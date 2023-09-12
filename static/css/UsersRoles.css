@@ -1,0 +1,73 @@
+
+.UsersRolesButtons {
+  margin-top: 1em;
+  height: 4em;
+}
+
+/* Стиль cсылок на вкладку */
+
+
+.tablink:hover {
+  background-color: #777;
+}
+
+/* Стиль содержимого вкладки (и добавить высоту: 100% для полного содержимого страницы) */
+.tabcontent {
+  margin:  0 10px;
+  display: none;
+}
+
+.UsersRolesAddButtons {
+  height: 40px;
+}
+
+.tabcontent button {
+  background-color: #FDF9F6;
+  float: left;
+  cursor: pointer;
+  padding: 5px 5px;
+  margin: 0px 20px;
+  font-size: 15px;
+  border-radius: 10px;
+}
+
+
+.UsersRolesContent{
+  width: 80%;
+  background: #FDF9F6;
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 70vh;
+  border-bottom: 3px solid #242424;
+}
+
+.UsersRolesContentHat {
+  border-top: 3px solid #242424;
+  border-bottom: 2px solid #242424;
+  position: sticky;
+  top: 0;
+  background: #FDF9F6;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.UsersRolesContent p {
+  margin: 10px 20px;
+  margin-right: 50px;
+  /* background: lightblue; */
+  width: 300px;
+}
+
+.UsersRolesContentMain ul {
+  padding: 0;
+  margin: 0;
+}
+
+.UsersRolesContentMain li {
+  /* background: magenta; */
+  list-style: none;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0px 0px;
+}

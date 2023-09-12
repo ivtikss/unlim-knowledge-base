@@ -1,0 +1,79 @@
+/* Окаймленная форма */
+form {
+  border: 3px solid #f1f1f1;
+}
+
+/* Модальный (фон) */
+.modalMember {
+  display: none; /* Скрыто по умолчанию */
+  position: fixed; /* Оставаться на месте */
+  z-index: 1; /* Сидеть на вершине */
+  left: 0;
+  top: 0;
+  width: 100%; /* Полная ширина */
+  height: 100%; /* Полный рост */
+  overflow: auto; /* Включите прокрутку, если это необходимо */
+  background-color: rgb(0,0,0); /* Цвет запасной вариант */
+  background-color: rgba(0,0,0,0.4); /* Черный с непрозрачностью */
+  padding-top: 30vh;
+}
+
+/* Модальное Содержание/коробка */
+.modal-content {
+  background-color: #FDF9F6;
+  margin: 5px auto; /* 15% сверху и по центру */
+  width: 30%; /* Может быть больше или меньше, в зависимости от размера экрана */
+  border: 2px solid #242424;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.namecontainer {
+  font-size: 20px;
+  padding: 1em 0;
+}
+
+.container>input {
+  width: 200px;
+  padding: 0.5em;
+  border-radius: 10px;
+}
+
+.PostButtons {
+  text-align: right;
+  margin: 1em;
+}
+
+
+.EditNewRole {
+  display: flex;
+  justify-content: space-around;
+  margin: 10px 0;
+  text-align: left;
+}
+
+.Rights {
+  font-size: 20px;
+  width: 45%;
+  max-height: 30vh;
+  overflow: scroll;
+}
+
+.RightHat {
+  position: sticky;
+  top: 0;
+  padding: 10px 0;
+  border-bottom: 2px solid #242424;
+}
+
+.Rights>ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.Rights li {
+  display: flex;
+  justify-content: space-around;
+  padding: 5px 0;
+}

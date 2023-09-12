@@ -1,0 +1,31 @@
+.ChangeName {
+  margin-top: 1em;
+}
+
+.ChangeName>div {
+  margin: 1em 1em;
+  font-size: 20px;
+  display: flex;
+}
+
+.ChangeName>div>label {
+  margin-right: 4em;
+}
+
+.InputName {
+  margin-right: 3em;
+  padding: 0.5em;
+  width: 20%;
+}
+
+.SubmitName {
+  background: #D9D9D9;
+  border-radius: 10px;
+  padding: 0 1em;
+}
+
+.ChangeName>a {
+  color: #242424;
+  text-decoration: underline;
+  margin: 0 1em;
+}

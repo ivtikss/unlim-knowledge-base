@@ -1,0 +1,28 @@
+main {
+  display: flex;
+  text-decoration: none !important;
+}
+
+.left-bar {
+  width: 20%;
+  height: 850px;
+  background-color:#242424;
+}
+
+
+.left-bar>ul {
+  display: block;
+  list-style: none;
+  background-color:#242424;
+}
+
+.left-bar>ul>li {
+  font-size: 25px;
+  padding: 0.5em;
+  background-color:#242424;
+}
+
+
+.left-bar>ul>li:hover {
+  background-color: #D9D9D9;
+}

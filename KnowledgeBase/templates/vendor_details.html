@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<script src="/static/js/scripts.js"></script>
+<link rel="stylesheet" href="/static/css/global.css">
+<link rel="stylesheet" href="/static/css/VendorCreation.css">
+
+<main>
+  <!-- Путь к файлу -->
+  <div class="name__directoty">
+  База знаний > Вендор > {{ vendor.name }}
+  </div>
+  <!-- Путь к файлу -->
+  <form class="CreateVendor" action="index.html" method="post">
+    <div class="PartnersGlobal">
+
+      <div class="PartnersLeft">
+        <div class="PartnersName">
+          <div>Наименование вендора</div>
+          <input type="text" value="{{vendor.name}}">
+        </div>
+
+        <label>Партнерство</label>
+        <div class="Partnership">
+
+          <div class="Partners PartnerStatus">
+            <div>Статус</div>
+            <input type="text" value="{{vendor.status}}">
+          </div>
+ 
+          <div class="Partners PartnerDate">
+            <div>Срок действия партнерского статуса</div>
+            <input type="date" value="{{vendor.period|date:'Y-m-d'}}">
+          </div>
+
+          <div class="Partners PartnerRec">
+            <div>Требования к партнерскому статусу</div>
+            <textarea name="name" rows="5" >{{vendor.requirement}}</textarea>
+          </div>
+
+          <div class="PartnerSertificated">
+            <div>
+              Сертифицированные специалисты
+            </div>
+            <div class="PartnerSertificatedMenu">
+              <ul>
+                {% for item in specialist %}
+                <li>
+                  <input type="text" value="{{item.name}}" placeholder="ФИО">
+                  <input type="date" value="{{item.date|date:'Y-m-d'}}">
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+
+          <div class="Partners PartnerSales">
+            <div>Скидки</div>
+            <input type="text" title="help" value="{{vendor.discount}}">
+          </div>
+        </div>
+
+      </div>
+
+<!-- -------------------------------------- -->
+
+      <div class="PartnersRight">
+        <div class="PartnersLogo">
+          <div>Логотип</div>
+          <input type="file" accept="image/*">
+        </div>
+        Контактные лица
+        <div class="Partnership">
+          <div class="ContactsList">
+            Список контактов
+            <button type="button">Добавить</button>
+          </div>
+          <div class="PartnerContactsMenu">
+            <ul>
+              {% for item in contact %}
+              <li>
+                <input type="text" value="{{item.name}}" placeholder="ФИО">
+                <input type="date" value="{{item.period|date:'Y-m-d'}}">
+                <input type="email" value="{{item.email}}">
+                <button type="button">Удалить</button>
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+        <div class="Prices">Прайсы</div>
+        <div class="Partnership">
+          <div class="ContactsList">
+            Список Прайсов
+            <button type="button">Добавить</button>
+          </div>
+          <div class="FileLoad">
+            <div class="ActualPrice">
+              <input type="file" accept="image/*, .pdf, .xlsx, .xls" title="help">
+            </div>
+
+            <div class="LoadPrice">
+              <input type="file" accept="image/*, .pdf, .xlsx, .xls" title="help">
+              <input type="date">
+            </div>
+            <a href="#">Архив прайсов</a>
+          </div>
+        </div>
+
+        <div class="SubmitBut">
+          <input type="reset" value="Закрыть">
+        </div>
+
+      </div>
+    </div>
+  </form>
+</main>
+{% endblock %}

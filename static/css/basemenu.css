@@ -1,0 +1,54 @@
+.field__directory {
+   margin-top: 1em;
+}
+
+.buttons {
+  display: block;
+  height: 50px;
+}
+/* Стиль cсылок на вкладку */
+.tablink {
+  font-size: 20px;
+  /* display: block; */
+  background-color: #FDF9F6;
+  color: #242424;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0.5em 1em;
+  margin-right: 2em;
+  width: 12em;
+  border-radius: 10px;
+}
+/* Стиль содержимого вкладки (и добавить высоту: 100% для полного содержимого страницы) */
+.tabcontent {
+  color: #242424;
+  display: none;
+  overflow: hidden;
+}
+
+
+
+
+.dateupdate {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dateupdate button {
+  background: #FDF9F6;
+  border: 1px solid #242424;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 8px 0;
+  margin: 7px 0;
+  width: 200px;
+}
+.dateupdate button:active {
+  background: #D9D9D9;
+}
+
+.dateupdate>p {
+  margin: 16px 0;
+}

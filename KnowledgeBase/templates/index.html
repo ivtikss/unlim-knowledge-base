@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% block content %}
+    <!-- Заменяемый контент -->
+    <main>
+      <!-- Путь к файлу -->
+      <div class="name__directoty">
+      База знаний
+      </div>
+      <!-- Путь к файлу -->
+
+      <div class="field__directory">
+
+        <!-- Кнопки выбора вклвдки -->
+        <div class="buttons">
+        <button class="tablink" onclick="openPage('Base', this)" id="defaultOpen">База знаний</button>
+        <button class="tablink" onclick="openPage('FAQ', this)">F.A.Q.</button>
+        </div>
+        <!-- Кнопки выбора вклвдки -->
+
+        <!-- Содержание страниц -->
+        <div id="Base" class="tabcontent">
+          <div class="dateupdate">
+            <button type="button">Загрузить список Вендоров</button>
+            <p>Последняя дата обновления: 23.12.2023</p>
+          </div>
+
+          <div class="VendorProductSearch">
+            <!-- Вендоры -->
+            <div class="Vendors">
+              <div class="SearchMenu">
+                <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Поиск.." title="Введите категорию">
+                <input type="submit" value="Добавить Вендора" id="myAddVendor">
+              </div>
+              <ul id="myMenu">
+                {% for vendor in vendors %}
+	              <li><img src="static/images/marinette001.png" alt="" width="40px">
+                  <a href="{% url 'vendor-detail' vendor.pk %}">{{vendor.name}}</a>
+                  <button>Edit</button></li>
+                {% endfor %}
+              </ul>
+            </div>
+            <!-- Вендоры -->
+            
+            <div class="Product">
+            <div class="ProductMenu">
+                <div>
+                  <div class="ProdEmpty"></div>
+                  <div>Наименование продукта</div>
+                  <div>ФСТЭК</div>
+                  <div>ФСБ</div>
+                  <div>ТОП</div>
+                  <div><button type="button">Добавить Продукт</button></div>
+                </div>
+            </div>
+            {% for product in products %}
+            <div class="names">
+              <div><img src="static/images/phone.png" alt="duck" width="60px;"></div>
+              <p><a href="">{{product.name}}</a></p>            
+              <p>{% if product.top %}<img src="static/images/59508.png" alt="check" width="20px;">{% endif %}</p>
+              <p>{% if product.top %}<img src="static/images/59508.png" alt="check" width="20px;">{% endif %}</p>
+              <p>{% if product.top %}<img src="static/images/59508.png" alt="check" width="20px;">{% endif %}</p>
+              <p></p>
+            </div>
+            {% endfor %}
+            </div>
+
+            <!-- <div class="Filter">
+              <div class="FilterMenu">
+                Фильтры
+              </div>
+
+              <div class="FiltersMain">
+                <div class="FilterButtons">
+                  <button>Применить</button>
+                  <button>Очистить</button>
+                </div>
+
+                <form method="POST">
+                  {% csrf_token %}
+                <div class="filter__search">
+                  Вендор
+                  <select class="filter__vendor">
+                    {% for vendor in object_list %}
+                    <option>{{vendor.name}}</option>
+                    {% endfor %}
+                  </select>
+                  Продукт
+                  <select class="filter__product">
+                    {% for product in view.all_product %}
+                    <option>{{product.name}}</option>
+                    {% endfor %}
+                  </select>
+                  Тип продукта
+                  <select class="filter__type__product">
+                    {% for type in view.all_type_product %}
+                    <option>{{type.name}}</option>
+                    {% endfor %}
+                  </select>
+                </div></form>
+
+                <div class="filter__certificate">
+                  Сертифиация
+                  <table>
+                    <tr>
+                      <td>ФСТЭК</td>
+                      <td><input type="checkbox" class="filter__btn__FSTEK"></td>
+                    </tr>
+                    <tr>
+                      <td>ФСБ</td>
+                      <td><input type="checkbox" class="filter__btn__FSB"></td>
+                    </tr>
+                    <tr>
+                      <td>ТОП</td>
+                      <td><input type="checkbox" class="filter__btn__TOP"></td>
+                    </tr>
+                  </table>
+                </div>
+
+                <div class="filter__realisation">
+                  Реализация
+                </div>
+                
+              </div>
+
+
+
+            </div> -->
+          </div>
+        </div>
+
+        <div id="FAQ" class="tabcontent">
+          <div class="dateupdate">
+            <button type="button">Добавить группу</button>
+          </div>
+      
+      
+          <div class="menu">
+            <!-- buttons - левая часть со всеми разделами и вопросами -->
+            <div class="buttonsFAQ">
+      
+              <!-- button1 - блок раздела (его прогнать через цикл разделов)
+              в нем идет список с вопросами (список через цикл с вопросами) -->
+              {% for item in group %}
+              <div class="button1">
+                <button class="accordion">{{ item.name }}</button>
+                <div class="panel">
+                  <button>Добавить вопрос</button>
+                  <ul>
+                    {% for quest in question %}
+                    {% if quest.group_id == item.id %}
+                    <li>
+                      <!-- Надо будет предусмотреть чтоб в swowAnswer() шел нужный айди вопроса -->
+                      <p>{{ quest.name }}</P>
+                      <button onclick="showAnswer('{{item.id}}')">Подробнее...</button>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+              {% endfor %}
+        <!-- Содержание страниц -->
+
+      </div>
+
+      {% for ans in answer %}
+      <!-- Раздел и номер вопроса ставить в айдишнике -->
+    <form class="contentFAQ" id="{{item.id}}" action="index.html" method="post">
+      <textarea name="name">
+        {{ans.description}}
+      </textarea>
+      <div class="FAQsubmit">
+        <button>Сохранить</button>
+        <button>Отмена</button>
+      </div>
+    </form>
+    {% endfor %}
+
+    <form class="contentFAQ" id="tab_1_2" action="index.html" method="post">
+      <textarea name="name">
+        Здесь зделаю отсупы для демонстрации
+        feefsf GGGGGGGGGGGGGGGGGGGGGGGGGg
+      </textarea>
+      <div class="FAQsubmit">
+        <button>Сохранить</button>
+        <button>Отмена</button>
+      </div>
+    </form>
+
+    </main>
+    <!-- Заменяемый контент -->
+
+    {% endblock %}
