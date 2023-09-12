@@ -43,3 +43,8 @@ class NewVendorForm(ModelForm):
         model = Vendor
         fields = ['name']
 
+
+class NewVendorSpecialistForm(ModelForm):
+    class Meta:
+        model = VendorSpecialist
+        fields = ['name']

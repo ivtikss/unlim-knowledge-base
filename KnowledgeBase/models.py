@@ -1,38 +1,57 @@
 from django.db import models
+from django.urls import reverse
 import datetime
 import django.utils
 
 
-class Vendor(models.Model):
-    name = models.CharField(max_length=50, default='', null=True)
-    logo = models.ImageField(default=None, null=True)
-    status = models.CharField(max_length=50, default='', null=True)
-    period = models.DateField(max_length=50, default=django.utils.timezone.now,null=True)
-    requirement = models.CharField(max_length=50, default='', null=True)
-    discount = models.CharField(max_length=50, default='', null=True)
+# Все модели сделать как модель Вендора, то есть добавить str, meta, verbose-name
 
 
-class VendorSpecialist(models.Model):
-    vendor = models.ForeignKey('Vendor', on_delete=models.CASCADE)
-    name = models.CharField(max_length=50, default='', null=True)
-    # date = models.DateField(max_length=50, default=django.utils.timezone.now, null=True)
-    file = models.FileField(null=True)
+class Vendor(models.Model):  # добавить поле дата
+    name = models.CharField(max_length=50, default='', null=True, verbose_name='Наименование', db_index=True)
+    logo = models.ImageField(default=None, null=True, verbose_name='Логотип')
+    status = models.CharField(max_length=50, default='', null=True, verbose_name='Статус')
+    requirement = models.CharField(max_length=50, default='', null=True, verbose_name='Требования к партнерскому '
+                                                                                      'статусу')
+    discount = models.CharField(max_length=50, default='', null=True, verbose_name='Скидка')
+
+    def get_absolute_url(self):
+        return reverse('vendor-detail', kwargs={"vendor_id": self.pk})
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Вендор'
+        verbose_name_plural = 'Вендоры'
+        ordering = ['name']
 
 
-class Contact(models.Model):
+class VendorSpecialist(models.Model):  # добавить дату и файл
+    vendor = models.ForeignKey('Vendor', on_delete=models.CASCADE, verbose_name='У какого вендора?')
+    name = models.CharField(max_length=50, default='', null=True, verbose_name='ФИО')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Сертифицированный специалист'
+        verbose_name_plural = 'Сертифицированные специалисты'
+        ordering = ['name']
+
+
+class Contact(models.Model):  # добавить дату
     vendor = models.ForeignKey('Vendor', on_delete=models.SET_DEFAULT, default='', null=True)
     product = models.ForeignKey('Product', on_delete=models.SET_DEFAULT, default='', null=True)
     name = models.CharField(max_length=50, default='')
-    # period = models.DateField(max_length=50, default=django.utils.timezone.now)
     phone_number = models.CharField(max_length=50, default='')
     email = models.CharField(max_length=50, default='')
     messanger = models.CharField(max_length=20, default='')
 
 
-class VendorPrices(models.Model):
+class VendorPrices(models.Model):  # добавить дату
     vendor = models.ForeignKey('Vendor', on_delete=models.CASCADE)
     price = models.FileField(default=None)
-    # date = models.DateField(default=django.utils.timezone.now)
     file = models.FileField(default=None)
 
 
@@ -41,15 +60,16 @@ class Product(models.Model):
     name = models.CharField(max_length=50, default='', null=True)
     top = models.BooleanField(max_length=50, default=False, null=True)
     brif_description = models.TextField(default='', null=True)
-    whom_and_what_for = models.TextField(default='',null=True)
+    whom_and_what_for = models.TextField(default='', null=True)
     gen_form = models.FileField(default=None, null=True)
     ship_kit = models.CharField(max_length=200, default='', null=True)
     tech_support = models.CharField(max_length=200, default='', null=True)
     owner_type = models.CharField(max_length=100, default='', null=True)
     battle_card = models.FileField(default=None, null=True)
-    product_type = models.CharField(max_length=50, default='', null=True) # мб нужна связь с типами продукта
+    product_type = models.CharField(max_length=50, default='', null=True)  # мб нужна связь с типами продукта
     competencies = models.FileField(default=None, null=True)
     analogs = models.CharField(max_length=50, default='', null=True)
+
 
 # class __Skeleton(models.Model):
 #     product = models.ForeignKey(Product, on_delete=models.SET_DEFAULT, default='', name='id Продукта')

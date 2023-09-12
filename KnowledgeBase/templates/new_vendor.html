@@ -15,19 +15,17 @@
 			<div class="PartnersLeft">
 				<div class="PartnersName">
 					<div>Наименование вендора</div>
-					<form action="" method="post">
+					<form action="{% url 'new_vendor' %}" method="post">
 						{% csrf_token %} 
 						{{ vendor.name }}
-				</div>	
+						{{ vendorspecialist.name }}
+						<button type="submit">Добавить вендора</button>
+					</form>
+				</div>
 				<label>Партнерство</label>
 				<div class="Partnership">
 					<div class="Partners PartnerStatus">
-						<div>Статус</div>
-							{% csrf_token %} 
-							{{ vendorpartner.status }}
-							<input type="submit" value="Добавить вендора" name="add_vendor">
-					</form>	
-					
+
 					</div>
 
 					<div class="Partners PartnerDate">

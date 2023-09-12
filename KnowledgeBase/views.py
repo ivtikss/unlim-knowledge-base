@@ -1,6 +1,6 @@
 from django.contrib.auth.models import Group, User
 from django.urls import reverse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from .forms import *
 from .models import *
@@ -116,11 +116,11 @@ def staff(request):
     return render(request, 'UsersRoles.html', context)
 
 
-def vendor_detail(request, pk):
+def vendor_detail(request, vendor_id):
 
-    vendor = Vendor.objects.get(id=pk)
-    specialist = VendorSpecialist.objects.filter(vendor=pk)
-    contact = Contact.objects.filter(vendor=pk)
+    vendor = get_object_or_404(Vendor, pk=vendor_id)
+    specialist = VendorSpecialist.objects.filter(vendor=vendor_id)
+    contact = Contact.objects.filter(vendor=vendor_id)
 
     context = {
         'vendor': vendor,
@@ -132,16 +132,21 @@ def vendor_detail(request, pk):
 
 
 def new_vendor(request):
-    vendor = NewVendorForm()
-    if request.POST.get('add_vendor'):
-        vendor = NewVendorForm(request.POST)
-        vendor.save()
+    if request.POST:
+        vendor = NewVendorForm(request.POST, prefix='vendor')
+        vendor = vendor.save()
+        vendorspecialist = NewVendorSpecialistForm(request.POST, prefix='vendorspecialist')
+        vendorspecialist = vendorspecialist.save(commit=False)
+        vendorspecialist.vendor = vendor
+        vendorspecialist.save()
         return HttpResponseRedirect(reverse(index))
     
-    vendor = NewVendorForm()
+    vendor = NewVendorForm(prefix='vendor')
+    vendorspecialist = NewVendorSpecialistForm(prefix='vendorspecialist')
 
     context = {
         'vendor': vendor,
+        'vendorspecialist': vendorspecialist
     }
 
     return render(request, 'new_vendor.html', context)
