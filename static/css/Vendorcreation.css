@@ -200,7 +200,7 @@
 }
 
 
-.SubmitBut>input {
+.SubmitBut>button {
   font-size: 20px;
   margin: 1em;
   padding: 5px;

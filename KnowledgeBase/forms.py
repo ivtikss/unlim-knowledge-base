@@ -1,54 +1,61 @@
 from .models import *
-from django.forms import ModelForm
+from django import forms
 
 
-class TypeStatusForm(ModelForm):
+class TypeStatusForm(forms.ModelForm):
     class Meta:
         model = TypeStatus
         fields = ['name']
 
 
-class TypeProductForm(ModelForm):
+class TypeProductForm(forms.ModelForm):
     class Meta:
         model = TypeProduct
         fields = ['name']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'PartnersName'})
+        }
 
 
-class TypeCertificationForm(ModelForm):
+class TypeCertificationForm(forms.ModelForm):
     class Meta:
         model = TypeCertification
         fields = ['name']
 
 
-class TypeLicenseForm(ModelForm):
+class TypeLicenseForm(forms.ModelForm):
     class Meta:
         model = TypeLicense
         fields = ['name']
 
 
-class TypeGetForm(ModelForm):
+class TypeGetForm(forms.ModelForm):
     class Meta:
         model = TypeGet
         fields = ['name']
 
 
-class TypeReliaseForm(ModelForm):
+class TypeReliaseForm(forms.ModelForm):
     class Meta:
         model = TypeReliase
         fields = ['name']
 
 
-class NewVendorForm(ModelForm):
+class NewVendorForm(forms.ModelForm):
     class Meta:
         model = Vendor
         fields = ['name', 'status', 'requirement', 'discount']
+        widgets = {
+            'requirement': forms.Textarea(attrs={'row': 5})
+        }
 
     prefix = 'vendor'
 
 
-class NewVendorSpecialistForm(ModelForm):
+class NewVendorSpecialistForm(forms.ModelForm):
     class Meta:
         model = VendorSpecialist
         fields = ['name']
+        widgets = []
 
     prefix = 'vendorspecialist'

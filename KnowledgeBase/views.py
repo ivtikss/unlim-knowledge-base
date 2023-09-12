@@ -1,6 +1,6 @@
 from django.contrib.auth.models import Group, User
 from django.urls import reverse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
 from .forms import *
 from .models import *
@@ -141,11 +141,8 @@ def new_vendor(request):
         vendorspecialist.vendor = vendor
         vendorspecialist.save()
 
-        return HttpResponseRedirect(reverse(index))
+        return redirect(vendor)
 
-    if Vendor.objects.get(pk=1):
-        ven = Vendor.objects.get(pk=1)
-        ven.delete()
     vendor = NewVendorForm()
     vendorspecialist = NewVendorSpecialistForm()
 
