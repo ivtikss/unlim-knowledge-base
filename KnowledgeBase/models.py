@@ -41,8 +41,8 @@ class VendorSpecialist(models.Model):  # добавить дату и файл
 
 
 class Contact(models.Model):  # добавить дату
-    vendor = models.ForeignKey('Vendor', on_delete=models.SET_DEFAULT, default='', null=True)
-    product = models.ForeignKey('Product', on_delete=models.SET_DEFAULT, default='', null=True)
+    vendor = models.ForeignKey('Vendor', on_delete=models.CASCADE, default='', null=True)
+    product = models.ForeignKey('Product', on_delete=models.CASCADE, default='', null=True)
     name = models.CharField(max_length=50, default='')
     phone_number = models.CharField(max_length=50, default='')
     email = models.CharField(max_length=50, default='')

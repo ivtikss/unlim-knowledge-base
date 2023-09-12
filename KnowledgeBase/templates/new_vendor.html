@@ -18,6 +18,9 @@
 					<form action="{% url 'new_vendor' %}" method="post">
 						{% csrf_token %} 
 						{{ vendor.name }}
+						{{ vendor.status }}
+						{{ vendor.requirement }}
+						{{ vendor.discount }}
 						{{ vendorspecialist.name }}
 						<button type="submit">Добавить вендора</button>
 					</form>

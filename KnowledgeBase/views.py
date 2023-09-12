@@ -133,16 +133,21 @@ def vendor_detail(request, vendor_id):
 
 def new_vendor(request):
     if request.POST:
-        vendor = NewVendorForm(request.POST, prefix='vendor')
+        vendor = NewVendorForm(request.POST)
         vendor = vendor.save()
-        vendorspecialist = NewVendorSpecialistForm(request.POST, prefix='vendorspecialist')
+
+        vendorspecialist = NewVendorSpecialistForm(request.POST)
         vendorspecialist = vendorspecialist.save(commit=False)
         vendorspecialist.vendor = vendor
         vendorspecialist.save()
+
         return HttpResponseRedirect(reverse(index))
-    
-    vendor = NewVendorForm(prefix='vendor')
-    vendorspecialist = NewVendorSpecialistForm(prefix='vendorspecialist')
+
+    if Vendor.objects.get(pk=1):
+        ven = Vendor.objects.get(pk=1)
+        ven.delete()
+    vendor = NewVendorForm()
+    vendorspecialist = NewVendorSpecialistForm()
 
     context = {
         'vendor': vendor,

@@ -41,10 +41,14 @@ class TypeReliaseForm(ModelForm):
 class NewVendorForm(ModelForm):
     class Meta:
         model = Vendor
-        fields = ['name']
+        fields = ['name', 'status', 'requirement', 'discount']
+
+    prefix = 'vendor'
 
 
 class NewVendorSpecialistForm(ModelForm):
     class Meta:
         model = VendorSpecialist
         fields = ['name']
+
+    prefix = 'vendorspecialist'
