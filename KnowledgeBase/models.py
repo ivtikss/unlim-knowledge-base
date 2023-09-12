@@ -3,35 +3,37 @@ import datetime
 import django.utils
 
 
-
 class Vendor(models.Model):
     name = models.CharField(max_length=50, default='', null=True)
     logo = models.ImageField(default=None, null=True)
     status = models.CharField(max_length=50, default='', null=True)
     period = models.DateField(max_length=50, default=django.utils.timezone.now,null=True)
     requirement = models.CharField(max_length=50, default='', null=True)
-    discount =  models.CharField(max_length=50, default='', null=True)
+    discount = models.CharField(max_length=50, default='', null=True)
+
 
 class VendorSpecialist(models.Model):
     vendor = models.ForeignKey('Vendor', on_delete=models.CASCADE)
     name = models.CharField(max_length=50, default='', null=True)
-    date = models.DateField(max_length=50, default=django.utils.timezone.now, null=True)
+    # date = models.DateField(max_length=50, default=django.utils.timezone.now, null=True)
     file = models.FileField(null=True)
+
 
 class Contact(models.Model):
     vendor = models.ForeignKey('Vendor', on_delete=models.SET_DEFAULT, default='', null=True)
     product = models.ForeignKey('Product', on_delete=models.SET_DEFAULT, default='', null=True)
     name = models.CharField(max_length=50, default='')
-    period = models.DateField(max_length=50, default=django.utils.timezone.now)
+    # period = models.DateField(max_length=50, default=django.utils.timezone.now)
     phone_number = models.CharField(max_length=50, default='')
     email = models.CharField(max_length=50, default='')
     messanger = models.CharField(max_length=20, default='')
+
+
 class VendorPrices(models.Model):
     vendor = models.ForeignKey('Vendor', on_delete=models.CASCADE)
     price = models.FileField(default=None)
-    date = models.DateField(default=django.utils.timezone.now)
+    # date = models.DateField(default=django.utils.timezone.now)
     file = models.FileField(default=None)
-
 
 
 class Product(models.Model):
@@ -132,20 +134,26 @@ class Answer(models.Model):
     description = models.TextField(default='')
     files = models.FileField(default=None)
 
-class Guide_status(models.Model):
+
+class TypeStatus(models.Model):
     name = models.CharField(max_length=100, default='')
 
-class Guide_type_product(models.Model):
+
+class TypeProduct(models.Model):
     name = models.CharField(max_length=100, default='')
 
-class Guide_type_certification(models.Model):
+
+class TypeCertification(models.Model):
     name = models.CharField(max_length=100, default='')
 
-class Guide_type_license(models.Model):
+
+class TypeLicense(models.Model):
     name = models.CharField(max_length=100, default='')
 
-class Guide_type_get(models.Model):
+
+class TypeGet(models.Model):
     name = models.CharField(max_length=100, default='')
 
-class Guide_type_reliase(models.Model):
+
+class TypeReliase(models.Model):
     name = models.CharField(max_length=100, default='')

@@ -1,37 +1,44 @@
-from .models import Guide_status, Guide_type_product, Guide_type_certification
-from .models import Guide_type_license, Guide_type_get, Guide_type_reliase, Vendor
-from django.forms import ModelForm, TextInput
+from .models import *
+from django.forms import ModelForm
 
-class Guide_statusForm(ModelForm):
+
+class TypeStatusForm(ModelForm):
     class Meta:
-        model = Guide_status
+        model = TypeStatus
         fields = ['name']
 
-class Guide_type_productForm(ModelForm):
+
+class TypeProductForm(ModelForm):
     class Meta:
-        model = Guide_type_product
+        model = TypeProduct
         fields = ['name']
 
-class Guide_type_certificationForm(ModelForm):
+
+class TypeCertificationForm(ModelForm):
     class Meta:
-        model = Guide_type_certification
-        fields = ['name']
-class Guide_type_licenseForm(ModelForm):
-    class Meta:
-        model = Guide_type_license
+        model = TypeCertification
         fields = ['name']
 
-class Guide_type_getForm(ModelForm):
+
+class TypeLicenseForm(ModelForm):
     class Meta:
-        model = Guide_type_get
+        model = TypeLicense
         fields = ['name']
 
-class Guide_type_reliaseForm(ModelForm):
+
+class TypeGetForm(ModelForm):
     class Meta:
-        model = Guide_type_reliase
+        model = TypeGet
         fields = ['name']
 
-class New_VendorForm(ModelForm):
+
+class TypeReliaseForm(ModelForm):
+    class Meta:
+        model = TypeReliase
+        fields = ['name']
+
+
+class NewVendorForm(ModelForm):
     class Meta:
         model = Vendor
         fields = ['name']
