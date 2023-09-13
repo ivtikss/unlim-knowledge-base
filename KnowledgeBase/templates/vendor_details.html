@@ -14,21 +14,17 @@
   <!-- Путь к файлу -->
   <form class="CreateVendor" action="index.html" method="post">
     <div class="PartnersGlobal">
-
       <div class="PartnersLeft">
         <div class="PartnersName">
           <div>Наименование вендора</div>
           <input type="text" value="{{vendor.name}}">
         </div>
-
         <label>Партнерство</label>
         <div class="Partnership">
-
           <div class="Partners PartnerStatus">
             <div>Статус</div>
             <input type="text" value="{{vendor.status}}">
           </div>
- 
           <div class="Partners PartnerDate">
             <div>Срок действия партнерского статуса</div>
             <input type="date" value="{{vendor.period|date:'Y-m-d'}}">

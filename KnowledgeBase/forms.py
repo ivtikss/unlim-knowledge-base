@@ -56,6 +56,8 @@ class NewVendorSpecialistForm(forms.ModelForm):
     class Meta:
         model = VendorSpecialist
         fields = ['name', 'date']
-        widgets = []
+        widgets = {
+            'date': forms.DateInput(attrs={'type': 'date', 'placeholder': 'dd.mm.YYYY (DOB)', 'class': 'form-control'})
+        }
 
     prefix = 'vendorspecialist'
