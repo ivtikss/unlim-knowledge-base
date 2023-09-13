@@ -29,7 +29,11 @@
             <div class="Vendors">
               <div class="SearchMenu">
                 <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Поиск.." title="Введите категорию">
-                <input type="submit" value="Добавить Вендора" id="myAddVendor">
+                <form action="{% url 'new_vendor' %}">
+                  <div class="SubmitBut">
+                    <button type="submit">Добавить</button>
+                  </div>
+                </form>
               </div>
               <ul id="myMenu">
                 {% for vendor in vendors %}
@@ -151,7 +155,7 @@
                     <li>
                       <!-- Надо будет предусмотреть чтоб в swowAnswer() шел нужный айди вопроса -->
                       <p>{{ quest.name }}</P>
-                      <button onclick="showAnswer('{{item.id}}')">Подробнее...</button>
+                      <button onclick="showAnswer('{{quest.id}}')">Подробнее...</button>
                     </li>
                     {% endif %}
                     {% endfor %}
@@ -160,26 +164,13 @@
               </div>
               {% endfor %}
         <!-- Содержание страниц -->
-
-      </div>
-
-      {% for ans in answer %}
-      <!-- Раздел и номер вопроса ставить в айдишнике -->
-    <form class="contentFAQ" id="{{item.id}}" action="index.html" method="post">
+        </div>
+            <!-- Раздел и номер вопроса ставить в айдишнике -->
+            {{ answ }}}
+        {% for answ in answer %}
+        <form class="contentFAQ" id="{{answ.question_id}}" action="index.html" method="post">
       <textarea name="name">
-        {{ans.description}}
-      </textarea>
-      <div class="FAQsubmit">
-        <button>Сохранить</button>
-        <button>Отмена</button>
-      </div>
-    </form>
-    {% endfor %}
-
-    <form class="contentFAQ" id="tab_1_2" action="index.html" method="post">
-      <textarea name="name">
-        Здесь зделаю отсупы для демонстрации
-        feefsf GGGGGGGGGGGGGGGGGGGGGGGGGg
+ {{ answ.description  }}
       </textarea>
       <div class="FAQsubmit">
         <button>Сохранить</button>
@@ -187,6 +178,17 @@
       </div>
     </form>
 
+        {% endfor %}
+
+
+
+
+      </div>
+
+
+
+    </div>
+      </div>
     </main>
     <!-- Заменяемый контент -->
 
