@@ -24,8 +24,8 @@
   align-items: center;
 }
 
-.GuideAddButtons>button {
-  background: #FDF9F6;
+.GuideAddButtons button {
+  background: #ff7400;
   border-radius: 10px;
   width: 8%;
   padding: 5px;
