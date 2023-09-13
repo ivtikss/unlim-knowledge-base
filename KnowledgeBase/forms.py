@@ -55,7 +55,7 @@ class NewVendorForm(forms.ModelForm):
 class NewVendorSpecialistForm(forms.ModelForm):
     class Meta:
         model = VendorSpecialist
-        fields = ['name']
+        fields = ['name', 'date']
         widgets = []
 
     prefix = 'vendorspecialist'

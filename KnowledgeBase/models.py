@@ -1,6 +1,6 @@
 from django.db import models
 from django.urls import reverse
-from datetime import timezone
+from django.utils import timezone
 
 
 # Все модели сделать как модель Вендора, то есть добавить str, meta, verbose-name
@@ -11,7 +11,7 @@ class Vendor(models.Model):  # добавить поле дата
     logo = models.ImageField(default=None, null=True, verbose_name='Логотип')
     status = models.CharField(max_length=50, default='', null=True, verbose_name='Статус')
     requirement = models.CharField(max_length=50, default='', null=True, verbose_name='Требования к партнерскому '
-                                                                           'статусу')
+                                                                                      'статусу')
     discount = models.CharField(max_length=50, default='', null=True, verbose_name='Скидка')
 
     def get_absolute_url(self):
@@ -29,8 +29,7 @@ class Vendor(models.Model):  # добавить поле дата
 class VendorSpecialist(models.Model):  # добавить дату и файл
     vendor = models.ForeignKey('Vendor', on_delete=models.CASCADE, verbose_name='У какого вендора?')
     name = models.CharField(max_length=150, default='', null=True, verbose_name='ФИО')
-    date = models.DateField(auto_now=True)
-
+    date = models.DateField(default=timezone.now)
 
     def __str__(self):
         return self.name
