@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import *
 from django.views.generic import TemplateView
-from django.contrib.auth.views import LogoutView 
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('', index, name='index'),

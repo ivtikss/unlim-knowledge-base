@@ -117,7 +117,6 @@ def staff(request):
 
 
 def vendor_detail(request, vendor_id):
-
     vendor = get_object_or_404(Vendor, pk=vendor_id)
     specialist = VendorSpecialist.objects.filter(vendor=vendor_id)
     contact = Contact.objects.filter(vendor=vendor_id)
