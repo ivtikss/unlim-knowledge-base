@@ -1,0 +1,217 @@
+.VendorProductSearch {
+  height: 70vh;
+  border: 2px solid #242424;
+  border-radius: 10px;
+  display: flex;
+  padding: 0 10px;
+}
+
+
+/* ----------------------------------- */
+.Vendors {
+  width: 20%;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.Filter {
+  width: 20%;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.Product {
+  width: 60%;
+  border-right: 2px solid #D9D9D9;
+  border-left: 2px solid #D9D9D9;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.SearchMenu, .ProductMenu, .FilterMenu {
+  width: 100%;
+  height: 45px;
+  border-bottom: 2px solid #D9D9D9;
+  display: flex;
+  position: sticky;
+  top: 0;
+}
+.SearchMenu {
+  display: flex;
+  justify-content: space-between;
+}
+.SubmitBut>button {
+  padding: 5px 10px;
+  border: 0.5px solid #242424;
+  border-radius: 5px;
+  margin: 7px;
+}
+
+/* Стиль окна поиска */
+#myAddVendor {
+  padding: 0 9px;
+  margin: 5px 20px;
+  background: #FDF9F6;
+  border: 1px solid #242424;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#mySearch {
+  width: 50%;
+  font-size: 15px;
+  padding: 5px;
+  margin: 5px;
+  border: 1px solid #242424;
+}
+
+/* Стиль меню навигации */
+#myMenu {
+  list-style-type: none;
+}
+
+/* Стиль навигационных ссылок */
+#myMenu li {
+  padding: 5px;
+  margin: 10px;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #242424;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+#myMenu button {
+  padding: 10px;
+  border: 0.5px solid #242424;
+  border-radius: 5px;
+  margin: 0;
+}
+#myMenu button:active {
+  background: #D9D9D9;
+}
+
+#myMenu li a {
+  width: 100%;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #242424;
+}
+
+#myMenu li:hover {
+  background-color: #D9D9D9;
+}
+/* --------------------------------------- */
+.ProductMenu {
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+}
+.ProductMenu>div {
+  margin-top: 5px;
+  margin: 0 25px;
+  display: flex;
+  width: 100%;
+
+}
+
+.ProductMenu>div>div {
+  width: calc(100% / 6);
+  align-items: center;
+
+
+}
+
+.ProductMenu>div>div>button {
+  background: #FDF9F6;
+  padding: 0.5em 0.5em;
+  border: 1px solid #242424;
+  border-radius: 10px;
+  width: 150px;
+  margin: 0;
+}
+.ProductMenu>div>div>button:active {
+  background: #D9D9D9;
+}
+
+.names {
+  /* background: lightgreen; */
+  margin: 0.5em 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  padding: 0 10px;
+}
+
+.names:hover {
+  cursor: pointer;
+}
+
+.names>p {
+  width: calc(100% / 6);
+  padding: 2px;
+  text-align: center;
+}
+
+.names button {
+  border: 1px solid #242424;
+  padding: 0.1em 0.2em;
+  font-size: 20px;
+  background: #FDF9F6;
+  border-radius: 10px;
+  color: #FDF9F6;
+}
+
+.FiltersMain {
+  padding: 0.5em;
+}
+
+.filter__search {
+  display: flex;
+  flex-direction: column;
+}
+.filter__search>select {
+  margin: 10px 0;
+  padding: 0 10px;
+  height: 30px;
+  background: #FDF9F6;
+  border-radius: 10px;
+}
+
+.filter__certificate>table {
+  width: 70%;
+  text-align: left;
+  padding: 0 10px;
+}
+
+.filter__certificate td {
+  width: 50%;
+}
+
+.filter__realisation {
+  padding: 10px 0;
+}
+/* --------------------------------------- */
+.FilterMenu {
+  display: block;
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.FilterButtons {
+  /* background: green; */
+  display: flex;
+  justify-content: center;
+}
+
+.FilterButtons>button {
+  background: #FDF9F6;
+  border-radius: 10px;
+  padding: 5px 20px;
+  margin: 5px 3em;
+  cursor: pointer;
+}

@@ -1,0 +1,39 @@
+* {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  text-decoration: none !important;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #242424;
+  font-size: 25px;
+}
+
+header p, a {
+  display: block;
+  padding-right: 1em;
+  padding-left: 1em;
+  padding-top: 0.5em;
+  text-decoration: none;
+  color: #FDF9F6;
+}
+
+header>div {
+  display: flex;
+}
+header>div>a:hover, header>div>button:hover {
+  background-color: #D9D9D9;
+}
+
+.nav-btn {
+    font-size: 2em;
+    background-color: #242424;
+    border: none;
+    display: block;
+    margin-right: 1em;
+    padding-right: 0.5em;
+    padding-left: 0.5em;
+  }

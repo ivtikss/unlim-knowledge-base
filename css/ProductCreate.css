@@ -1,0 +1,580 @@
+.ProductButtons {
+  margin: 10px 0;
+  overflow-x: auto;
+  min-width: 400px;
+  max-height: 90px;
+}
+
+.tablink {
+  width: 25%;
+}
+
+.FirstInfo {
+  margin: 1em;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.colum {
+  width: 100%;
+  flex: 50%;
+}
+
+.ProductFrame {
+  width: 90%;
+  border: 1px solid #242424;
+  border-radius: 5px;
+  font-size: 1em;
+  margin-top: 5px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-bottom: 20px;
+  height: 100px;
+}
+
+.ProductName {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.ProdName {
+  display: inline-flex;
+  align-items: center;
+  width: 25%;
+}
+
+.ProdName>span {
+  width: 120px;
+  margin-right: 30px;
+}
+
+.ProdName>input, .ProdName>select {
+  flex-wrap: wrap;
+  width: 250px;
+  background: #FDF9F6;
+  border: 1px solid #242424;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 1em;
+}
+
+.ProdTOP {
+  display: inline-flex;
+  width: 25%;
+  align-items: center;
+  }
+
+.ProdTOP>span {
+  font-size: 20px;
+  margin-right: 5%;
+  margin-left: 15%;
+}
+
+/* Реализация */
+.ProductRealisation {
+  height: 200px;
+}
+
+.ProductRealisationHat {
+  display: flex;
+  position: sticky;
+  flex-wrap: wrap;
+  top: 0;
+}
+
+.ProductRealisationHat {
+  background: #FDF9F6;
+  border-bottom: 1px solid #242424;
+  padding: 5px 10px;
+  max-height: 30%;
+  overflow: auto;
+}
+.ProductRealisationHat>ul{
+  width: 100%;
+}
+.ProductRealisationHat>ul>li {
+  display: inline-flex;
+  width: 27%;
+}
+
+.ProductRealisation>ul {
+  list-style: none;
+  width: 100%;
+}
+
+.ProductRealisation li {
+  border: 0.5px solid #242424;
+  border-radius: 10px;
+  padding: 5px 10px;
+  margin: 5px;
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ProductRealisation li>button {
+  background: #FDF9F6;
+  border: 1px solid #242424;
+  border-radius: 10px;
+  padding: 3px 10px;
+  cursor: pointer;
+}
+.ProductRealisation li>button:active {
+  background: #D9D9D9;
+}
+
+/* Компетенции */
+.ProductCompetencies>ul {
+  height: 500px;
+}
+
+.ProductCompetencies button {
+  background: #FDF9F6;
+  border: 1px solid #242424;
+  border-radius: 10px;
+  padding: 5px 10px;
+}
+.ProductCompetencies input {
+  background: #FDF9F6;
+  border: 1px solid #242424;
+  border-radius: 10px;
+  padding: 5px 10px;
+}
+.ProductCompetencies button:active {
+  background: #D9D9D9;
+}
+.ProductCompetencies>span {
+  margin-right: 39px;
+  margin-bottom: 20px;
+}
+.ProductCompetencies>ul {
+  height: 150px;
+}
+.ProductCompetencies li {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #242424;
+  border-radius: 10px;
+  padding: 5px 10px;
+  width: 60%;
+  margin: 5px;
+}
+
+.ProductDescription{
+  margin-top: 5px;
+  margin-bottom: 20px;
+}
+.ProductDescription>textarea {
+  resize: none;
+  margin-bottom: 20px;
+  height: 100px;
+  padding: 5px;
+}
+
+.ProductLicence {
+  height: 220px;
+  display: block;
+}
+
+.ProductLicence>div {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 30px;
+  margin-top: 10px;
+  width: 90%;
+}
+.ProductLicence>div>input {
+  background: #FDF9F6;
+  border: 1px solid #242424;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.ProductLicence>ul {
+  width: 90%;
+  height: 140px;
+  list-style: none;
+  margin-left: 30px;
+}
+
+.ProductLicence li {
+  margin: 10px;
+  overflow-x: hidden;
+}
+
+.ProductLicence select, .ProductLicence>ul li>input,
+.ProductLicence>ul li>a {
+  background: #FDF9F6;
+  border: 1px solid #242424;
+  border-radius: 5px;
+  width: 160px;
+  padding: 5px 10px;
+}
+.ProductLicence>ul>select {
+  margin-top: 20px;
+  margin-left: 10px;
+}
+
+.ProductLicence>ul li>button {
+  background: #FDF9F6;
+  border: 1px solid #242424;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.ProductLicence>ul li>button:active,.ProductLicence>div>input:active {
+  background: #D9D9D9;
+}
+/* Второй ряд */
+.ProductPrices>p {
+  margin-top: 10px;
+  margin-left: 25px;
+}
+
+.ProductPrices {
+  height: 200px;
+}
+
+.ProductActualPrice {
+  margin: 5px 20px;
+  width: 30%;
+  padding: 10px;
+  height: 20px;
+}
+
+.ProductActualPrice>a {
+  color: #242424;
+  text-decoration: underline;
+}
+
+.ProductNewPrice {
+  margin: 15px 20px;
+}
+.ProductNewPrice>input {
+  border: 1px solid #242424;
+  border-radius: 5px;
+  padding: 5px;
+  margin-right: 20px;
+}
+
+.ProductPrices>a {
+  margin: 0 20px;
+  color: #242424;
+  text-decoration: underline;
+}
+
+.ProductShipment {
+  height: 200px;
+}
+.ProductShipment>div {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+  width: 90%;
+}
+
+.ProductShipment>ul {
+  list-style: none;
+  height: 130px;
+  margin: 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.ProductShipment li {
+  margin: 5px 15px;
+  width: 100%;
+}
+
+.ProductShipment li>select, .ProductShipment li>input, .ProductShipment li>button,
+.ProductShipment>div>input {
+  background: #FDF9F6;
+  border: 0.5px solid #242424;
+  border-radius: 5px;
+  padding: 5px;
+}
+.ProductShipment li>input {
+  width: 65%;
+}
+.ProductShipment li>button:active, .ProductShipment>div>input:active {
+  background: #D9D9D9;
+}
+.ProductContacts {
+  font-size: 20px;
+  margin: 40px 0;
+}
+.ProductContacts>input {
+  border: 0.5px solid #242424;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 20px;
+}
+.ProductSave {
+  margin-left: 15px;
+  display: flex;
+  justify-content: flex-end;
+  width: 90%;
+  align-items: center;
+}
+.ProductSave>input {
+  background: #FDF9F6;
+  border: 1px solid #242424;
+  border-radius: 10px;
+  padding: 10px;
+  margin-right: 40px;
+  cursor: pointer;
+}
+.ProductSave>input:active {
+  background: #D9D9D9;
+}
+/* ---------------------------------------------- */
+/* Дополнительная информация */
+.DealInfo {
+  margin: 1em;
+}
+/* Техническое задание */
+.ProductTZ{
+  height: 160px;
+}
+.ProductLastDateUpdate {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 20px;
+}
+.ProdTZS {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 15px;
+}
+.ProdTZS>div>input {
+  background: #FDF9F6;
+  border: 1px solid #242424;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-top: 5px;
+}
+
+/* Проведние пилота */
+.ProductPilot {
+  height: 300px;
+}
+.ProductPilot input {
+  background: #FDF9F6;
+  border: 1px solid #242424;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+.ProductPilot input:active {
+  background: #D9D9D9;
+}
+
+.ProductPilotAnketa {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+  margin: 5px;
+  align-items: center;
+}
+.ProductPilot>p {
+  margin-left: 10px;
+}
+.ProductPilot>div {
+  margin-left: 10px;
+}
+
+.ProductHowToPilot {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.ProductHowToPilot>textarea {
+  height: 80%;
+  width: 50%;
+  resize: none;
+  border: 1px solid #242424;
+  border-radius: 5px;
+  padding: 5px;
+}
+.ProductPilot>div>a {
+  background: #FDF9F6;
+  border: 1px solid #242424;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-top: 5px;
+  color: #242424;
+  text-decoration: underline;
+  margin: 5px 10px;
+  margin-right: 30%;
+}
+/* Вторая колонка */
+/* Регистрация сделок */
+.ProductRegDeal {
+  height: 560px;
+  padding-left: 20px;
+}
+
+.ProductRegDeal input, .ProductRegDeal button {
+  background: #FDF9F6;
+  border: 1px solid #242424;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+.ProductRegDeal button:active {
+  background: #D9D9D9;
+}
+
+
+.ProdAxoft {
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+.ProdAxoft input {
+  border: 1px solid #242424;
+  border-radius: 5px;
+  padding: 5px;
+
+}
+
+.ProductRegContacts {
+  height: 30%;
+  height: 160px;
+}
+.ProductRegContacts>div {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: 5px 10px;
+}
+.ProductRegContacts>ul {
+  list-style: none;
+  margin-left: 10px;
+}
+.ProductRegContacts li {
+  margin: 5px 10px;
+}
+.ProductRegContacts li>input {
+  width: 25%;
+}
+.ProductRegDeal>textarea {
+  resize: none;
+}
+/* -------------------------------------- */
+/* Материалы от вендора */
+.ExtraInfo {
+  margin: 1em;
+}
+
+.ExtraInfo input {
+  width: 70%;
+  background: #FDF9F6;
+  border: 1px solid #242424;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+.ProductExtraVendor {
+  height: 200px;
+}
+
+.ProductExtraVendor>p {
+  margin-left: 10px;
+}
+.ProductSave>input {
+  width: 15%;
+}
+
+
+
+
+
+
+
+
+/* 00000000000000000000000000000000000000000000000 */
+@media (max-width: 900px) {
+  .column {
+    flex: 100%;
+  }
+  .ProductName, .ProdName {
+    display: block;
+  }
+  .ProdTOP>span {
+    margin: 5px 0;
+    margin-right: 20px;
+  }
+  .ProductRealisation>ul>li {
+    width: 70%;
+  }
+  .ProductRealisation li>button {
+    padding: 3px;
+    font-size: 10px;
+  }
+  .FirstInfo li {
+    width: 100%;
+  }
+  .ProductRealisationHat>ul>li {
+    display: block;
+    width: 300px;
+  }
+  .ProductActualPrice>a {
+    color: #242424;
+    text-decoration: underline;
+    width: 200px;
+  }
+  .ProductShipment li>input {
+    width: 50%;
+  }
+  .ProductHowToPilot {
+    display: block;
+  }
+  .ProductHowToPilot>textarea {
+    width: 90%;
+    margin: 10px;
+  }
+  .ProductHowToPilot>input {
+    margin: 5px 10px;
+  }
+}
+@media (max-width: 1500px) {
+  .ProductRealisationHat>ul>li {
+    display: inline-flex;
+    width: 40%;
+  }
+  .ProductActualPrice {
+    margin: 10px;
+    width: 90%;
+  }
+  .ProdName, .ProdTOP {
+    width: 100%;
+  }
+  .ProductShipment li>input {
+    width: 50%;
+  }
+  .ProductCompetencies li {
+    width: 90%;
+  }
+  .ProductLicence>ul, .ProductLicence>div {
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 95%;
+  }
+}
+@media (max-width: 500px){
+  .ProdTZS {
+    display: block;
+  }
+}

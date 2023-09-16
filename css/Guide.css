@@ -1,0 +1,69 @@
+.tablink {
+  padding: 0.5em;
+  margin: 0 7px;
+  width: 15%;
+}
+
+.GuideButtons {
+  margin-top: 1em;
+  height: 5em;
+  /* background: green; */
+}
+
+
+/* Стиль содержимого вкладки (и добавить высоту: 100% для полного содержимого страницы) */
+.Guide {
+  margin: 10px;
+  display: none;
+  /* background: red; */
+}
+
+.GuideAddButtons {
+  /* background: blue; */
+  height: 45px;
+  align-items: center;
+}
+
+.GuideAddButtons button {
+  background: #ff7400;
+  border-radius: 10px;
+  width: 8%;
+  padding: 5px;
+}
+
+.GuideContent{
+  width: 98%;
+  background: #FDF9F6;
+  overflow: scroll;
+  height: 65vh;
+  border-bottom: 3px solid #242424;
+}
+
+.GuideContentHat {
+  border-top: 3px solid #242424;
+  border-bottom: 2px solid #242424;
+  padding: 15px 20px;
+  position: sticky;
+  top: 0;
+  background: #FDF9F6;
+}
+
+.GuideContentMain ul {
+  padding: 0;
+  margin: 0;
+}
+
+.GuideContentMain li {
+  /* background: magenta; */
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 20px;
+}
+
+.GuideContentMain li>button {
+  background: #FDF9F6;
+  border-radius: 10px;
+  padding: 5px;
+}

@@ -1,0 +1,96 @@
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Верхняя шапка */
+.topBar {
+  display: flex;
+  position: sticky;
+  top: 0;
+  justify-content: space-between;
+  background: lightgray;
+}
+
+.topBarLeft {
+  color: black;
+  font-size: 30px;
+  padding: 10px 20px;
+}
+
+.topBarRight {
+  display: flex;
+}
+
+.topBarRight a {
+  color: black;
+  font-size: 25px;
+  padding: 10px 20px 0px;
+  margin-right: 20px;
+}
+.topBarRight>a>img {height:30px;}
+/* Верхняя шапка */
+
+.globalMenu {
+  display: flex;
+  height: 900px;
+  overflow: hidden;
+}
+
+/* Боковое меню */
+.leftBar {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  border-right: 2px solid lightgray;
+}
+.leftBar a {
+  color: black;
+  font-size: 30px;
+  padding: 20px 20px;
+}
+/* Боковое меню */
+
+/* Основная страница */
+.mainContent {
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+  padding: 10px;
+}
+/* Основная страница */
+
+a:hover {
+  filter: invert(100%);
+  background: gray;
+}
+
+
+@media screen and (max-width: 800px) {
+  .globalMenu {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .leftBar {
+    width: 100%;
+    flex-direction: row;
+    border: none;
+    border-bottom: 2px solid lightgray;
+  }
+  .leftBar a {
+    width: 100%;
+    padding: 10px 20px;
+    margin: 0;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .topBarRight>a>img {height:25px;}
+  .topBarLeft {font-size: 20px;}
+  .topBarRight a {font-size: 15px;}
+  .leftBar a {font-size: 20px;}
+}

@@ -1,0 +1,210 @@
+.CreateVendor {
+  margin: 0.5em;
+  font-size: 18px;
+}
+
+.CreateVendor button {
+  background: #FDF9F6;
+  border: 1px solid #242424;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.CreateVendor button:active {
+  background: #D9D9D9;
+}
+
+.PartnersGlobal {
+  display: flex;
+  justify-content: space-between;
+}
+
+.PartnersLeft {
+  width: 49%;
+}
+
+.PartnersName, .PartnersLogo {
+  display: flex;
+  height: 60px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.PartnersName>div {
+  width: 130px;
+  margin-right: 10%;
+}
+
+.PartnersLogo>div {
+  width: 80px;
+}
+
+.PartnersName>input, .PartnersLogo>input {
+  width: 30%;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #242424;
+}
+
+.Partnership {
+  margin-top: 5px;
+  display: block;
+  border: 2px solid #242424;
+  border-radius: 10px;
+  padding: 1em;
+}
+
+.Partners {
+  margin-bottom: 15px;
+}
+
+.Partners>input {
+  width: 60%;
+  margin: 10px 0;
+  padding: 5px;
+  font-size: 1em;
+  border-radius: 5px;
+  border: 1px solid #242424;
+}
+
+.Partners>textarea {
+  width: 80%;
+  font-size: 1em;
+  margin-top: 5px;
+  resize: none;
+  border-radius: 5px;
+  border: 1px solid #242424;
+  padding: 5px;
+}
+
+.PartnerSertificated>div>button {
+  padding: 5px;
+  margin-left: 40px;
+}
+
+.PartnerSertificatedMenu {
+  margin-top: 5px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 80%;
+  height: 20%;
+  border: 1px solid #242424;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.PartnerSertificatedMenu>ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.PartnerSertificatedMenu li {
+  margin: 5px;
+}
+
+.PartnerSertificatedMenu li>input {
+  width: calc(80%/2);
+  border: 0.5px solid #242424;
+  border-radius: 5px;
+  padding: 5px;
+  margin-right: 1em;
+  font-size: 1em;
+}
+
+.PartnerSertificatedMenu li>button {
+  padding: 5px;
+}
+
+/* --------------------------------------------------- */
+
+.PartnersRight {
+  width: 49%;
+}
+
+.ContactsList>button {
+  padding: 5px;
+  margin: 1px;
+  margin-left: 20px;
+}
+
+.PartnerContactsMenu {
+  margin-top: 5px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 95%;
+  height: 20%;
+  border: 1px solid #242424;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.PartnerContactsMenu>ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.PartnerContactsMenu li {
+  margin: 5px;
+  margin-left: 1em;
+}
+
+.PartnerContactsMenu li>input {
+  width: 27%;
+  border: 0.5px solid #242424;
+  border-radius: 5px;
+  padding: 5px;
+  margin-right: 0.5em;
+  font-size: 1em;
+}
+
+.PartnerContactsMenu li>button {
+  padding: 5px;
+}
+
+.Prices {
+  margin-top: 20px;
+}
+
+.FileLoad {
+  border: 1px solid #242424;
+  border-radius: 5px;
+  padding: 5px;
+  margin-top: 5px;
+  height: 20%;
+  width: 95%;
+}
+
+.ActualPrice>input, .LoadPrice>input {
+  border: 1px solid #242424;
+  border-radius: 5px;
+  padding: 5px;
+  width: 30%;
+  margin: 5px 10px;
+}
+
+.LoadPrice {
+  margin-bottom: 10px;
+}
+
+.FileLoad>a {
+  margin-left: 20px;
+  color: #242424;
+}
+
+.SubmitBut {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+.SubmitBut>button {
+  font-size: 20px;
+  margin: 1em;
+  padding: 5px;
+  background: #FDF9F6;
+  border: 1px solid #242424;
+  border-radius: 5px;
+}
