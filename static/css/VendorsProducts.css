@@ -6,6 +6,7 @@
   padding: 0 10px;
 }
 
+
 /* ----------------------------------- */
 .Vendors {
   width: 20%;
@@ -35,6 +36,17 @@
   position: sticky;
   top: 0;
 }
+.SearchMenu {
+  display: flex;
+  justify-content: space-between;
+}
+.SubmitBut>button {
+  padding: 5px 10px;
+  border: 0.5px solid #242424;
+  border-radius: 5px;
+  margin: 7px;
+}
+
 /* Стиль окна поиска */
 #myAddVendor {
   padding: 0 9px;
@@ -66,7 +78,6 @@
   justify-content: space-between;
   border: 1px solid #242424;
   border-radius: 10px;
-  padding: 10px;
 }
 
 #myMenu button {
@@ -84,6 +95,9 @@
   padding: 10px 20px;
   text-decoration: none;
   color: #242424;
+  overflow: hidden;
+  white-space:nowrap;
+  text-overflow: ellipsis;
 }
 
 #myMenu li:hover {

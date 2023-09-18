@@ -8,7 +8,6 @@ from .models import *
 
 def guides(request):
     form = TypeStatusForm()
-
     guides_status = TypeStatus.objects.all()
     guides_type_product = TypeProduct.objects.all()
     guide_type_certification = TypeCertification.objects.all()
@@ -35,7 +34,6 @@ def guides(request):
             return HttpResponseRedirect(reverse(guides))
         if request.POST.get('add_get'):
             form = TypeGetForm(request.POST)
-            print(form)
             form.save()
             return HttpResponseRedirect(reverse(guides))
         if request.POST.get('add_reliase'):
@@ -43,32 +41,26 @@ def guides(request):
             form.save()
             return HttpResponseRedirect(reverse(guides))
         if request.POST.get('del_status'):
-            print(request.POST.get('del_status'))
             a = TypeStatus.objects.get(id=request.POST.get('id'))
             a.delete()
             return HttpResponseRedirect(reverse(guides))
         if request.POST.get('del_product'):
-            print(request.POST.get('del_product'))
             a = TypeProduct.objects.get(id=request.POST.get('id'))
             a.delete()
             return HttpResponseRedirect(reverse(guides))
         if request.POST.get('del_certification'):
-            print(request.POST.get('del_certification'))
             a = TypeCertification.objects.get(id=request.POST.get('id'))
             a.delete()
             return HttpResponseRedirect(reverse(guides))
         if request.POST.get('del_license'):
-            print(request.POST.get('del_license'))
             a = TypeLicense.objects.get(id=request.POST.get('id'))
             a.delete()
             return HttpResponseRedirect(reverse(guides))
         if request.POST.get('del_get'):
-            print(request.POST.get('del_get'))
             a = TypeGet.objects.get(id=request.POST.get('id'))
             a.delete()
             return HttpResponseRedirect(reverse(guides))
         if request.POST.get('del_reliase'):
-            print(request.POST.get('del_reliase'))
             a = TypeReliase.objects.get(id=request.POST.get('id'))
             a.delete()
             return HttpResponseRedirect(reverse(guides))
@@ -83,17 +75,41 @@ def guides(request):
         'all_type_reliase': guide_type_reliase,
         'all_status': guides_status,
         'form': form,
+
     }
     return render(request, 'Guide.html', context)
 
 
 def index(request):
+    groupform = NewGroupFAQForm()
+    questionform = NewQuestionFAQForm()
+
     vendor = Vendor.objects.all()
     product = Product.objects.all()
     group = GroupFAQ.objects.all()
     question = QuestionFAQ.objects.all()
     answer = Answer.objects.all()
-    print(answer)
+
+    if request.POST.get('add_group'):
+        form = NewGroupFAQForm(request.POST)
+        form.save()
+        return HttpResponseRedirect(reverse(index))
+    if request.POST.get('add_question'):
+        form = NewQuestionFAQForm(request.POST)
+        form = form.save(commit=False)
+        form.group = GroupFAQ.objects.get(id=request.POST.get('group_id'))
+        form.save()
+        return HttpResponseRedirect(reverse(index))
+    if request.POST.get('del_group'):
+        a = GroupFAQ.objects.get(id=request.POST.get('group_id'))
+        a.delete()
+        return HttpResponseRedirect(reverse(index))
+    if request.POST.get('del_quest'):
+        a = QuestionFAQ.objects.get(id=request.POST.get('quest_id'))
+        a.delete()
+        return HttpResponseRedirect(reverse(index))
+
+    form = NewGroupFAQForm(request.POST)
 
     context = {
         'vendors': vendor,
@@ -101,6 +117,8 @@ def index(request):
         'group': group,
         'question': question,
         'answer': answer,
+        'groupform': groupform,
+        'questionform': questionform,
     }
     return render(request, 'index.html', context)
 

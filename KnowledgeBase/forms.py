@@ -61,3 +61,15 @@ class NewVendorSpecialistForm(forms.ModelForm):
         }
 
     prefix = 'vendorspecialist'
+
+
+class NewGroupFAQForm(forms.ModelForm):
+    class Meta:
+        model = GroupFAQ
+        fields = ['name']
+
+
+class NewQuestionFAQForm(forms.ModelForm):
+    class Meta:
+        model = QuestionFAQ
+        fields = ['name']

@@ -29,7 +29,7 @@ class Vendor(models.Model):  # добавить поле дата
 class VendorSpecialist(models.Model):  # добавить дату и файл
     vendor = models.ForeignKey('Vendor', on_delete=models.CASCADE, verbose_name='У какого вендора?')
     name = models.CharField(max_length=150, default='', null=True, verbose_name='ФИО')
-    date = models.DateField(default=timezone.now)
+    date = models.DateField(default=timezone.now, verbose_name='')
 
     def __str__(self):
         return self.name
@@ -56,7 +56,7 @@ class VendorPrices(models.Model):  # добавить дату
 
 
 class Product(models.Model):
-    vendor = models.ForeignKey(Vendor, on_delete=models.SET_DEFAULT, default='', null=True)
+    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, default='', null=True)
     name = models.CharField(max_length=50, default='', null=True)
     top = models.BooleanField(max_length=50, default=False, null=True)
     brif_description = models.TextField(default='', null=True)
@@ -145,12 +145,12 @@ class GroupFAQ(models.Model):
 
 
 class QuestionFAQ(models.Model):
-    group = models.ForeignKey(GroupFAQ, on_delete=models.SET_DEFAULT, default=0)
+    group = models.ForeignKey(GroupFAQ, on_delete=models.CASCADE, default=0)
     name = models.CharField(max_length=100, default='')
 
 
 class Answer(models.Model):
-    question = models.ForeignKey('QuestionFAQ', on_delete=models.SET_DEFAULT, default=0)
+    question = models.ForeignKey('QuestionFAQ', on_delete=models.CASCADE, default=0)
     description = models.TextField(default='')
     files = models.FileField(default=None)
 

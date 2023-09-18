@@ -17,22 +17,22 @@
       <div class="PartnersLeft">
         <div class="PartnersName">
           <div>Наименование вендора</div>
-          <input type="text" value="{{vendor.name}}">
+          <input type="text" value="{{vendor.name}}" readonly>
         </div>
         <label>Партнерство</label>
         <div class="Partnership">
           <div class="Partners PartnerStatus">
             <div>Статус</div>
-            <input type="text" value="{{vendor.status}}">
+            <input type="text" value="{{vendor.status}}" readonly>
           </div>
           <div class="Partners PartnerDate">
             <div>Срок действия партнерского статуса</div>
-            <input type="date" value="{{vendor.period|date:'Y-m-d'}}">
+            <input type="date" value="{{vendor.period|date:'Y-m-d'}}" readonly>
           </div>
 
           <div class="Partners PartnerRec">
             <div>Требования к партнерскому статусу</div>
-            <textarea name="name" rows="5" >{{vendor.requirement}}</textarea>
+            <textarea name="name" rows="5" readonly>{{vendor.requirement}}</textarea>
           </div>
 
           <div class="PartnerSertificated">
@@ -43,8 +43,8 @@
               <ul>
                 {% for item in specialist %}
                 <li>
-                  <input type="text" value="{{item.name}}" placeholder="ФИО">
-                  <input type="date" value="{{item.date|date:'Y-m-d'}}">
+                  <input type="text" value="{{item.name}}" placeholder="ФИО" readonly>
+                  <input type="date" value="{{item.date|date:'Y-m-d'}}" readonly>
                 </li>
                 {% endfor %}
               </ul>
@@ -53,7 +53,7 @@
 
           <div class="Partners PartnerSales">
             <div>Скидки</div>
-            <input type="text" title="help" value="{{vendor.discount}}">
+            <input type="text" title="help" value="{{vendor.discount}}" readonly>
           </div>
         </div>
 
