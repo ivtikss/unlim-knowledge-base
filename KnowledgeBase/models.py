@@ -8,11 +8,11 @@ from django.utils import timezone
 
 class Vendor(models.Model):  # добавить поле дата
     name = models.CharField(max_length=50, default='', null=True, verbose_name='Наименование', db_index=True)
-    logo = models.ImageField(default=None, null=True, verbose_name='Логотип')
-    status = models.CharField(max_length=50, default='', null=True, verbose_name='Статус')
+    status = models.CharField(max_length=50, default='', null=True, verbose_name='Статус', blank=True)
+    date = models.DateField(default=timezone.now, verbose_name='Срок действия партнерского статуса', blank=True)
     requirement = models.CharField(max_length=50, default='', null=True, verbose_name='Требования к партнерскому '
-                                                                                      'статусу')
-    discount = models.CharField(max_length=50, default='', null=True, verbose_name='Скидка')
+                                                                                      'статусу', blank=True)
+    discount = models.CharField(max_length=50, default='', null=True, verbose_name='Скидка', blank=True)
 
     def get_absolute_url(self):
         return reverse('vendor-detail', kwargs={"vendor_id": self.pk})
@@ -27,9 +27,11 @@ class Vendor(models.Model):  # добавить поле дата
 
 
 class VendorSpecialist(models.Model):  # добавить дату и файл
-    vendor = models.ForeignKey('Vendor', on_delete=models.CASCADE, verbose_name='У какого вендора?')
-    name = models.CharField(max_length=150, default='', null=True, verbose_name='ФИО')
-    date = models.DateField(default=timezone.now, verbose_name='')
+    vendor = models.ForeignKey('Vendor', on_delete=models.CASCADE, verbose_name='У какого вендора?', blank=True,
+                               null=True)
+    name = models.CharField(max_length=150, default='', null=True, verbose_name='ФИО', blank=True)
+    date = models.DateField(default=timezone.now, verbose_name='Срок действия сертификатов специалистов', blank=True,
+                            null=True)
 
     def __str__(self):
         return self.name
@@ -41,34 +43,52 @@ class VendorSpecialist(models.Model):  # добавить дату и файл
 
 
 class Contact(models.Model):  # добавить дату
-    vendor = models.ForeignKey('Vendor', on_delete=models.CASCADE, default='', null=True)
-    product = models.ForeignKey('Product', on_delete=models.CASCADE, default='', null=True)
-    name = models.CharField(max_length=50, default='')
-    phone_number = models.CharField(max_length=50, default='')
-    email = models.CharField(max_length=50, default='')
-    messanger = models.CharField(max_length=20, default='')
+    vendor = models.ForeignKey('Vendor', on_delete=models.CASCADE, default='', null=True,  blank=True,
+                               verbose_name= 'Вендор')
+    product = models.ForeignKey('Product', on_delete=models.CASCADE, default='', null=True,  blank=True,
+                                verbose_name='Продукт')
+    name = models.CharField(max_length=50, default='', verbose_name='ФИО')
+    phone_number = models.CharField(max_length=50, default='', verbose_name='Номер телефона')
+    email = models.CharField(max_length=50, default='', verbose_name='Адрес электронной почты')
+    messanger = models.CharField(max_length=20, default='', verbose_name='Мессенджер')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Контактное лицо'
+        verbose_name_plural = 'Контактные лица'
+        ordering = ['name']
 
 
 class VendorPrices(models.Model):  # добавить дату
-    vendor = models.ForeignKey('Vendor', on_delete=models.CASCADE)
-    price = models.FileField(default=None)
-    file = models.FileField(default=None)
+    vendor = models.ForeignKey('Vendor', on_delete=models.CASCADE, default='', null=True,  blank=True)
+    file = models.FileField(default='', verbose_name='Файл прайса', null=True,  blank=True)
+    date = models.DateField(default=timezone.now, verbose_name='Дата начала действия прайса', blank=True, null=True)
+
+    def __str__(self):
+        return self.file
+
+    class Meta:
+        verbose_name = 'Прайс'
+        verbose_name_plural = 'Прайсы'
+        ordering = ['vendor']
 
 
 class Product(models.Model):
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, default='', null=True)
     name = models.CharField(max_length=50, default='', null=True)
-    top = models.BooleanField(max_length=50, default=False, null=True)
-    brif_description = models.TextField(default='', null=True)
-    whom_and_what_for = models.TextField(default='', null=True)
-    gen_form = models.FileField(default=None, null=True)
-    ship_kit = models.CharField(max_length=200, default='', null=True)
-    tech_support = models.CharField(max_length=200, default='', null=True)
-    owner_type = models.CharField(max_length=100, default='', null=True)
-    battle_card = models.FileField(default=None, null=True)
-    product_type = models.CharField(max_length=50, default='', null=True)  # мб нужна связь с типами продукта
-    competencies = models.FileField(default=None, null=True)
-    analogs = models.CharField(max_length=50, default='', null=True)
+    # top = models.BooleanField(max_length=50, default=False, null=True)
+    # brif_description = models.TextField(default='', null=True)
+    # whom_and_what_for = models.TextField(default='', null=True)
+    # gen_form = models.FileField(default=None, null=True)
+    # ship_kit = models.CharField(max_length=200, default='', null=True)
+    # tech_support = models.CharField(max_length=200, default='', null=True)
+    # owner_type = models.CharField(max_length=100, default='', null=True)
+    # battle_card = models.FileField(default=None, null=True)
+    # product_type = models.CharField(max_length=50, default='', null=True)  # мб нужна связь с типами продукта
+    # competencies = models.FileField(default=None, null=True)
+    # analogs = models.CharField(max_length=50, default='', null=True)
 
 
 # class __Skeleton(models.Model):
@@ -143,37 +163,109 @@ class Product(models.Model):
 class GroupFAQ(models.Model):
     name = models.CharField(max_length=100, default='', null=False)
 
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Группа вопросов'
+        verbose_name_plural = 'Группы вопросов'
+        ordering = ['name']
+
 
 class QuestionFAQ(models.Model):
     group = models.ForeignKey(GroupFAQ, on_delete=models.CASCADE, default=0)
     name = models.CharField(max_length=100, default='')
 
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Вопрос'
+        verbose_name_plural = 'Вопросы'
+        ordering = ['name', 'group']
+
 
 class Answer(models.Model):
-    question = models.ForeignKey('QuestionFAQ', on_delete=models.CASCADE, default=0)
-    description = models.TextField(default='')
-    files = models.FileField(default=None)
+    question = models.ForeignKey('QuestionFAQ', on_delete=models.CASCADE, blank=True, null=True)
+    description = models.TextField(default='', blank=True, null=True)
+
+    def __str__(self):
+        return self.description
+
+    class Meta:
+        verbose_name = 'Инструкция'
+        verbose_name_plural = 'Инструкции'
+        ordering = ['question', 'description']
 
 
 class TypeStatus(models.Model):
     name = models.CharField(max_length=100, default='')
 
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Тип статуса'
+        verbose_name_plural = 'Типы статусов'
+        ordering = ['name']
+
 
 class TypeProduct(models.Model):
     name = models.CharField(max_length=100, default='')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Тип продукта'
+        verbose_name_plural = 'Типы продуктов'
+        ordering = ['name']
 
 
 class TypeCertification(models.Model):
     name = models.CharField(max_length=100, default='')
 
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Тип сертификации'
+        verbose_name_plural = 'Типы сертификации'
+        ordering = ['name']
+
 
 class TypeLicense(models.Model):
     name = models.CharField(max_length=100, default='')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Тип лицензии'
+        verbose_name_plural = 'Типы лицензий'
+        ordering = ['name']
 
 
 class TypeGet(models.Model):
     name = models.CharField(max_length=100, default='')
 
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Тип отгрузки'
+        verbose_name_plural = 'Типы отгрузки'
+        ordering = ['name']
+
 
 class TypeReliase(models.Model):
     name = models.CharField(max_length=100, default='')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Тип реализации'
+        verbose_name_plural = 'Типы реализации'
+        ordering = ['name']
+

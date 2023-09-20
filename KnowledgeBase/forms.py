@@ -13,7 +13,6 @@ class TypeProductForm(forms.ModelForm):
         model = TypeProduct
         fields = ['name']
         widgets = {
-            'name': forms.TextInput(attrs={'class': 'PartnersName'})
         }
 
 
@@ -44,7 +43,7 @@ class TypeReliaseForm(forms.ModelForm):
 class NewVendorForm(forms.ModelForm):
     class Meta:
         model = Vendor
-        fields = ['name', 'status', 'requirement', 'discount']
+        fields = ['name', 'status', 'date', 'requirement', 'discount']
         widgets = {
             'requirement': forms.Textarea(attrs={'row': 5})
         }
@@ -63,6 +62,28 @@ class NewVendorSpecialistForm(forms.ModelForm):
     prefix = 'vendorspecialist'
 
 
+class NewContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = ['name', 'phone_number', 'email', 'messanger']
+        widgets = {
+
+        }
+
+    prefix = 'contact'
+
+
+class NewVendorPricesForm(forms.ModelForm):
+    class Meta:
+        model = VendorPrices
+        fields = ['vendor', 'file', 'date']
+        widgets = {
+
+        }
+
+    prefix = 'price'
+
+
 class NewGroupFAQForm(forms.ModelForm):
     class Meta:
         model = GroupFAQ
@@ -73,3 +94,11 @@ class NewQuestionFAQForm(forms.ModelForm):
     class Meta:
         model = QuestionFAQ
         fields = ['name']
+
+
+class NewAnswerForm(forms.ModelForm):
+    class Meta:
+        model = Answer
+        fields = ['description', 'question']
+
+    prefix = 'answer'

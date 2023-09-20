@@ -24,8 +24,7 @@
   align-items: center;
 }
 
-.GuideAddButtons button {
-  background: #ff7400;
+.GuideAddButtons input {
   border-radius: 10px;
   width: 8%;
   padding: 5px;
@@ -62,7 +61,7 @@
   padding: 5px 20px;
 }
 
-.GuideContentMain li>button {
+.GuideContentMain li>form>input {
   background: #FDF9F6;
   border-radius: 10px;
   padding: 5px;

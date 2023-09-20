@@ -57,52 +57,31 @@
 <!-- -------------------------------------- -->
 
       <div class="PartnersRight">
-        <div class="PartnersLogo">
-          <div>Логотип</div>
-          <input type="file" accept="image/*">
-        </div>
         Контактные лица
         <div class="Partnership">
           <div class="ContactsList">
             Список контактов
-            <button type="button">Добавить</button>
           </div>
           <div class="PartnerContactsMenu">
             <ul>
-              {% for item in contact %}
               <li>
                 <input type="text" value="{{item.name}}" placeholder="ФИО">
                 <input type="date" value="{{item.period|date:'Y-m-d'}}">
                 <input type="email" value="{{item.email}}">
-                <button type="button">Удалить</button>
               </li>
-              {% endfor %}
             </ul>
           </div>
         </div>
         <div class="Prices">Прайсы</div>
-        <div class="Partnership">
-          <div class="ContactsList">
-            Список Прайсов
-            <button type="button">Добавить</button>
-          </div>
           <div class="FileLoad">
-            <div class="ActualPrice">
-              <input type="file" accept="image/*, .pdf, .xlsx, .xls" title="help">
-            </div>
-
             <div class="LoadPrice">
               <input type="file" accept="image/*, .pdf, .xlsx, .xls" title="help">
               <input type="date">
             </div>
-            <a href="#">Архив прайсов</a>
-          </div>
         </div>
-
         <div class="SubmitBut">
           <button type="submit">Добавить</button>
         </div>
-
       </div>
     </div>
   </form>

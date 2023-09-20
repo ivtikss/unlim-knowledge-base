@@ -83,6 +83,7 @@ def guides(request):
 def index(request):
     groupform = NewGroupFAQForm()
     questionform = NewQuestionFAQForm()
+    addanswerform = NewAnswerForm()
 
     vendor = Vendor.objects.all()
     product = Product.objects.all()
@@ -108,8 +109,21 @@ def index(request):
         a = QuestionFAQ.objects.get(id=request.POST.get('quest_id'))
         a.delete()
         return HttpResponseRedirect(reverse(index))
+    if request.POST.get('add_answer'):
+        form = NewAnswerForm(request.POST)
+        a = form.save(commit=False)
+        a.question = QuestionFAQ.objects.get(id=request.POST.get('quest_id'))
+        a.save()
+        return HttpResponseRedirect(reverse(index))
+    if request.POST.get('edit_answer'):
+        form = NewAnswerForm(request.POST)
+        answer = Answer.objects.get(id=request.POST.get('answ_id'))
+        form = form.save(commit=False)
+        answer.description = form.description
+        answer.save()
+        return HttpResponseRedirect(reverse(index))
 
-    form = NewGroupFAQForm(request.POST)
+    form = NewGroupFAQForm()
 
     context = {
         'vendors': vendor,
@@ -119,6 +133,7 @@ def index(request):
         'answer': answer,
         'groupform': groupform,
         'questionform': questionform,
+        'addanswerform': addanswerform,
     }
     return render(request, 'index.html', context)
 
@@ -169,3 +184,7 @@ def new_vendor(request):
     }
 
     return render(request, 'new_vendor.html', context)
+
+
+def new_product(request):
+    return render(request, 'ProductCreate.html')
