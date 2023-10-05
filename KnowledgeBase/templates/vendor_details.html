@@ -7,107 +7,107 @@
 <link rel="stylesheet" href="/static/css/VendorCreation.css">
 
 <main>
-  <!-- Путь к файлу -->
-  <div class="name__directoty">
-  База знаний > Вендор > {{ vendor.name }}
-  </div>
-  <!-- Путь к файлу -->
-  <form class="CreateVendor" action="index.html" method="post">
-    <div class="PartnersGlobal">
-      <div class="PartnersLeft">
-        <div class="PartnersName">
-          <div>Наименование вендора</div>
-          <input type="text" value="{{vendor.name}}" readonly>
-        </div>
-        <label>Партнерство</label>
-        <div class="Partnership">
-          <div class="Partners PartnerStatus">
-            <div>Статус</div>
-            {% if vendor.status %}
-            <input type="text" value="{{vendor.status}}" readonly>
-            {% else %}
-            <input type="text" value="" readonly >
-            {% endif %}
-          </div>
-          <div class="Partners PartnerDate">
-            <div>Срок действия партнерского статуса</div>
-            <input type="date" value="{{vendor.period|date:'Y-m-d'}}" readonly>
-          </div>
-
-          <div class="Partners PartnerRec">
-            <div>Требования к партнерскому статусу</div>
-            {% if vendor.requirement %}
-            <textarea name="name" rows="5" readonly>{{vendor.requirement}}</textarea>
-            {% else %}
-            <textarea name="name" rows="5" readonly></textarea>
-            {% endif %}
-          </div>
-
-          <div class="PartnerSertificated">
-            <div>
-              Сертифицированные специалисты
-            </div>
-            <div class="PartnerSertificatedMenu">
-              <ul>
-                {% for item in specialist %}
-                <li>
-                  <input type="text" value="{{item.name}}" placeholder="ФИО" readonly>
-                  <input type="date" value="{{item.date|date:'Y-m-d'}}" readonly>
-                </li>
-                {% endfor %}
-              </ul>
-            </div>
-          </div>
-
-          <div class="Partners PartnerSales">
-            <div>Скидки</div>
-            {% if vendor.requirement %}
-            <input type="text" title="help" value="{{vendor.discount}}" readonly>
-            {% else %}
-            <input type="text" title="help" value="" readonly>
-            {% endif %}
-          </div>
-        </div>
-
-      </div>
-
-<!-- -------------------------------------- -->
-
-      <div class="PartnersRight">
-        Контактные лица
-        <div class="Partnership">
-          <div class="ContactsList">
-            Список контактов
-          </div>
-          <div class="PartnerContactsMenu">
-            <ul>
-              {% for item in contact %}
-              <li>
-                <input type="text" value="{{item.name}}" placeholder="ФИО">
-                <input type="date" value="{{item.period|date:'Y-m-d'}}">
-                <input type="email" value="{{item.email}}">
-              </li>
-              {% endfor %}
-            </ul>
-          </div>
-        </div>
-        <div class="Prices">Прайсы</div>
-        <div class="Partnership">
-          <div class="FileLoad">
-            <div class="LoadPrice">
-              <input type="file" accept="image/*, .pdf, .xlsx, .xls" title="help">
-              <input type="date">
-            </div>
-            <a href="#">Архив прайсов</a>
-          </div>
-        </div>
-
-        <div class="SubmitBut">
-          <a href="{% url 'index' %}">Закрыть</a>
-        </div>
-
-      </div>
+    <!-- Путь к файлу -->
+    <div class="name__directoty">
+        База знаний > Вендор > {{ vendor.name }}
     </div>
-  </form>
+    <!-- Путь к файлу -->
+    <form class="CreateVendor" action="index.html" method="post">
+        <div class="PartnersGlobal">
+            <div class="PartnersLeft">
+                <div class="PartnersName">
+                    <div>Наименование вендора</div>
+                    <input type="text" value="{{vendor.name}}" readonly>
+                </div>
+                <label>Партнерство</label>
+                <div class="Partnership">
+                    <div class="Partners PartnerStatus">
+                        <div>Статус</div>
+                        {% if vendor.status %}
+                        <input type="text" value="{{vendor.status}}" readonly>
+                        {% else %}
+                        <input type="text" value="" readonly>
+                        {% endif %}
+                    </div>
+                    <div class="Partners PartnerDate">
+                        <div>Срок действия партнерского статуса</div>
+                        <input type="date" value="{{vendor.period|date:'Y-m-d'}}" readonly>
+                    </div>
+
+                    <div class="Partners PartnerRec">
+                        <div>Требования к партнерскому статусу</div>
+                        {% if vendor.requirement %}
+                        <textarea name="name" rows="5" readonly>{{vendor.requirement}}</textarea>
+                        {% else %}
+                        <textarea name="name" rows="5" readonly></textarea>
+                        {% endif %}
+                    </div>
+
+                    <div class="PartnerSertificated">
+                        <div>
+                            Сертифицированные специалисты
+                        </div>
+                        <div class="PartnerSertificatedMenu">
+                            <ul>
+                                {% for item in specialist %}
+                                <li>
+                                    <input type="text" value="{{item.name}}" placeholder="ФИО" readonly>
+                                    <input type="date" value="{{item.date|date:'Y-m-d'}}" readonly>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="Partners PartnerSales">
+                        <div>Скидки</div>
+                        {% if vendor.requirement %}
+                        <input type="text" title="help" value="{{vendor.discount}}" readonly>
+                        {% else %}
+                        <input type="text" title="help" value="" readonly>
+                        {% endif %}
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- -------------------------------------- -->
+
+            <div class="PartnersRight">
+                Контактные лица
+                <div class="Partnership">
+                    <div class="ContactsList">
+                        Список контактов
+                    </div>
+                    <div class="PartnerContactsMenu">
+                        <ul>
+                            {% for item in contact %}
+                            <li>
+                                <input type="text" value="{{item.name}}" placeholder="ФИО">
+                                <input type="date" value="{{item.period|date:'Y-m-d'}}">
+                                <input type="email" value="{{item.email}}">
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="Prices">Прайсы</div>
+                <div class="Partnership">
+                    <div class="FileLoad">
+                        <div class="LoadPrice">
+                            <input type="file" accept="image/*, .pdf, .xlsx, .xls" title="help">
+                            <input type="date">
+                        </div>
+                        <a href="#">Архив прайсов</a>
+                    </div>
+                </div>
+
+                <div class="SubmitBut">
+                    <a href="{% url 'index' %}">Закрыть</a>
+                </div>
+
+            </div>
+        </div>
+    </form>
 </main>
 {% endblock %}

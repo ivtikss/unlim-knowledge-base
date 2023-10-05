@@ -1,298 +1,327 @@
 {% extends 'base.html' %}
 {% load markdown_extras %}
 {% block content %}
-    <!-- Заменяемый контент -->
-    <main>
-      <!-- Путь к файлу -->
-      <div class="name__directoty">
-      База знаний
-      </div>
-      <!-- Путь к файлу -->
-      <div class="field__directory">
+<!-- Заменяемый контент -->
+<main>
+    <!-- Путь к файлу -->
+    <div class="name__directoty">
+        База знаний
+    </div>
+    <!-- Путь к файлу -->
+    <div class="field__directory">
         <!-- Кнопки выбора вклвдки -->
         <div class="buttons">
-        <button class="tablink" onclick="openPage('Base', this)" id="defaultOpen">База знаний</button>
-        <button class="tablink" onclick="openPage('FAQ', this)">F.A.Q.</button>
+            <button class="tablink" onclick="openPage('Base', this)" id="defaultOpen">База знаний</button>
+            <button class="tablink" onclick="openPage('FAQ', this)">F.A.Q.</button>
         </div>
         <!-- Кнопки выбора вклвдки -->
         <!-- Содержание страниц -->
         <div id="Base" class="tabcontent">
-          <div class="dateupdate">
-            <button type="button">Загрузить список Вендоров</button>
-            <p>Последняя дата обновления: 23.12.2023</p>
-          </div>
-          <div class="VendorProductSearch">
-            <!-- Вендоры -->
-            <div class="Vendors">
-              <div class="SearchMenu">
-                <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Поиск.." title="Введите категорию">
-                <form action="{% url 'new_vendor' %}">
-                  <div class="SubmitBut">
-                    <button type="submit">Добавить</button>
+            <div class="dateupdate">
+                <button type="button">Загрузить список Вендоров</button>
+                <p>Последняя дата обновления: 23.12.2023</p>
+            </div>
+            <div class="VendorProductSearch">
+                <!-- Вендоры -->
+                <div class="Vendors">
+                    <div class="SearchMenu">
+                        <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Поиск.."
+                               title="Введите категорию">
+                        <form action="{% url 'new_vendor' %}">
+                            <div class="SubmitBut">
+                                <button type="submit">Добавить</button>
+                            </div>
+                        </form>
+                    </div>
+                    <ul id="myMenu">
+                        {% for vendor in vendors %}
+                        <li><img src="static/images/marinette001.png" alt="" width="40px">
+                            <a href="{{ vendor.get_absolute_url }}">{{vendor.name}}</a>
+                            <button>Edit</button>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <!-- Вендоры -->
+                <div class="Product">
+                    <div class="ProductMenu">
+                        <div>
+                            <div class="ProdEmpty"></div>
+                            <div>Наименование продукта</div>
+                            <div>ФСТЭК</div>
+                            <div>ФСБ</div>
+                            <div>ТОП</div>
+                            <div><a href="{% url 'create_product' %}">
+                                <button type="button">Добавить Продукт</button>
+                            </a></div>
+                        </div>
+                    </div>
+                    {% for product in products %}
+                    <div class="names">
+                        <div><img src="static/images/phone.png" alt="duck" width="60px;"></div>
+                        <p><a href="">{{product.name}}</a></p>
+                        <p>{% if product.top %}<img src="static/images/59508.png" alt="check" width="20px;">{% endif %}
+                        </p>
+                        <p>{% if product.top %}<img src="static/images/59508.png" alt="check" width="20px;">{% endif %}
+                        </p>
+                        <p>{% if product.top %}<img src="static/images/59508.png" alt="check" width="20px;">{% endif %}
+                        </p>
+                        <p></p>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <!-- <div class="Filter">
+                  <div class="FilterMenu">
+                    Фильтры
                   </div>
-                </form>
-              </div>
-              <ul id="myMenu">
-                {% for vendor in vendors %}
-	              <li><img src="static/images/marinette001.png" alt="" width="40px">
-                  <a href="{{ vendor.get_absolute_url }}">{{vendor.name}}</a>
-                  <button>Edit</button></li>
-                {% endfor %}
-              </ul>
+
+                  <div class="FiltersMain">
+                    <div class="FilterButtons">
+                      <button>Применить</button>
+                      <button>Очистить</button>
+                    </div>
+
+                    <form method="POST">
+                      {% csrf_token %}
+                    <div class="filter__search">
+                      Вендор
+                      <select class="filter__vendor">
+                        {% for vendor in object_list %}
+                        <option>{{vendor.name}}</option>
+                        {% endfor %}
+                      </select>
+                      Продукт
+                      <select class="filter__product">
+                        {% for product in view.all_product %}
+                        <option>{{product.name}}</option>
+                        {% endfor %}
+                      </select>
+                      Тип продукта
+                      <select class="filter__type__product">
+                        {% for type in view.all_type_product %}
+                        <option>{{type.name}}</option>
+                        {% endfor %}
+                      </select>
+                    </div></form>
+
+                    <div class="filter__certificate">
+                      Сертифиация
+                      <table>
+                        <tr>
+                          <td>ФСТЭК</td>
+                          <td><input type="checkbox" class="filter__btn__FSTEK"></td>
+                        </tr>
+                        <tr>
+                          <td>ФСБ</td>
+                          <td><input type="checkbox" class="filter__btn__FSB"></td>
+                        </tr>
+                        <tr>
+                          <td>ТОП</td>
+                          <td><input type="checkbox" class="filter__btn__TOP"></td>
+                        </tr>
+                      </table>
+                    </div>
+
+                    <div class="filter__realisation">
+                      Реализация
+                    </div>
+
+                  </div>
+
+
+
+                </div> -->
             </div>
-            <!-- Вендоры -->
-            <div class="Product">
-            <div class="ProductMenu">
-                <div>
-                  <div class="ProdEmpty"></div>
-                  <div>Наименование продукта</div>
-                  <div>ФСТЭК</div>
-                  <div>ФСБ</div>
-                  <div>ТОП</div>
-                  <div><a href="{% url 'create_product' %}"><button type="button">Добавить Продукт</button></a></div>
-                </div>
-            </div>
-            {% for product in products %}
-            <div class="names">
-              <div><img src="static/images/phone.png" alt="duck" width="60px;"></div>
-              <p><a href="">{{product.name}}</a></p>
-              <p>{% if product.top %}<img src="static/images/59508.png" alt="check" width="20px;">{% endif %}</p>
-              <p>{% if product.top %}<img src="static/images/59508.png" alt="check" width="20px;">{% endif %}</p>
-              <p>{% if product.top %}<img src="static/images/59508.png" alt="check" width="20px;">{% endif %}</p>
-              <p></p>
-            </div>
-            {% endfor %}
-            </div>
-
-            <!-- <div class="Filter">
-              <div class="FilterMenu">
-                Фильтры
-              </div>
-
-              <div class="FiltersMain">
-                <div class="FilterButtons">
-                  <button>Применить</button>
-                  <button>Очистить</button>
-                </div>
-
-                <form method="POST">
-                  {% csrf_token %}
-                <div class="filter__search">
-                  Вендор
-                  <select class="filter__vendor">
-                    {% for vendor in object_list %}
-                    <option>{{vendor.name}}</option>
-                    {% endfor %}
-                  </select>
-                  Продукт
-                  <select class="filter__product">
-                    {% for product in view.all_product %}
-                    <option>{{product.name}}</option>
-                    {% endfor %}
-                  </select>
-                  Тип продукта
-                  <select class="filter__type__product">
-                    {% for type in view.all_type_product %}
-                    <option>{{type.name}}</option>
-                    {% endfor %}
-                  </select>
-                </div></form>
-
-                <div class="filter__certificate">
-                  Сертифиация
-                  <table>
-                    <tr>
-                      <td>ФСТЭК</td>
-                      <td><input type="checkbox" class="filter__btn__FSTEK"></td>
-                    </tr>
-                    <tr>
-                      <td>ФСБ</td>
-                      <td><input type="checkbox" class="filter__btn__FSB"></td>
-                    </tr>
-                    <tr>
-                      <td>ТОП</td>
-                      <td><input type="checkbox" class="filter__btn__TOP"></td>
-                    </tr>
-                  </table>
-                </div>
-
-                <div class="filter__realisation">
-                  Реализация
-                </div>
-
-              </div>
-
-
-
-            </div> -->
-          </div>
         </div>
         <div id="FAQ" class="tabcontent">
-          <div class="dateupdate">
-            <button  onclick="document.getElementById('AddNewQuestGroup').style.display='block'" type="button">Добавить раздел</button>
-            <!-- Модальный -->
-          <div id="AddNewQuestGroup" class="modalMember">
-            <!-- Модальный контент -->
-            <form class="modal-content" action="{% url 'index' %}" method="post">
-                    {% csrf_token %}
-              <div class="namecontainer">
-                Добавление раздела
-              </div>
-              <div class="container">
-                <label for="uname">Наименование раздела:</label>
-                  {{ groupform.name }}
-              </div>
-              <div class="PostButtons">
-                <input type="submit" value="Отправить" name="add_group">
-                <input type="reset" value="Отменить" onclick="document.getElementById('AddNewQuestGroup').style.display='none'">
-              </div>
-            </form>
-          </div>
-          </div>
-          <div class="menu">
-            <!-- buttons - левая часть со всеми разделами и вопросами -->
-            <div class="buttonsFAQ">
-              <!-- button1 - блок раздела (его прогнать через цикл разделов)
-              в нем идет список с вопросами (список через цикл с вопросами) -->
-              {% for item in group %}
-              <div class="button1">
-                <button class="accordion">{{ item.name }}</button>
-                <div class="panel">
-                  <div class="buttonAddQuestFAQ">
-                    <button onclick="document.getElementById('AddNewQuest{{ item.id }}').style.display='block'">Добавить вопрос</button>
-                    <button onclick="document.getElementById('delitNewQuest{{ item.id }}').style.display='block'">Удалить раздел</button>
-                  </div>
-                  <!-- Модальный Добавить вопрос -->
-                  <div id="AddNewQuest{{ item.id }}" class="modalMember">
+            <div class="dateupdate">
+                <button onclick="document.getElementById('AddNewQuestGroup').style.display='block'" type="button">
+                    Добавить раздел
+                </button>
+                <!-- Модальный -->
+                <div id="AddNewQuestGroup" class="modalMember">
                     <!-- Модальный контент -->
                     <form class="modal-content" action="{% url 'index' %}" method="post">
-                      {% csrf_token %}
-                      <div class="namecontainer">
-                        Добавление вопроса
-                      </div>
-                      <div class="container">
-                        <label for="uname">Вопрос:</label>
-                        {{ questionform.name }}
-                      </div>
-                      <div class="PostButtons">
-                        <input type="submit" value="Отправить" name="add_question">
-                        <input type="hidden" value="{{ item.id }}" name="group_id">
-                        <input type="reset" value="Отменить" onclick="document.getElementById('AddNewQuest{{ item.id }}').style.display='none'">
-                      </div>
-                    </form>
-                  </div>
-                  <!-- Модальный Удалить раздел -->
-                  <div id="delitNewQuest{{ item.id }}" class="modalMember">
-                    <!-- Модальный контент -->
-                    <form class="modal-content" action="{% url 'index' %}" method="post">
-                      {% csrf_token %}
-                      <div class="namecontainer">
-                        Вы уверены что хотите удалить раздел?
-                      </div>
-                      <div class="PostButtons">
-                        <form method="post">
-                          {% csrf_token %}
-                          <input type="submit" value="Удалить раздел" name="del_group">
-                          <input type="hidden" value="{{ item.id }}" name="group_id">
-                        </form>
-                        <input type="reset" value="Отменить" onclick="document.getElementById('delitNewQuest{{ item.id }}').style.display='none'">
-                      </div>
-                    </form>
-                  </div>
-                  <ul>
-                    {% for quest in question %}
-                    {% if quest.group_id == item.id %}
-                    <li>
-                      <!-- Надо будет предусмотреть чтоб в swowAnswer() шел нужный айди вопроса -->
-                      <p>{{ quest.name }}</P>
-                      <div class="buttsQuestFAQ">
-                        {% if quest.answer_set.all %}
-                        <button class="butShowMoreFAQ" onclick="showAnswer('{{quest.id}}')">Подробнее...</button>
-                        <button onclick="document.getElementById('delitNewAskFAQ{{ quest.id }}').style.display='block'">Удалить</button>
-                        {% else %}
-                        <button onclick="document.getElementById('addAnswFAQ{{ quest.id }}').style.display='block'">Добавить инструкцию</button>
-                        <button onclick="document.getElementById('delitNewAskFAQ{{ quest.id }}').style.display='block'">Удалить</button>
-                        {% endif %}
-                        <!-- Модальный Удалить вопрос -->
-                        <div id="delitNewAskFAQ{{ quest.id }}" class="modalMember">
-                          <!-- Модальный контент -->
-                          <form class="modal-content" action="{% url 'index' %}" method="post">
-                            {% csrf_token %}
-                            <div class="namecontainer">
-                              Вы уверены что хотите удалить вопрос?
-                            </div>
-                            <div class="PostButtons">
-                              <form method="post">
-                                {% csrf_token %}
-                                <input type="submit" value="Удалить" name="del_quest">
-                                <input type="hidden" value="{{ quest.id }}" name="quest_id">
-                              </form>
-                              <input type="reset" value="Отменить" onclick="document.getElementById('delitNewAskFAQ{{ quest.id }}').style.display='none'">
-                            </div>
-                          </form>
+                        {% csrf_token %}
+                        <div class="namecontainer">
+                            Добавление раздела
                         </div>
-                        <!-- Модальный Добавить инструкцию -->
-                        <div id="addAnswFAQ{{ quest.id }}" class="modalMember editWindow">
-                          <!-- Модальный контент -->
-                          <form class="editAnswer" action="{% url 'index' %}" method="post">
-                            {% csrf_token %}
-                            <div class="namecontainer">
-                              Добавление инструкции
-                            </div>
-                            <div class="container">
-                              {{ addanswerform.description | safe }}
-                            </div>
-                            <div class="PostButtons">
-                              <input type="submit" value="Отправить" name="add_answer">
-                              <input type="hidden" value="{{ quest.id }}" name="quest_id">
-                              <input type="reset" value="Отменить" onclick="document.getElementById('editAnswFAQ{{ quest.id }}').style.display='none'">
-                            </div>
-                          </form>
+                        <div class="container">
+                            <label for="uname">Наименование раздела:</label>
+                            {{ groupform.name }}
                         </div>
-                      </div>
-                    </li>
-                    {% endif %}
-                    {% endfor %}
-                  </ul>
+                        <div class="PostButtons">
+                            <input type="submit" value="Отправить" name="add_group">
+                            <input type="reset" value="Отменить"
+                                   onclick="document.getElementById('AddNewQuestGroup').style.display='none'">
+                        </div>
+                    </form>
                 </div>
-              </div>
-              {% endfor %}
-        <!-- Содержание страниц -->
+            </div>
+            <div class="menu">
+                <!-- buttons - левая часть со всеми разделами и вопросами -->
+                <div class="buttonsFAQ">
+                    <!-- button1 - блок раздела (его прогнать через цикл разделов)
+                    в нем идет список с вопросами (список через цикл с вопросами) -->
+                    {% for item in group %}
+                    <div class="button1">
+                        <button class="accordion">{{ item.name }}</button>
+                        <div class="panel">
+                            <div class="buttonAddQuestFAQ">
+                                <button onclick="document.getElementById('AddNewQuest{{ item.id }}').style.display='block'">
+                                    Добавить вопрос
+                                </button>
+                                <button onclick="document.getElementById('delitNewQuest{{ item.id }}').style.display='block'">
+                                    Удалить раздел
+                                </button>
+                            </div>
+                            <!-- Модальный Добавить вопрос -->
+                            <div id="AddNewQuest{{ item.id }}" class="modalMember">
+                                <!-- Модальный контент -->
+                                <form class="modal-content" action="{% url 'index' %}" method="post">
+                                    {% csrf_token %}
+                                    <div class="namecontainer">
+                                        Добавление вопроса
+                                    </div>
+                                    <div class="container">
+                                        <label for="uname">Вопрос:</label>
+                                        {{ questionform.name }}
+                                    </div>
+                                    <div class="PostButtons">
+                                        <input type="submit" value="Отправить" name="add_question">
+                                        <input type="hidden" value="{{ item.id }}" name="group_id">
+                                        <input type="reset" value="Отменить"
+                                               onclick="document.getElementById('AddNewQuest{{ item.id }}').style.display='none'">
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- Модальный Удалить раздел -->
+                            <div id="delitNewQuest{{ item.id }}" class="modalMember">
+                                <!-- Модальный контент -->
+                                <form class="modal-content" action="{% url 'index' %}" method="post">
+                                    {% csrf_token %}
+                                    <div class="namecontainer">
+                                        Вы уверены что хотите удалить раздел?
+                                    </div>
+                                    <div class="PostButtons">
+                                        <form method="post">
+                                            {% csrf_token %}
+                                            <input type="submit" value="Удалить раздел" name="del_group">
+                                            <input type="hidden" value="{{ item.id }}" name="group_id">
+                                        </form>
+                                        <input type="reset" value="Отменить"
+                                               onclick="document.getElementById('delitNewQuest{{ item.id }}').style.display='none'">
+                                    </div>
+                                </form>
+                            </div>
+                            <ul>
+                                {% for quest in question %}
+                                {% if quest.group_id == item.id %}
+                                <li>
+                                    <!-- Надо будет предусмотреть чтоб в swowAnswer() шел нужный айди вопроса -->
+                                    <p>{{ quest.name }}</P>
+                                    <div class="buttsQuestFAQ">
+                                        {% if quest.answer_set.all %}
+                                        <button class="butShowMoreFAQ" onclick="showAnswer('{{quest.id}}')">
+                                            Подробнее...
+                                        </button>
+                                        <button onclick="document.getElementById('delitNewAskFAQ{{ quest.id }}').style.display='block'">
+                                            Удалить
+                                        </button>
+                                        {% else %}
+                                        <button onclick="document.getElementById('addAnswFAQ{{ quest.id }}').style.display='block'">
+                                            Добавить инструкцию
+                                        </button>
+                                        <button onclick="document.getElementById('delitNewAskFAQ{{ quest.id }}').style.display='block'">
+                                            Удалить
+                                        </button>
+                                        {% endif %}
+                                        <!-- Модальный Удалить вопрос -->
+                                        <div id="delitNewAskFAQ{{ quest.id }}" class="modalMember">
+                                            <!-- Модальный контент -->
+                                            <form class="modal-content" action="{% url 'index' %}" method="post">
+                                                {% csrf_token %}
+                                                <div class="namecontainer">
+                                                    Вы уверены что хотите удалить вопрос?
+                                                </div>
+                                                <div class="PostButtons">
+                                                    <form method="post">
+                                                        {% csrf_token %}
+                                                        <input type="submit" value="Удалить" name="del_quest">
+                                                        <input type="hidden" value="{{ quest.id }}" name="quest_id">
+                                                    </form>
+                                                    <input type="reset" value="Отменить"
+                                                           onclick="document.getElementById('delitNewAskFAQ{{ quest.id }}').style.display='none'">
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <!-- Модальный Добавить инструкцию -->
+                                        <div id="addAnswFAQ{{ quest.id }}" class="modalMember editWindow">
+                                            <!-- Модальный контент -->
+                                            <form class="editAnswer" action="{% url 'index' %}" method="post">
+                                                {% csrf_token %}
+                                                <div class="namecontainer">
+                                                    Добавление инструкции
+                                                </div>
+                                                <div class="container">
+                                                    {{ addanswerform.description | safe }}
+                                                </div>
+                                                <div class="PostButtons">
+                                                    <input type="submit" value="Отправить" name="add_answer">
+                                                    <input type="hidden" value="{{ quest.id }}" name="quest_id">
+                                                    <input type="reset" value="Отменить"
+                                                           onclick="document.getElementById('editAnswFAQ{{ quest.id }}').style.display='none'">
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <!-- Содержание страниц -->
+                </div>
+                <!-- Раздел и номер вопроса ставить в айдишнике -->
+                {% for answ in answer %}
+                <div class="contentFAQ" id="{{answ.question_id}}">
+                    <div class="FAQanswerMenu">
+                        {{ answ.description | markdown | safe }}
+                    </div>
+                    <div class="FAQsubmit">
+                        <button onclick="document.getElementById('editAnswFAQ{{ answ.id }}').style.display='block'">
+                            Изменить
+                        </button>
+                        <button>Отмена</button>
+                    </div>
+                </div>
+                <!-- Модальный Добавить инструкцию -->
+                <div id="editAnswFAQ{{ answ.id }}" class="modalMember editWindow">
+                    <!-- Модальный контент -->
+                    <form class="editAnswer" action="{% url 'index' %}" method="post">
+                        {% csrf_token %}
+                        <div class="namecontainer">
+                            Изменение инструкции
+                        </div>
+                        <div class="container">
+                            {{ addanswerform.description | safe }}
+                        </div>
+                        <div class="PostButtons">
+                            <input type="submit" value="Отправить" name="edit_answer">
+                            <input type="hidden" value="{{ answ.id }}" name="answ_id">
+                            <input type="reset" value="Отменить"
+                                   onclick="document.getElementById('editAnswFAQ{{ answ.id }}').style.display='none'">
+                        </div>
+                    </form>
+                </div>
+                {% endfor %}
+            </div>
         </div>
-            <!-- Раздел и номер вопроса ставить в айдишнике -->
-        {% for answ in answer %}
-        <div class="contentFAQ" id="{{answ.question_id}}">
-          <div class="FAQanswerMenu">
-            {{ answ.description | markdown | safe }}
-          </div>
-      <div class="FAQsubmit">
-        <button onclick="document.getElementById('editAnswFAQ{{ answ.id }}').style.display='block'">Изменить</button>
-        <button>Отмена</button>
-      </div>
     </div>
-            <!-- Модальный Добавить инструкцию -->
-    <div id="editAnswFAQ{{ answ.id }}" class="modalMember editWindow">
-      <!-- Модальный контент -->
-      <form class="editAnswer" action="{% url 'index' %}" method="post">
-        {% csrf_token %}
-        <div class="namecontainer">
-          Изменение инструкции
-        </div>
-        <div class="container">
-          {{ addanswerform.description | safe }}
-        </div>
-        <div class="PostButtons">
-          <input type="submit" value="Отправить" name="edit_answer">
-          <input type="hidden" value="{{ answ.id }}" name="answ_id">
-          <input type="reset" value="Отменить" onclick="document.getElementById('editAnswFAQ{{ answ.id }}').style.display='none'">
-        </div>
-      </form>
-    </div>
-        {% endfor %}
-      </div>
-    </div>
-      </div>
-    </main>
-    <!-- Заменяемый контент -->
+</main>
+<!-- Заменяемый контент -->
 
-    {% endblock %}
+{% endblock %}

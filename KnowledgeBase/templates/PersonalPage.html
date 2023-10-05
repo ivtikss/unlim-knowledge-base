@@ -1,18 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
 <main>
-  <div class="name__directoty">
-    {{user.first_name}}
-  </div>
-
-  <form class="ChangeName" action="PersonalPage.html" method="post">
-    <div>
-      <label for="InputName">ФИО</label>
-      <input type="text" class="InputName">
-      <input type="submit" name="" value="Сохранить" class="SubmitName">
+    <div class="name__directoty">
+        {{user.first_name}}
     </div>
-    <a href="#">Восстановить пароль</a>
-  </form>
+
+    <form class="ChangeName" action="PersonalPage.html" method="post">
+        <div>
+            <label for="InputName">ФИО</label>
+            <input type="text" class="InputName">
+            <input type="submit" name="" value="Сохранить" class="SubmitName">
+        </div>
+        <a href="#">Восстановить пароль</a>
+    </form>
 </main>
 
 <link rel="stylesheet" href="static/css/global.css">

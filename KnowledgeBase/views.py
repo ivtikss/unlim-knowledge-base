@@ -7,6 +7,11 @@ from django.contrib.auth import login, logout
 from django.contrib import messages
 
 
+def user_logout(request):
+    logout(request)
+    return redirect('user_login')
+
+
 def user_login(request):
     if request.method == 'POST':
         form = UserLoginForm(data=request.POST)
@@ -159,6 +164,17 @@ def index(request):
 def staff(request):
     users = User.objects.all()
     roles = Group.objects.all()
+
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = "1234"  # Заданный пароль
+        try:
+            user = User.objects.create_user(username=email, email=email, password=password)
+            messages.success(request, "Пользователь успешно создан.")
+            return redirect('UsersRoles')
+        except Exception as e:
+            print(e)
+            messages.error(request, str(e))
 
     context = {
         'users': users,
