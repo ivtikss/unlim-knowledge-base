@@ -8,23 +8,19 @@
       База знаний
       </div>
       <!-- Путь к файлу -->
-
       <div class="field__directory">
-
         <!-- Кнопки выбора вклвдки -->
         <div class="buttons">
         <button class="tablink" onclick="openPage('Base', this)" id="defaultOpen">База знаний</button>
         <button class="tablink" onclick="openPage('FAQ', this)">F.A.Q.</button>
         </div>
         <!-- Кнопки выбора вклвдки -->
-
         <!-- Содержание страниц -->
         <div id="Base" class="tabcontent">
           <div class="dateupdate">
             <button type="button">Загрузить список Вендоров</button>
             <p>Последняя дата обновления: 23.12.2023</p>
           </div>
-
           <div class="VendorProductSearch">
             <!-- Вендоры -->
             <div class="Vendors">
@@ -45,7 +41,6 @@
               </ul>
             </div>
             <!-- Вендоры -->
-
             <div class="Product">
             <div class="ProductMenu">
                 <div>
@@ -132,13 +127,11 @@
             </div> -->
           </div>
         </div>
-
         <div id="FAQ" class="tabcontent">
           <div class="dateupdate">
             <button  onclick="document.getElementById('AddNewQuestGroup').style.display='block'" type="button">Добавить раздел</button>
             <!-- Модальный -->
           <div id="AddNewQuestGroup" class="modalMember">
-
             <!-- Модальный контент -->
             <form class="modal-content" action="{% url 'index' %}" method="post">
                     {% csrf_token %}
@@ -156,8 +149,6 @@
             </form>
           </div>
           </div>
-
-
           <div class="menu">
             <!-- buttons - левая часть со всеми разделами и вопросами -->
             <div class="buttonsFAQ">
@@ -170,7 +161,6 @@
                   <div class="buttonAddQuestFAQ">
                     <button onclick="document.getElementById('AddNewQuest{{ item.id }}').style.display='block'">Добавить вопрос</button>
                     <button onclick="document.getElementById('delitNewQuest{{ item.id }}').style.display='block'">Удалить раздел</button>
-
                   </div>
                   <!-- Модальный Добавить вопрос -->
                   <div id="AddNewQuest{{ item.id }}" class="modalMember">
@@ -191,7 +181,6 @@
                       </div>
                     </form>
                   </div>
-
                   <!-- Модальный Удалить раздел -->
                   <div id="delitNewQuest{{ item.id }}" class="modalMember">
                     <!-- Модальный контент -->
@@ -210,7 +199,6 @@
                       </div>
                     </form>
                   </div>
-
                   <ul>
                     {% for quest in question %}
                     {% if quest.group_id == item.id %}
@@ -225,7 +213,6 @@
                         <button onclick="document.getElementById('addAnswFAQ{{ quest.id }}').style.display='block'">Добавить инструкцию</button>
                         <button onclick="document.getElementById('delitNewAskFAQ{{ quest.id }}').style.display='block'">Удалить</button>
                         {% endif %}
-
                         <!-- Модальный Удалить вопрос -->
                         <div id="delitNewAskFAQ{{ quest.id }}" class="modalMember">
                           <!-- Модальный контент -->
@@ -244,7 +231,6 @@
                             </div>
                           </form>
                         </div>
-
                         <!-- Модальный Добавить инструкцию -->
                         <div id="addAnswFAQ{{ quest.id }}" class="modalMember editWindow">
                           <!-- Модальный контент -->
@@ -263,7 +249,6 @@
                             </div>
                           </form>
                         </div>
-
                       </div>
                     </li>
                     {% endif %}
@@ -303,17 +288,8 @@
         </div>
       </form>
     </div>
-
-
         {% endfor %}
-
-
-
-
       </div>
-
-
-
     </div>
       </div>
     </main>

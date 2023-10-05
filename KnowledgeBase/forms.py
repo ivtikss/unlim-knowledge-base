@@ -1,5 +1,20 @@
 from .models import *
 from django import forms
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.models import User
+
+
+class UserLoginForm(AuthenticationForm):
+    username = forms.CharField(label='E-mail')
+    password = forms.CharField(label='Пароль')
+
+
+class UserRegisterForm(UserCreationForm):
+    email = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
 
 
 class TypeStatusForm(forms.ModelForm):
@@ -56,7 +71,7 @@ class NewVendorSpecialistForm(forms.ModelForm):
         model = VendorSpecialist
         fields = ['name', 'date']
         widgets = {
-            'date': forms.DateInput(attrs={'type': 'date', 'placeholder': 'dd.mm.YYYY (DOB)', 'class': 'form-control'})
+            'date': forms.DateInput(attrs={'type': 'date', 'placeholder': 'dd.mm.YYYY (DOB)', 'class': 'PartnerSertificatedMenuinput'})
         }
 
     prefix = 'vendorspecialist'

@@ -17,22 +17,41 @@
     <div class="left__part">
       <b>База Знаний</b>
     </div>
-
+      {% if request.user.is_authenticated == False %}
     <div class="right__part">
       <a href="{% url 'PersonalPage' %}">{{user.first_name}}</a>
-      <a href="{% url 'logout' %}">Выход</a>
+      <a href="{% url 'user_login' %}">Войти</a>
     </div>
+    {% else %}
+    <div class="right__part">
+      <a href="{% url 'PersonalPage' %}"> Добро пожаловать! {{user.first_name}}</a>
+      <a href="{% url 'user_logout' %}">Выход</a>
+    </div>
+    {% endif %}
   </div>
+
+  {% if request.user.is_authenticated %}
   <!-- Верхняя часть -->
-  <div class="sidenav">
-    <a href="{% url 'index' %}">База знаний</a>
-    <a href="{% url 'Guide' %}">Справочники</a>
-    <a href="{% url 'UsersRoles' %}">Сотрудники</a>
-  </div>
+    <div class="sidenav">
+      <a href="{% url 'index' %}">База знаний</a>
+      <a href="{% url 'Guide' %}">Справочники</a>
+      <a href="{% url 'UsersRoles' %}">Сотрудники</a>
+    </div>
+
   {% block content%}
   <!-- Заменяемый контент -->
   <!-- Заменяемый контент -->
   {% endblock %}
+  {% else %}
+    <!-- Вывод контента для неавторизованных пользователей -->
+    <p>Пожалуйста, <a href="{% url 'login' %}"">войдите</a> в систему</a>.</p>
+    <p>Пожалуйста, <a href="{% url 'login' %}"">войдите</a> в систему</a>.</p>
+      <p>Пожалуйста, <a href="{% url 'login' %}"">войдите</a> в систему</a>.</p>
+      <p>Пожалуйста, <a href="{% url 'login' %}"">войдите</a> в систему</a>.</p>
+      <p>Пожалуйста, <a href="{% url 'login' %}"">войдите</a> в систему</a>.</p>
+
+
+  {% endif %}
 </body>
 
 </html>

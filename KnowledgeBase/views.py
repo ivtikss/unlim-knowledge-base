@@ -1,9 +1,27 @@
 from django.contrib.auth.models import Group, User
-from django.urls import reverse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
 from .forms import *
 from .models import *
+from django.contrib.auth import login, logout
+from django.contrib import messages
+
+
+def user_login(request):
+    if request.method == 'POST':
+        form = UserLoginForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('index')
+    else:
+        form = UserLoginForm()
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'login.html', context)
 
 
 def guides(request):
