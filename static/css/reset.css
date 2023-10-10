@@ -1,0 +1,113 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    width: 550px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    min-height: 250px; /* Минимальная высота для контейнера */
+}
+
+h2 {
+    text-align: center;
+}
+
+form {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block; /* Новая строка для каждой метки */
+    font-weight: bold; /* Жирный текст */
+    margin-bottom: 10px; /* Отступ между метками */
+    color: #333; /* Цвет текста */
+    font-size: 16px; /* Размер шрифта */
+}
+
+input[type="email"] {
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.email-input {
+  width: 100%; /* Ширина поля ввода, можете настроить по своему усмотрению */
+  padding: 10px; /* Отступы вокруг текста в поле ввода */
+  font-size: 16px; /* Размер шрифта */
+  border: 1px solid #ccc; /* Граничная рамка */
+  border-radius: 5px; /* Закругленные углы */
+  background-color: #f5f5f5; /* Фоновый цвет поля */
+  color: #333; /* Цвет текста */
+  transition: border-color 0.3s, box-shadow 0.3s; /* Плавные переходы цвета рамки и тени */
+}
+
+/* Если вы хотите добавить стили для фокуса (когда пользователь кликает на поле) */
+.email-input:focus {
+  outline: none; /* Убираем стандартное выделение поля при фокусе */
+  border-color: #007bff; /* Цвет рамки при фокусе */
+  box-shadow: 0 0 5px #007bff; /* Тень при фокусе */
+}
+
+/* Если вы хотите добавить иконку слева от поля пароля, вы можете использовать псевдоэлемент before: */
+.email-input:before {
+  content: "\1F512"; /* Иконка замка (Unicode) */
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+/* Если вы хотите добавить анимацию при фокусе: */
+.email-input:focus:before {
+  transform: rotate(20deg); /* Поворот иконки при фокусе */
+  transition: transform 0.3s;
+}
+
+.errorlist {
+  margin: 10px;
+  list-style: none;
+  color: #ff0000; /* Цвет текста ошибки */
+  font-weight: bold; /* Жирный шрифт */
+  background-color: #ffeeee; /* Цвет фона списка ошибок */
+  border: 1px solid #ff0000; /* Граничная рамка */
+  padding: 10px; /* Отступ вокруг списка ошибок */
+  border-radius: 5px; /* Закругленные углы */
+}
+
+.errorlist li {
+  margin-bottom: 5px; /* Отступ между сообщениями об ошибках */
+}
+
+.errorlist li:before {
+  content: "\2716"; /* Замените это на иконку или символ для обозначения ошибки */
+  margin-right: 5px; /* Отступ между иконкой и текстом */
+}

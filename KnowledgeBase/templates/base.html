@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
 <head>
+    {% load group_check %}
     <meta charset="utf-8">
     <title>База знаний</title>
-    <link rel="shortcut icon" href="/static/images/marinette001.png">
+    <link rel="shortcut icon" href="/static/images/icons8-idea-120.png">
     <link rel="stylesheet" href="/static/css/global.css">
     <link rel="stylesheet" href="/static/css/basemenu.css">
     <link rel="stylesheet" href="/static/css/VendorsProducts.css">
@@ -19,13 +19,12 @@
     </div>
     {% if request.user.is_authenticated == False %}
     <div class="right__part">
-        <a href="{% url 'PersonalPage' %}">{{user.first_name}}</a>
         <a href="{% url 'user_login' %}">Войти</a>
     </div>
     {% else %}
     <div class="right__part">
         <a href="{% url 'PersonalPage' %}"> Добро пожаловать! {{user.first_name}}</a>
-        <a href="{% url 'user_logout' %}">Выход</a>
+        <a href="{% url 'logout' %}">Выход</a>
     </div>
     {% endif %}
 </div>
@@ -35,7 +34,9 @@
 <div class="sidenav">
     <a href="{% url 'index' %}">База знаний</a>
     <a href="{% url 'Guide' %}">Справочники</a>
+    {% if user|in_group:"Администратор" %}
     <a href="{% url 'UsersRoles' %}">Сотрудники</a>
+    {% endif %}
 </div>
 
 {% block content%}
@@ -44,11 +45,18 @@
 {% endblock %}
 {% else %}
 <!-- Вывод контента для неавторизованных пользователей -->
-<p>Пожалуйста, <a href="{% url 'login' %}"">войдите</a> в систему</a>.</p>
-<p>Пожалуйста, <a href="{% url 'login' %}"">войдите</a> в систему</a>.</p>
-<p>Пожалуйста, <a href="{% url 'login' %}"">войдите</a> в систему</a>.</p>
-<p>Пожалуйста, <a href="{% url 'login' %}"">войдите</a> в систему</a>.</p>
-<p>Пожалуйста, <a href="{% url 'login' %}"">войдите</a> в систему</a>.</p>
+<p>Пожалуйста, <a href="{% url 'user_login' %}">войдите в систему</a>.</p>
+<p>Пожалуйста, <a href="{% url 'user_login' %}">войдите в систему</a>.</p>
+<p>Пожалуйста, <a href="{% url 'user_login' %}">войдите в систему</a>.</p>
+<p>Пожалуйста, <a href="{% url 'user_login' %}">войдите в систему</a>.</p>
+<p>Пожалуйста, <a href="{% url 'user_login' %}">войдите в систему</a>.</p>
+<p>Пожалуйста, <a href="{% url 'user_login' %}">войдите в систему</a>.</p>
+<p>Пожалуйста, <a href="{% url 'user_login' %}">войдите в систему</a>.</p>
+<p>Пожалуйста, <a href="{% url 'user_login' %}">войдите в систему</a>.</p>
+<p>Пожалуйста, <a href="{% url 'user_login' %}">войдите в систему</a>.</p>
+<p>Пожалуйста, <a href="{% url 'user_login' %}">войдите в систему</a>.</p>
+<p>Пожалуйста, <a href="{% url 'user_login' %}">войдите в систему</a>.</p>
+<p>Пожалуйста, <a href="{% url 'user_login' %}">войдите в систему</a>.</p>
 
 
 {% endif %}

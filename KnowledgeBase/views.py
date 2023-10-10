@@ -1,20 +1,35 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group, User
+from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
 from .forms import *
 from .models import *
 from django.contrib.auth import login, logout
 from django.contrib import messages
+from django.contrib.auth.decorators import user_passes_test
+
+
+def is_admin(user):
+    return user.groups.filter(name='Администратор').exists()
+
+
+class UserPasswordResetDoneView(PasswordResetDoneView):
+    template_name = 'registration/password_reset_done.html'
+
+
+class UserPasswordResetView(PasswordResetView):
+    template_name = 'registration/password_reset_form.html'
 
 
 def user_logout(request):
     logout(request)
-    return redirect('user_login')
+    return redirect('/login')
 
 
 def user_login(request):
     if request.method == 'POST':
-        form = UserLoginForm(data=request.POST)
+        form = UserLoginForm(request, request.POST)
         if form.is_valid():
             user = form.get_user()
             login(request, user)
@@ -26,9 +41,10 @@ def user_login(request):
         'form': form,
     }
 
-    return render(request, 'login.html', context)
+    return render(request, 'registration/login.html', context)
 
 
+@login_required
 def guides(request):
     form = TypeStatusForm()
     guides_status = TypeStatus.objects.all()
@@ -161,6 +177,7 @@ def index(request):
     return render(request, 'index.html', context)
 
 
+@user_passes_test(is_admin, login_url='/')
 def staff(request):
     users = User.objects.all()
     roles = Group.objects.all()
