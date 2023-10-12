@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+{% load group_check %}
 <main>
 
     <!-- Путь к файлу -->
@@ -11,24 +11,28 @@
     <!-- Путь к файлу -->
 
     <!--  -->
-    <div class="UsersRolesButtons">
-        <button class="tablink" onclick="openPage('Users', this)" id="defaultOpen">Сотрудники</button>
-        <button class="tablink" onclick="openPage('Roles', this)">Роли</button>
+    <div class="UsersRolesBarButtons">
+        <div>
+            <button class="tablink" onclick="openPage('Users', this)" id="defaultOpen">Сотрудники</button>
+            <button class="tablink" onclick="openPage('Roles', this)">Роли</button>
+        </div>
     </div>
-{% if messages %}
-<ul class="messages">
-  {% for message in messages %}
-    <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>
-      {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
-      {{ message }}
-    </li>
-  {% endfor %}
-</ul>
-{% endif %}
-    <div id="Users" class="tabcontent">
-        <div class="UsersRolesAddButtons">
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>
+            {{ message }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <div class="UsersRolesAddButtons">
             <button onclick="document.getElementById('AddNewUser').style.display='block'">Пригласить сотрудника</button>
         </div>
+
+    <div id="Users" class="tabcontent">
+
         <!-- Пригашение новых пользователей -->
         <div id="AddNewUser" class="modalMember">
 
@@ -56,6 +60,7 @@
             <div class="UsersRolesContentHat">
                 <p>ФИО</p>
                 <p>Адрес электронной почты</p>
+                <p>Роль</p>
                 <p>Доступы</p>
             </div>
 
@@ -63,11 +68,25 @@
                 <ul>
                     {% for user in users %}
                     <li>
-                        <p>{{ user.first_name }} {{ user.last_name}}</p>
-                        <p>{{ user.email}}</p>
-                        <p>
-                            <button type="button">Редактировать</button>
-                        </p>
+                        <p>{{ user.first_name }} {{ user.last_name }}</p>
+                        <p>{{ user.email }}</p>
+                        <p>{{ user.profile }}</p>
+                        {% if user|in_group:"Администратор" %}
+                        <p>Администратор</p>
+                        {% endif %}
+                        {% if user|in_group:"Сотрудник" %}
+                        <p>Сотрудник</p>
+                        {% endif %}
+                        {% if user|in_group:"Сотрудник ОПиР" %}
+                        <p>Сотрудник ОПиР</p>
+                        {% endif %}
+                        {% if user|in_group:"Сотрудник ОС" %}
+                        <p>Сотрудник ОС</p>
+                        {% endif %}
+                        {% if user|in_group:"Сотрудник Коммерческого блока" %}
+                        <p>Сотрудник Коммерческого блока</p>
+                        {% endif %}
+                        <button type="button">Редактировать</button>
                     </li>
                     {% endfor %}
                 </ul>

@@ -1,6 +1,6 @@
 /* login.css */
 body {
-    font-family: Arial, sans-serif;
+    font-family: Inter, sans-serif;
     background-color: #f4f4f4;
     display: flex;
     align-items: center;
@@ -48,7 +48,7 @@ input[type="password"] {
 
 /* custom.css */
 .login-button {
-    background-color: #007bff; /* Цвет фона кнопки */
+    background-color: #242424; /* Цвет фона кнопки */
     color: #fff; /* Цвет текста кнопки */
     font-size: 18px; /* Размер шрифта */
     padding: 10px 20px; /* Внутренний отступ */
@@ -150,7 +150,7 @@ input[type="password"] {
 h2 {
     font-size: 36px; /* Увеличьте размер шрифта */
     font-weight: bold; /* Жирный текст */
-    color: #007bff; /* Синий цвет */
+    color: #242424; /* Синий цвет */
     margin-top: 20px; /* Увеличьте верхний отступ */
     text-align: center; /* Выравнивание по центру */
     text-transform: uppercase; /* Верхний регистр текста */
@@ -166,7 +166,7 @@ h2::after {
     left: 0;
     width: 100%;
     height: 2px; /* Толщина линии анимации */
-    background-color: #007bff; /* Цвет линии анимации */
+    background-color: #242424; /* Цвет линии анимации */
     transform-origin: 50%; /* Точка вращения анимации в середине */
     transform: scaleX(0); /* Начальное состояние: линия невидима */
     transition: transform 0.3s ease; /* Анимация с уменьшением */
@@ -186,4 +186,10 @@ h2:hover::after {
 
 .password-reset-link:hover {
     text-decoration: underline; /* Добавляем подчеркивание при наведении */
+}
+
+.logos {
+    max-width: 100px; /* Устанавливаем максимальную ширину логотипа */
+    margin-right: 10px; /* Добавляем небольшой отступ между логотипом и надписью */
+    background-color: #fff;
 }

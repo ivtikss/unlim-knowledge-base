@@ -1,20 +1,33 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load group_check %}
 {% block content %}
 <main>
     <div class="name__directoty">
-        {{user.first_name}}
+        Личный кабинет
     </div>
 
-    <form class="ChangeName" action="PersonalPage.html" method="post">
-        <div>
-            <label for="InputName">ФИО</label>
-            <input type="text" class="InputName">
-            <input type="submit" name="" value="Сохранить" class="SubmitName">
-        </div>
-        <a href="#">Восстановить пароль</a>
+    <form class="ChangeName" action="" method="post">
+        <p>Ваша роль:
+            {% if user|in_group:"Администратор" %}
+            Администратор<br>
+            {% endif %}
+            {% if user|in_group:"Сотрудник" %}
+            Сотрудник<br>
+            {% endif %}
+            {% if user|in_group:"Сотрудник ОПиР" %}
+            Сотрудник ОПиР<br>
+            {% endif %}
+            {% if user|in_group:"Сотрудник ОС" %}
+            Сотрудник ОС<br>
+            {% endif %}{% if user|in_group:"Сотрудник Коммерческого блока" %}
+            Сотрудник Коммерческого блока<br>
+            {% endif %}
+        </p><br>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Сохранить" class="SubmitName">
     </form>
+    <a href="{% url 'password_reset' %}">Восстановить пароль</a>
 </main>
-
-<link rel="stylesheet" href="static/css/global.css">
-<link rel="stylesheet" href="static/css/PersonalPage.css">
 {% endblock %}

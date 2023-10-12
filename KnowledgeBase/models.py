@@ -69,6 +69,7 @@ class VendorPrices(models.Model):  # добавить дату
     def __str__(self):
         return self.file
 
+
     class Meta:
         verbose_name = 'Прайс'
         verbose_name_plural = 'Прайсы'
@@ -78,7 +79,6 @@ class VendorPrices(models.Model):  # добавить дату
 class Product(models.Model):
     vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, default='', null=True)
     name = models.CharField(max_length=50, default='', null=True)
-    # top = models.BooleanField(max_length=50, default=False, null=True)
     # brif_description = models.TextField(default='', null=True)
     # whom_and_what_for = models.TextField(default='', null=True)
     # gen_form = models.FileField(default=None, null=True)
@@ -89,7 +89,9 @@ class Product(models.Model):
     # product_type = models.CharField(max_length=50, default='', null=True)  # мб нужна связь с типами продукта
     # competencies = models.FileField(default=None, null=True)
     # analogs = models.CharField(max_length=50, default='', null=True)
-
+    fsb_certified = models.BooleanField(max_length=50, default=False, null=True)
+    fsteck_certified = models.BooleanField(max_length=50, default=False, null=True)
+    top_certified = models.BooleanField(max_length=50, default=False, null=True)
 
 # class __Skeleton(models.Model):
 #     product = models.ForeignKey(Product, on_delete=models.SET_DEFAULT, default='', name='id Продукта')

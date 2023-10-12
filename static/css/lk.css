@@ -1,0 +1,38 @@
+.ChangeName {
+  width: 500px; /* Ширина формы */
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+
+.ChangeName label {
+  display: block; /* Размещение меток на новой строке */
+  margin-bottom: 10px; /* Отступ снизу меток */
+  font-weight: bold; /* Жирный текст меток */
+}
+
+.ChangeName input[type="text"], input[type="email"] {
+  width: 100%; /* Ширина полей ввода */
+  padding: 10px;
+  margin-bottom: 20px; /* Отступ снизу полей ввода */
+  border: 1px solid #ccc; /* Граница полей ввода */
+  border-radius: 5px; /* Закругленные углы полей ввода */
+}
+
+.ChangeName .SubmitName {
+  background-color: #242424; /* Цвет фона кнопки "Сохранить" */
+  color: #fff; /* Цвет текста на кнопке */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Плавное изменение цвета фона при наведении */
+}
+
+.ChangeName .SubmitName:hover {
+  background-color: #0056b3; /* Новый цвет фона при наведении */
+}
+
+a {
+  text-decoration: none; /* Убираем подчеркивание с ссылки */
+  color: #007bff; /* Цвет текста ссылки */
+}

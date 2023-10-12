@@ -10,6 +10,21 @@ from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
 
 
+@login_required
+def personal_page(request):
+    if request.method == 'POST':
+        form = ChangeUserInfoForm(request.POST, instance=request.user)
+
+        if form.is_valid():
+            form.save()
+            return redirect('PersonalPage')  # Перенаправьте пользователя на страницу после изменения данных
+
+    else:
+        form = ChangeUserInfoForm(instance=request.user)
+
+    return render(request, 'PersonalPage.html', {'form': form})
+
+
 def is_admin(user):
     return user.groups.filter(name='Администратор').exists()
 
@@ -55,51 +70,51 @@ def guides(request):
     guide_type_reliase = TypeReliase.objects.all()
 
     if request.method == 'POST':
-        if request.POST.get('add_status'):
+        if 'add_status' in request.POST:
             form = TypeStatusForm(request.POST)
             form.save()
             return HttpResponseRedirect(reverse(guides))
-        if request.POST.get('add_product'):
+        if 'add_product' in request.POST:
             form = TypeProductForm(request.POST)
             form.save()
             return HttpResponseRedirect(reverse(guides))
-        if request.POST.get('add_certification'):
+        if 'add_certification' in request.POST:
             form = TypeCertificationForm(request.POST)
             form.save()
             return HttpResponseRedirect(reverse(guides))
-        if request.POST.get('add_license'):
+        if 'add_license' in request.POST:
             form = TypeLicenseForm(request.POST)
             form.save()
             return HttpResponseRedirect(reverse(guides))
-        if request.POST.get('add_get'):
+        if 'add_get' in request.POST:
             form = TypeGetForm(request.POST)
             form.save()
             return HttpResponseRedirect(reverse(guides))
-        if request.POST.get('add_reliase'):
+        if 'add_reliase' in request.POST:
             form = TypeReliaseForm(request.POST)
             form.save()
             return HttpResponseRedirect(reverse(guides))
-        if request.POST.get('del_status'):
+        if 'del_status' in request.POST:
             a = TypeStatus.objects.get(id=request.POST.get('id'))
             a.delete()
             return HttpResponseRedirect(reverse(guides))
-        if request.POST.get('del_product'):
+        if 'del_product' in request.POST:
             a = TypeProduct.objects.get(id=request.POST.get('id'))
             a.delete()
             return HttpResponseRedirect(reverse(guides))
-        if request.POST.get('del_certification'):
+        if 'del_certification' in request.POST:
             a = TypeCertification.objects.get(id=request.POST.get('id'))
             a.delete()
             return HttpResponseRedirect(reverse(guides))
-        if request.POST.get('del_license'):
+        if 'del_license' in request.POST:
             a = TypeLicense.objects.get(id=request.POST.get('id'))
             a.delete()
             return HttpResponseRedirect(reverse(guides))
-        if request.POST.get('del_get'):
+        if 'del_get' in request.POST:
             a = TypeGet.objects.get(id=request.POST.get('id'))
             a.delete()
             return HttpResponseRedirect(reverse(guides))
-        if request.POST.get('del_reliase'):
+        if 'del_reliase' in request.POST:
             a = TypeReliase.objects.get(id=request.POST.get('id'))
             a.delete()
             return HttpResponseRedirect(reverse(guides))
@@ -129,6 +144,7 @@ def index(request):
     group = GroupFAQ.objects.all()
     question = QuestionFAQ.objects.all()
     answer = Answer.objects.all()
+    guides_type_product = TypeProduct.objects.all()
 
     if request.POST.get('add_group'):
         form = NewGroupFAQForm(request.POST)
@@ -164,15 +180,50 @@ def index(request):
 
     form = NewGroupFAQForm()
 
+    vendor_filter = request.GET.get('vendor')
+    product_filter = request.GET.get('product')
+    type_filter = request.GET.get('type')
+
+    fstek_filter = request.GET.get('FSTEK')
+    fsb_filter = request.GET.get('FSB')
+    top_filter = request.GET.get('TOP')
+
+    filtered_products = product
+
+    if vendor_filter:
+        vendor_id = Vendor.objects.filter(name=vendor_filter).values_list('id', flat=True).first()
+        if vendor_id:
+            filtered_products = filtered_products.filter(vendor=vendor_id)
+
+    if product_filter:
+        filtered_products = filtered_products.filter(name=product_filter)
+
+    # if type_filter:
+    #     filtered_products = filtered_products.filter(type__name=type_filter)
+
+    if not vendor_filter and not product_filter:
+        # Если нет параметров фильтрации, показываем все продукты
+        filtered_products = product
+
+    if fstek_filter:
+        filtered_products = filtered_products.filter(fsteck_certified=True)
+
+    if fsb_filter:
+        filtered_products = filtered_products.filter(fsb_certified=True)
+
+    if top_filter:
+        filtered_products = filtered_products.filter(top_certified=True)
+
     context = {
         'vendors': vendor,
-        'products': product,
+        'products': filtered_products,
         'group': group,
         'question': question,
         'answer': answer,
         'groupform': groupform,
         'questionform': questionform,
         'addanswerform': addanswerform,
+        'all_type_product': guides_type_product,
     }
     return render(request, 'index.html', context)
 

@@ -1,68 +1,155 @@
 .tablink {
-  padding: 0.5em;
-  margin: 0 7px;
-  width: 15%;
+    padding: 0.5em;
+    margin: 0 7px;
+    width: 15%;
 }
 
 .GuideButtons {
-  margin-top: 1em;
-  height: 5em;
-  /* background: green; */
+    display: flex;
+    align-items: flex-end;
+    margin-top: 16px;
+    margin-left: -7px;
+    /*background: green;*/
 }
 
 
 /* Стиль содержимого вкладки (и добавить высоту: 100% для полного содержимого страницы) */
 .Guide {
-  margin: 10px;
-  display: none;
-  /* background: red; */
+    margin: 1px;
+    display: none;
+    /* background: red; */
 }
 
 .GuideAddButtons {
-  /* background: blue; */
-  height: 45px;
-  align-items: center;
+    margin-top: 20px;
+    display: flex; /* Располагаем элементы внутри контейнера горизонтально */
+    align-items: flex-end; /* Выравниваем элементы по верхнему краю */
+    margin-bottom: 10px;
 }
 
 .GuideAddButtons input {
-  border-radius: 10px;
-  width: 8%;
-  padding: 5px;
+    flex: 1; /* Позволяет форме занимать доступное пространство */
+    margin-right: 10px; /* Расстояние между формой и кнопкой (можете настроить) */
 }
 
-.GuideContent{
-  width: 98%;
-  background: #FDF9F6;
-  overflow: scroll;
-  height: 65vh;
-  border-bottom: 3px solid #242424;
+.GuideContent {
+    width: 98%;
+    background: #FDF9F6;
+    overflow: auto;
+    height: 65vh;
 }
 
 .GuideContentHat {
-  border-top: 3px solid #242424;
-  border-bottom: 2px solid #242424;
-  padding: 15px 20px;
-  position: sticky;
-  top: 0;
-  background: #FDF9F6;
+    border-bottom: 1px solid #242424;
+    padding: 15px 20px;
+    position: sticky;
+    background: #FDF9F6;
 }
 
 .GuideContentMain ul {
-  padding: 0;
-  margin: 0;
+    padding: 0;
+    margin: 0;
 }
+
+
 
 .GuideContentMain li {
-  /* background: magenta; */
-  list-style: none;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 5px 20px;
+    /* background: magenta; */
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 20px;
 }
 
-.GuideContentMain li>form>input {
-  background: #FDF9F6;
-  border-radius: 10px;
-  padding: 5px;
+.GuideContentMain ul > li:hover {
+    background: #D9D9D9;
+    border-radius: 30px;
+}
+
+.GuideContentMain li > form > input {
+    background: #FDF9F6;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+/* Стили для текстового поля с классом custom-input */
+.guides-input {
+    padding: 5px;
+    width: 100%;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease-in-out;
+    color: #333;
+}
+
+.guides-input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.guides-input::placeholder {
+    color: #999;
+}
+
+.guides-input:hover {
+    border-color: #66afe9;
+}
+
+/* Стиль для ошибки валидации */
+.guides-input.error {
+    border-color: #dc3545;
+}
+
+/* Стиль для успешного ввода */
+.guides-input.success {
+    border-color: #28a745;
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+}
+
+.SubmitButg > button {
+    border: none; /* Уберите границу */
+    border-radius: 5px;
+    background-color: #D9D9D9; /* Цвет фона кнопки */
+    color: #242424; /* Цвет текста */
+    font-size: 16px;
+    padding: 5px 15px; /* Отступы внутри кнопки */
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+
+.SubmitButg > button:hover {
+    background-color: #188509; /* Измените цвет фона при наведении */
+    color: #D9D9D9;
+}
+
+.SubmitButg > button:focus {
+    outline: none; /* Уберите обводку при фокусировке */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Тень при фокусировке */
+}
+
+
+input[type="text"] {
+    width: 10%;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    flex: none;
+}
+
+.DeleteButton {
+    background-color: #D9D9D9; /* Цвет фона кнопки */
+    color: #242424; /* Цвет текста */
+    border: none; /* Убираем границу */
+    padding: 10px 10px; /* Отступы внутри кнопки */
+    border-radius: 5px; /* Закругленные углы */
+    cursor: pointer; /* Изменение курсора при наведении */
+    transition: background-color 0.3s ease; /* Плавное изменение цвета фона при наведении */
+}
+
+.DeleteButton:hover {
+    background-color: #981717; /* Новый цвет фона при наведении */
+    color: #D9D9D9;
 }

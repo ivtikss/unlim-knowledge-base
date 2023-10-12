@@ -1,80 +1,145 @@
 * {
-  margin: 0;
-  padding: 0;
-  text-decoration: none;
-  font-family: 'Inter', sans-serif;
-  background: #FDF9F6;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    background: #FDF9F6;
+    box-sizing: border-box;
 }
+
 /* Верхняя панель */
+
 .topnav {
-  display: block;
-  position: fixed;
-  width: 100%;
-  font-size: 25px;
-  overflow: hidden;
-  background-color: #D9D9D9;
+    display: block;
+    position: fixed;
+    width: 100%;
+    margin: 0 auto;
+    padding: 5px 20px;
+    background-color: #D9D9D9;
 }
-/* Название в верхней панели */
+
 .left__part {
-  background: #D9D9D9;
-  display: block;
-  float: left;
-  padding: 1rem 2rem;
-  text-align: center;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background-color: #D9D9D9;
 }
-.left__part>b {background: #D9D9D9;}
+
+.logo {
+    max-width: 50px; /* Устанавливаем максимальную ширину логотипа */
+    margin-right: 10px; /* Добавляем небольшой отступ между логотипом и надписью */
+    background-color: #D9D9D9;
+
+}
+
+.left__part__caption{
+    font-size: 24px;
+    font-weight: 700;
+    background-color: #D9D9D9;
+}
 /* Позиционирование ссылок в верхней панели */
+.navigation .topnav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.navigation {
+    background: #D9D9D9;
+}
+
 .right__part {
-  background: #D9D9D9;
-  float: right;
-  padding: 1rem 1rem;
+    display: flex;
+    gap: 30px;
+    list-style-type: none;
+    background-color: #D9D9D9;
 }
 
 /* Ссылки в верхней панели */
-.right__part>a {
-  color: #242424;
-  background: #D9D9D9;
-  margin: 0 1rem;
-  padding: 1rem 1rem;
+.right__part > a {
+    color: #242424;
+    background: #D9D9D9;
+    font-size: 20px;
+    float: right;
+    align-items: flex-start;
 }
 
-.right__part>a:hover {
-  background: #FDF9F6;
-}
 
 /* Меню боковой панели */
 .sidenav {
-  margin-top: 60px;
-  height: 100%;
-  width: 250px;
-  position: fixed;
-  overflow-x: hidden;
-  border-right: 2px solid #D9D9D9;
+    margin-top: 60px;
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    overflow-x: hidden;
+    border-radius: 10px;
 }
 
 /* Ссылки в меню навигации */
 .sidenav a {
-  padding: 1rem 2rem;
-  text-decoration: none;
-  font-size: 25px;
-  color: #242424;
-  display: block;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    font-size: 20px;
+    color: #242424;
+    display: block;
+    border-radius: 10px;
 }
 
 /* При наведении курсора мыши на навигационные ссылки измените их цвет */
 .sidenav a:hover {
-  background: gray;
+    background: #242424;
+    color: #FDF9F6;
 }
 
 /* Стиль содержимого страницы */
 main {
-  margin-left: 250px; /* То же, что и ширина боковой панели */
-  padding: 20px 20px;
+    margin-left: 250px; /* То же, что и ширина боковой панели */
+    padding: 20px 20px;
+    border-radius: 20px;
 }
 
 .name__directoty {
-  margin-top: 60px;
-  background: #D9D9D9;
-  font-size: 30px;
-  padding: 10px 20px;
+    margin-top: 50px;
+    background: #D9D9D9;
+    font-size: 30px;
+    padding: 10px 20px;
+    color: #242424;
+    border-radius: 10px;
+}
+
+
+.Searchinput {
+    padding: 12px;
+    width: 100%;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease-in-out;
+    color: #333;
+}
+
+.Searchinput:focus {
+    outline: none;
+    border-color: #242424;
+    box-shadow: #6e6e6e;
+}
+
+.Searchinput::placeholder {
+    color: #999;
+}
+
+.Searchinput:hover {
+    border-color: #242424;
+}
+
+/* Стиль для ошибки валидации */
+.Searchinput.error {
+    border-color: #dc3545;
+}
+
+/* Стиль для успешного ввода */
+.Searchinput.success {
+    border-color: #28a745;
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
 }

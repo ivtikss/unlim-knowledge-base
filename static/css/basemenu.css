@@ -10,7 +10,7 @@
 .tablink {
   font-size: 20px;
   /* display: block; */
-  background-color: #FDF9F6;
+  background-color: #D9D9D9;
   color: #242424;
   float: left;
   border: none;
@@ -21,6 +21,11 @@
   width: 12em;
   border-radius: 10px;
 }
+
+.tablink:hover {
+  background-color: #777;
+}
+
 /* Стиль содержимого вкладки (и добавить высоту: 100% для полного содержимого страницы) */
 .tabcontent {
   color: #242424;

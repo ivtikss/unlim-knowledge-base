@@ -1,38 +1,75 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
+    {% load static %}
     {% load group_check %}
     <meta charset="utf-8">
     <title>База знаний</title>
-    <link rel="shortcut icon" href="/static/images/icons8-idea-120.png">
+    <link rel="shortcut icon" href="/static/images/logo.png">
     <link rel="stylesheet" href="/static/css/global.css">
     <link rel="stylesheet" href="/static/css/basemenu.css">
     <link rel="stylesheet" href="/static/css/VendorsProducts.css">
     <link rel="stylesheet" href="/static/css/FAQ.css">
+    <link rel="stylesheet" href="{% static '/css/lk.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const filterForm = document.getElementById("filterForm");
+            const clearFilterButton = document.getElementById("clearFilter");
+
+            clearFilterButton.addEventListener("click", function (e) {
+                e.preventDefault();
+
+                // Сбрасываем значения всех выпадающих списков
+                const vendorSelect = document.querySelector(".filter__vendor");
+                vendorSelect.selectedIndex = 0;
+
+                const productSelect = document.querySelector(".filter__product");
+                productSelect.selectedIndex = 0;
+
+                const typeSelect = document.querySelector(".filter__type__product");
+                typeSelect.selectedIndex = 0;
+
+                const checkboxes = document.querySelectorAll(".filter__certificate input[type=checkbox]");
+                checkboxes.forEach(function (checkbox) {
+                    checkbox.checked = false;
+                });
+
+                // Отправляем форму
+                filterForm.submit();
+            });
+        });
+    </script>
+
+
 </head>
 
 <body>
 <!-- Верхняя часть -->
-<div class="topnav">
-    <div class="left__part">
-        <b>База Знаний</b>
+<nav class="navigation">
+    <div class="topnav">
+        <div class="left__part">
+            <img src="{% static 'images/logos.png' %}" alt="Логотип" class="logo">
+            <p class="left__part__caption">БАЗА ЗНАНИЙ</p>
+        </div>
+        {% if request.user.is_authenticated == False %}
+        <ul class="right__part">
+            <li class="right__part"><a href="{% url 'user_login' %}">Войти</a></li>
+        </ul>
+        {% else %}
+        <ul class="right__part">
+            <li class="right__part"><a href="{% url 'PersonalPage' %}"> Личный кабинет</a></li>
+            <li class="right__part"><a href="{% url 'logout' %}">Выход</a></li>
+        </ul>
+        {% endif %}
     </div>
-    {% if request.user.is_authenticated == False %}
-    <div class="right__part">
-        <a href="{% url 'user_login' %}">Войти</a>
-    </div>
-    {% else %}
-    <div class="right__part">
-        <a href="{% url 'PersonalPage' %}"> Добро пожаловать! {{user.first_name}}</a>
-        <a href="{% url 'logout' %}">Выход</a>
-    </div>
-    {% endif %}
-</div>
-
+</nav>
 {% if request.user.is_authenticated %}
 <!-- Верхняя часть -->
 <div class="sidenav">
-    <a href="{% url 'index' %}">База знаний</a>
+    <a href="{% url 'index' %}">Главная</a>
     <a href="{% url 'Guide' %}">Справочники</a>
     {% if user|in_group:"Администратор" %}
     <a href="{% url 'UsersRoles' %}">Сотрудники</a>

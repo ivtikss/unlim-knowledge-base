@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% load group_check %}
+{% block content %}
 <main>
     <!-- Путь к файлу -->
     <div class="name__directoty">
@@ -16,12 +18,14 @@
     </div>
 
     <div id="Product" class="tabcontent">
-        <div class="GuideAddButtons">
-            <form action="" method="post">
-                {% csrf_token %} {{ form.name }}
-                <input type="submit" value="Добавить статус" name="add_product" class="guideaddform">
-            </form>
-        </div>
+        {% if user|in_group:"Сотрудник Коммерческого блока" %}
+        <form action="" method="post" class="GuideAddButtons">
+            {% csrf_token %} {{ form.name }}
+            <div class="SubmitButg">
+                <button type="submit" name="add_product">Добавить</button>
+            </div>
+        </form>
+        {% endif %}
 
         <div class="GuideContent">
             <div class="GuideContentHat">
@@ -33,11 +37,13 @@
                     {% for type_product in all_type_product %}
                     <li>
                         {{type_product.name}}
+                        {% if user|in_group:"Сотрудник Коммерческого блока" %}
                         <form action="" method="post">
                             {% csrf_token %}
-                            <input type="submit" value="Удалить" name="del_product">
+                            <button type="submit" name="del_product" class="DeleteButton">Удалить</button>
                             <input type="hidden" value="{{ type_product.id }}" name="id">
                         </form>
+                        {% endif %}
                     </li>
                     {% endfor %}
                 </ul>
@@ -45,13 +51,16 @@
         </div>
     </div>
 
+
     <div id="Certificate" class="tabcontent">
-        <div class="GuideAddButtons">
-            <form action="" method="post">
-                {% csrf_token %} {{ form.name }}
-                <input type="submit" value="Добавить статус" name="add_certification">
-            </form>
-        </div>
+        {% if user|in_group:"Сотрудник Коммерческого блока" %}
+        <form action="" method="post" class="GuideAddButtons">
+            {% csrf_token %} {{ form.name }}
+            <div class="SubmitButg">
+                <button type="submit" name="add_certification">Добавить</button>
+            </div>
+        </form>
+        {% endif %}
 
         <div class="GuideContent">
             <div class="GuideContentHat">
@@ -63,11 +72,13 @@
                     {% for type_certification in all_type_certification %}
                     <li>
                         {{type_certification.name}}
+                        {% if user|in_group:"Сотрудник Коммерческого блока" %}
                         <form action="" method="post">
                             {% csrf_token %}
-                            <input type="submit" value="Удалить" name="del_certification">
+                            <button type="submit" class="DeleteButton" name="del_certification">Удалить</button>
                             <input type="hidden" value="{{ type_certification.id }}" name="id">
                         </form>
+                        {% endif %}
                     </li>
                     {% endfor %}
                 </ul>
@@ -75,14 +86,16 @@
         </div>
     </div>
 
-    <div id="License" class="tabcontent">
-        <div class="GuideAddButtons">
-            <form action="" method="post">
-                {% csrf_token %} {{ form.name }}
-                <input type="submit" value="Добавить статус" name="add_license">
-            </form>
-        </div>
 
+    <div id="License" class="tabcontent">
+        {% if user|in_group:"Сотрудник Коммерческого блока" %}
+        <form action="" method="post" class="GuideAddButtons">
+            {% csrf_token %} {{ form.name }}
+            <div class="SubmitButg">
+                <button type="submit" name="add_license">Добавить</button>
+            </div>
+        </form>
+        {% endif %}
         <div class="GuideContent">
             <div class="GuideContentHat">
                 Наименование
@@ -93,11 +106,13 @@
                     {% for type_license in all_type_license %}
                     <li>
                         {{type_license.name}}
+                        {% if user|in_group:"Сотрудник Коммерческого блока" %}
                         <form action="" method="post">
                             {% csrf_token %}
-                            <input type="submit" value="Удалить" name="del_license">
+                            <button type="submit" class="DeleteButton" name="del_license">Удалить</button>
                             <input type="hidden" value="{{ type_license.id }}" name="id">
                         </form>
+                        {% endif %}
                     </li>
                     {% endfor %}
                 </ul>
@@ -105,14 +120,18 @@
         </div>
     </div>
 
-    <div id="Shipment" class="tabcontent">
-        <div class="GuideAddButtons">
-            <form action="" method="post">
-                {% csrf_token %} {{ form.name }}
-                <input type="submit" value="Добавить статус" name="add_get">
-            </form>
-        </div>
 
+    <div id="Shipment" class="tabcontent">
+        {% if user|in_group:"Сотрудник Коммерческого блока" %}
+
+        <form action="" method="post" class="GuideAddButtons">
+            {% csrf_token %} {{ form.name }}
+            <div class="SubmitButg">
+                <button type="submit" name="add_get">Добавить</button>
+            </div>
+        </form>
+
+        {% endif %}
         <div class="GuideContent">
             <div class="GuideContentHat">
                 Наименование
@@ -123,11 +142,13 @@
                     {% for type_get in all_type_get %}
                     <li>
                         {{type_get.name}}
+                        {% if user|in_group:"Сотрудник Коммерческого блока" %}
                         <form action="" method="post">
                             {% csrf_token %}
-                            <input type="submit" value="Удалить" name="del_get">
+                            <button type="submit" class="DeleteButton" name="del_get">Удалить</button>
                             <input type="hidden" value="{{ type_get.id }}" name="id">
                         </form>
+                        {% endif %}
                     </li>
                     {% endfor %}
                 </ul>
@@ -135,14 +156,16 @@
         </div>
     </div>
 
-    <div id="Realisation" class="tabcontent">
-        <div class="GuideAddButtons">
-            <form action="" method="post">
-                {% csrf_token %} {{ form.name }}
-                <input type="submit" value="Добавить статус" name="add_reliase">
-            </form>
-        </div>
 
+    <div id="Realisation" class="tabcontent">
+        {% if user|in_group:"Сотрудник Коммерческого блока" %}
+            <form action="" method="post" class="GuideAddButtons">
+                {% csrf_token %} {{ form.name }}
+                <div class="SubmitButg">
+                <button type="submit" name="add_reliase">Добавить</button>
+            </div>
+            </form>
+        {% endif %}
         <div class="GuideContent">
             <div class="GuideContentHat">
                 Наименование
@@ -153,11 +176,13 @@
                     {% for type_reliase in all_type_reliase %}
                     <li>
                         {{type_reliase.name}}
+                        {% if user|in_group:"Сотрудник Коммерческого блока" %}
                         <form action="" method="post">
                             {% csrf_token %}
-                            <input type="submit" value="Удалить" name="del_reliase">
+                            <button type="submit" class="DeleteButton" name="del_reliase">Удалить</button>
                             <input type="hidden" value="{{ type_reliase.id }}" name="id">
                         </form>
+                        {% endif %}
                     </li>
                     {% endfor %}
                 </ul>
@@ -165,14 +190,16 @@
         </div>
     </div>
 
-    <div id="Partners" class="tabcontent">
-        <div class="GuideAddButtons">
-            <form action="" method="post">
-                {% csrf_token %} {{ form.name }}
-                <input type="submit" value="Добавить статус" name="add_status">
-            </form>
-        </div>
 
+    <div id="Partners" class="tabcontent">
+        {% if user|in_group:"Сотрудник Коммерческого блока" %}
+            <form action="" method="post" class="GuideAddButtons">
+                {% csrf_token %} {{ form.name }}
+                <div class="SubmitButg">
+                <button type="submit" name="add_status">Добавить</button>
+            </div>
+            </form>
+        {% endif %}
         <div class="GuideContent">
             <div class="GuideContentHat">
                 Наименование
@@ -182,11 +209,13 @@
                     {% for status in all_status %}
                     <li>
                         {{status.name}}
+                        {% if user|in_group:"Сотрудник Коммерческого блока" %}
                         <form action="" method="post">
                             {% csrf_token %}
-                            <input type="submit" value="Удалить" name="del_status">
+                            <button type="submit" class="DeleteButton" name="del_status">Удалить</button>
                             <input type="hidden" value="{{ status.id }}" name="id">
                         </form>
+                        {% endif %}
                     </li>
                     {% endfor %}
                 </ul>

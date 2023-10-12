@@ -4,6 +4,12 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
 
+class ChangeUserInfoForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email']
+
+
 class UserLoginForm(AuthenticationForm):
     username = forms.CharField(
         label='E-mail',
@@ -25,6 +31,9 @@ class TypeStatusForm(forms.ModelForm):
     class Meta:
         model = TypeStatus
         fields = ['name']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'guides-input'}),
+        }
 
 
 class TypeProductForm(forms.ModelForm):

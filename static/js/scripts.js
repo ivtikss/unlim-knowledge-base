@@ -11,13 +11,15 @@ function openPage(pageName, elmnt) {
   tablinks = document.getElementsByClassName("tablink");
   for (i = 0; i < tablinks.length; i++) {
     tablinks[i].style.backgroundColor = "";
+    tablinks[i].style.color = "";
   }
 
   // Показать содержимое конкретной вкладки
   document.getElementById(pageName).style.display = "block";
 
   // Добавить конкретный цвет кнопки, используемой для открытия содержимого вкладки
-  elmnt.style.backgroundColor = 'lightgray';
+  elmnt.style.backgroundColor = '#242424';
+  elmnt.style.color = '#FDF9F6';
 }
 // Получите элемент с id="defaultOpen" и нажмите на него
 document.getElementById("defaultOpen").click();

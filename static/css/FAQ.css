@@ -1,218 +1,238 @@
 .accordion {
-  display: flex;
-  text-align: center;
-  justify-content: space-between;
-  font-size: 17px;
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  text-align: left;
-  border: none;
-  background: none;
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    font-size: 17px;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    background: none;
 }
 
-.active, .accordion:hover {
-  background-color: #ccc;
-}
 
 .panel {
-  display: none;
-  overflow: hidden;
-  padding: 10px;
+    display: none;
+    overflow: hidden;
+    padding: 10px;
+    background-color: #D9D9D9;
 }
+
 .buttonAddQuestFAQ {
-  display: flex;
-  justify-content: space-between;
-}
-.panel>div>button,
-.buttonAddQuestFAQ>form>input {
-  margin: 5px 0;
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #D9D9D9;
 }
 
-.panel>ul {
-  list-style: none;
+.buttonAddQuestFAQ > button {
+    padding: 5px 10px; /* Увеличьте отступы для кнопки */
+    background-color: #D9D9D9; /* Цвет фона кнопки */
+    color: #242424; /* Цвет текста */
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    border: 1px solid #242424;
+    border-radius: 5px;
 }
 
-.panel>ul li {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: 10px;
-  align-items: center;
+.buttonAddQuestFAQ > button:hover {
+    background-color: #242424; /* Измените цвет фона при наведении */
+    color: #D9D9D9;
 }
-.panel>ul li {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin-top: 10px;
-  align-items: center;
+
+.panel > ul {
+    list-style: none;
+}
+
+.panel > ul li {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10px;
+    align-items: center;
+    background-color: #D9D9D9;
+}
+
+.panel > ul li {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10px;
+    align-items: center;
 }
 
 .butShowMoreFAQ {
-  padding: 10px;
-  border: 1px solid black;
-  border-radius: 5px;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
 }
+
 .butDeliteFAQ {
-padding: 5px;
-  border: 1px solid black;
-  border-radius: 5px;
-  margin-left: 10px;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-left: 10px;
 }
 
 .menu {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
 
 }
 
 .buttonsFAQ {
-  margin-top: 20px;
-  width: 30%;
+    margin-top: 20px;
+    width: 30%;
 }
 
 .button1 {
-  border: 2px solid black;
-  border-radius: 10px;
-  padding: 10px;
-  margin-bottom: 20px;
+    background-color: #D9D9D9;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 20px;
 }
 
-button:active {
-  background: lightgray;
-}
 
 .buttsQuestFAQ {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+    display: flex;
+    align-items: flex-end;
+    background-color: #D9D9D9;
+}
+
+.buttsQuestFAQ > button {
+    padding: 5px 10px; /* Увеличьте отступы для кнопки */
+    background-color: #D9D9D9; /* Цвет фона кнопки */
+    color: #242424; /* Цвет текста */
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    margin-left: 20px;
+    border: 1px solid #242424;
+    border-radius: 5px;
+}
+
+.buttsQuestFAQ > button:hover {
+    background-color: #242424; /* Измените цвет фона при наведении */
+    color: #D9D9D9;
+}
+
+.p {
+    background-color: #D9D9D9;
 
 }
-.buttsQuestFAQ input,
-.buttsQuestFAQ button {
-  border: 0.5px solid black;
-  border-radius: 5px;
-  padding: 4px 5px;
-  margin-bottom: 3px;
-}
-.buttsQuestFAQ input:hover,
-.buttsQuestFAQ button:hover {
-  background: lightgray;
-}
+
 
 .contentFAQ {
-  margin: 10px 40px;
-  width: 65%;
-  border: 2px solid black;
-  border-radius: 10px;
-  height: 600px;
+    margin: 10px 40px;
+    width: 65%;
+    border-radius: 10px;
+    height: 600px;
 
-  display: none;
+    display: none;
 }
 
 .FAQanswerMenu {
-  margin: 10px;
-  padding: 5px;
-  width: 95%;
-  height: 520px;
-  resize: none;
-  border: 0.5px solid black;
-  border-radius: 10px;
-  overflow: none;
+    overflow: auto; /* Добавление полос прокрутки при необходимости */
+    margin: 10px;
+    padding: 5px;
+    width: 95%;
+    height: 520px;
+    resize: none;
+    border-radius: 10px;
 }
 
 .FAQsubmit {
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 5%;
-  margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 5%;
+    margin-bottom: 20px;
 }
 
-.FAQsubmit>button {
-  padding: 10px 30px;
-  border: 1px solid black;
-  border-radius: 5px;
-  margin-left: 20px;
+.FAQsubmit > button {
+    padding: 10px 30px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-left: 20px;
 }
-
-
 
 
 /* Окаймленная форма */
 .form {
-  border: 3px solid #f1f1f1;
+    border: 3px solid #f1f1f1;
 }
 
 /* Модальный (фон) */
 .modalMember {
-  display: none; /* Скрыто по умолчанию */
-  position: fixed; /* Оставаться на месте */
-  z-index: 1; /* Сидеть на вершине */
-  left: 0;
-  top: 0;
-  width: 100%; /* Полная ширина */
-  height: 100%; /* Полный рост */
-  overflow: auto; /* Включите прокрутку, если это необходимо */
-  background-color: rgb(0,0,0); /* Цвет запасной вариант */
-  background-color: rgba(0,0,0,0.4); /* Черный с непрозрачностью */
-  padding-top: 40vh;
+    display: none; /* Скрыто по умолчанию */
+    position: fixed; /* Оставаться на месте */
+    z-index: 1; /* Сидеть на вершине */
+    left: 0;
+    top: 0;
+    width: 100%; /* Полная ширина */
+    height: 100%; /* Полный рост */
+    overflow: auto; /* Включите прокрутку, если это необходимо */
+    background-color: rgb(0, 0, 0); /* Цвет запасной вариант */
+    background-color: rgba(0, 0, 0, 0.4); /* Черный с непрозрачностью */
+    padding-top: 40vh;
 }
 
 .editWindow {
-  padding-top: 20vh;
+    padding-top: 20vh;
 }
 
 /* Модальное Содержание/коробка */
 .modal-content {
-  background-color: #FDF9F6;
-  margin: 5px auto; /* 15% сверху и по центру */
-  width: 25%; /* Может быть больше или меньше, в зависимости от размера экрана */
-  border: 2px solid black;
-  border-radius: 20px;
-  text-align: center;
+    background-color: #FDF9F6;
+    margin: 5px auto; /* 15% сверху и по центру */
+    width: 25%; /* Может быть больше или меньше, в зависимости от размера экрана */
+    border: 2px solid black;
+    border-radius: 20px;
+    text-align: center;
 }
 
 /* Модальное Содержание/коробка */
 .editAnswer {
-  background-color: #FDF9F6;
-  margin: 5px auto; /* 15% сверху и по центру */
-  width: 50%; /* Может быть больше или меньше, в зависимости от размера экрана */
-  border: 2px solid black;
-  border-radius: 20px;
-  text-align: center;
+    background-color: #FDF9F6;
+    margin: 5px auto; /* 15% сверху и по центру */
+    width: 50%; /* Может быть больше или меньше, в зависимости от размера экрана */
+    border: 2px solid black;
+    border-radius: 20px;
+    text-align: center;
 }
 
 .namecontainer {
-  background: none;
-  font-size: 20px;
-  padding: 1em 0;
+    background: none;
+    font-size: 20px;
+    padding: 1em 0;
 }
 
-.container>input {
-  width: 300px;
-  padding: 5px;
+.container > input {
+    width: 300px;
+    padding: 5px;
 }
 
-.container>textarea{
-  resize: none;
-  border: 0.5px solid black;
-  border-radius: 10px;
-  padding: 10px;
-  width: 90%;
+.container > textarea {
+    resize: none;
+    border: 0.5px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    width: 90%;
 }
 
 .PostButtons {
-  text-align: right;
-  margin: 1em;
+    text-align: right;
+    margin: 1em;
 }
 
-.PostButtons>input {
-  margin: 5px;
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 5px;
+.PostButtons > input {
+    margin: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.panel > ul > li > p {
+    background-color: #D9D9D9;
 }

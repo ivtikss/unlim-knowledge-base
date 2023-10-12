@@ -2,13 +2,18 @@
 <html lang="en">
 <head>
     {% load static %}
+    <link rel="shortcut icon" href="/static/images/logo.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вход</title>
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="login-container">
+        <img src="{% static 'images/logos.png' %}" alt="Логотип" class="logos">
         <h2>База Знаний</h2>
         <form method="post">
             {% csrf_token %}
