@@ -5,13 +5,13 @@
 
 .CreateVendor button {
   background: #FDF9F6;
-  border: 1px solid #242424;
+  border: 1px solid #FDF9F6;
   border-radius: 10px;
   cursor: pointer;
 }
 
 .CreateVendor button:active {
-  background: #D9D9D9;
+  background: #FDF9F6;
 }
 
 .PartnersGlobal {
@@ -105,7 +105,7 @@
 
 .PartnerSertificatedMenu li>input {
   width: calc(80%/2);
-  border: 0.5px solid #242424;
+  border: 1px solid #242424;
   border-radius: 5px;
   padding: 5px;
   margin-right: 1em;
@@ -124,7 +124,6 @@
 
 .ContactsList>button {
   padding: 5px;
-  margin: 1px;
   margin-left: 20px;
 }
 
@@ -147,12 +146,11 @@
 
 .PartnerContactsMenu li {
   margin: 5px;
-  margin-left: 1em;
 }
 
 .PartnerContactsMenu li>input {
   width: 27%;
-  border: 0.5px solid #242424;
+  border: 1px solid #242424;
   border-radius: 5px;
   padding: 5px;
   margin-right: 0.5em;
@@ -207,4 +205,82 @@
   background: #FDF9F6;
   border: 1px solid #242424;
   border-radius: 5px;
+}
+
+/* Общий стиль для контейнера формы */
+/* Общий стиль для контейнера формы */
+.vendor-form {
+    display: flex;
+}
+
+/* Стиль для левой колонки */
+.left-column {
+    flex: 1;
+    padding: 20px;
+    background-color: #FDF9F6;
+}
+
+/* Стиль для правой колонки */
+.right-column {
+    flex: 1;
+    padding: 20px;
+    background-color: #FDF9F6;
+}
+
+/* Заголовки разделов */
+h2 {
+    margin-top: 10px;
+}
+
+/* Стиль для полей ввода */
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+textarea {
+    width: 70%;
+    padding: 8px;
+    border: 1px solid #242424;
+    border-radius: 4px;
+    margin-top: 5px;
+    box-sizing: border-box;
+}
+
+input[type="file"] {
+    margin-top: 5px;
+}
+
+/* Стиль для кнопки "Отправить" */
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #0073e6;
+    color: #FDF9F6;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* Отступы между элементами */
+.left-column > *:not(:first-child),
+.right-column > *:not(:first-child) {
+    margin-top: 20px;
+}
+
+.custom-datepicker {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #333;
+    font-size: 16px;
+    padding: 5px;
+    border-bottom: 1px solid #FDF9F6;
 }
