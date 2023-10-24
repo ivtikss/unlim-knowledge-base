@@ -14,7 +14,6 @@
     <div class="UsersRolesBarButtons">
         <div>
             <button class="tablink" onclick="openPage('Users', this)" id="defaultOpen">Сотрудники</button>
-            <button class="tablink" onclick="openPage('Roles', this)">Роли</button>
         </div>
     </div>
     {% if messages %}
@@ -27,9 +26,6 @@
     </ul>
     {% endif %}
 
-    <div class="UsersRolesAddButtons">
-            <button onclick="document.getElementById('AddNewUser').style.display='block'">Пригласить сотрудника</button>
-        </div>
 
     <div id="Users" class="tabcontent">
 
@@ -48,127 +44,106 @@
                     <input type="email" id="email" name="email" required>
                 </div>
 
+                <div class="container">
+                    <div class="custom-select">
+                        <label for="roles" class="hidden">Выберите роль</label>
+                        <select name="roles" id="roles">
+                            <option value="Сотрудник">Сотрудник</option>
+                            <option value="Сотрудник ОПиР">Сотрудник ОПиР</option>
+                            <option value="Сотрудник ОС">Сотрудник ОС</option>
+                            <option value="Сотрудник Коммерческого блока">Сотрудник Коммерческого блока</option>
+                            <option value="Администратор">Администратор</option>
+                        </select>
+                    </div>
+                </div>
+
                 <div class="PostButtons">
-                    <input type="submit" value="Отправить">
+                    <input type="submit" value="Отправить" name="addUser">
                     <input type="reset" value="Отменить"
                            onclick="document.getElementById('AddNewUser').style.display='none'">
                 </div>
             </form>
         </div>
         <!-- Пригашение новых пользователей -->
+        {% for user in users %}
+        <div id="ChangeRole{{ user.id }}" class="modalMember">
+            <form class="modal-content" method="post">
+                {% csrf_token %}
+                <div class="namecontainer">
+                    Выберите роль
+                </div>
+                <div class="container">
+                    <label class="checkbox-label"><input type="checkbox" name="role" value="Администратор" {% if user|in_group:"Администратор" %} checked {% endif %}>
+                        Администратор</label>
+                    <label class="checkbox-label"><input type="checkbox" name="role" value="Сотрудник" {% if user|in_group:"Сотрудник" %} checked {% endif %}>
+                        Сотрудник</label>
+                    <label class="checkbox-label"><input type="checkbox" name="role" value="Сотрудник ОПиР" {% if user|in_group:"Сотрудник ОПиР" %} checked {% endif %}>
+                        Сотрудник ОПиР</label>
+                    <label class="checkbox-label"><input type="checkbox" name="role" value="Сотрудник ОС" {% if user|in_group:"Сотрудник ОС" %} checked {% endif %}> Сотрудник
+                        ОС</label>
+                    <label class="checkbox-label"><input type="checkbox" name="role" value="Сотрудник Коммерческого блока" {% if user|in_group:"Сотрудник Коммерческого блока" %} checked {% endif %}> Сотрудник Коммерческого блока</label>
+                </div>
+                <div class="PostButtons">
+                    <input type="submit" value="Отправить" name="changeRole">
+                    <input type="reset" value="Отменить"
+                           onclick="document.getElementById('ChangeRole{{ user.id }}').style.display='none'">
+                    <input type="hidden" name="user_id" value="{{ user.id }}">
+                </div>
+            </form>
+        </div>
+        {% endfor %}
+        <div class="UsersRolesAddButtons">
+            <button onclick="document.getElementById('AddNewUser').style.display='block'">Пригласить сотрудника</button>
+        </div>
+
         <div class="UsersRolesContent">
             <div class="UsersRolesContentHat">
                 <p>ФИО</p>
                 <p>Адрес электронной почты</p>
                 <p>Роль</p>
-                <p>Доступы</p>
+                <p></p>
             </div>
 
             <div class="UsersRolesContentMain">
                 <ul>
                     {% for user in users %}
-                    <li>
-                        <p>{{ user.first_name }} {{ user.last_name }}</p>
-                        <p>{{ user.email }}</p>
-                        <p>{{ user.profile }}</p>
-                        {% if user|in_group:"Администратор" %}
-                        <p>Администратор</p>
-                        {% endif %}
-                        {% if user|in_group:"Сотрудник" %}
-                        <p>Сотрудник</p>
-                        {% endif %}
-                        {% if user|in_group:"Сотрудник ОПиР" %}
-                        <p>Сотрудник ОПиР</p>
-                        {% endif %}
-                        {% if user|in_group:"Сотрудник ОС" %}
-                        <p>Сотрудник ОС</p>
-                        {% endif %}
-                        {% if user|in_group:"Сотрудник Коммерческого блока" %}
-                        <p>Сотрудник Коммерческого блока</p>
-                        {% endif %}
-                        <button type="button">Редактировать</button>
+                    <li class="user-row">
+                        <div class="user-info"><p>{{ user.first_name }} {{ user.last_name }}</p></div>
+                        <div class="user-info"><p>{% if user.email %}{{ user.email }} {% else %} {{ user.username }}{% endif %}</p></div>
+                        <div class="user-roles">
+                            <p>{{ user.profile }}</p>
+                            <ul class="role-list">
+                                {% if user|in_group:"Администратор" %}
+                                <li>Администратор</li>
+                                {% endif %}
+                                {% if user|in_group:"Сотрудник" %}
+                                <li>Сотрудник</li>
+                                {% endif %}
+                                {% if user|in_group:"Сотрудник ОПиР" %}
+                                <li>Сотрудник ОПиР</li>
+                                {% endif %}
+                                {% if user|in_group:"Сотрудник ОС" %}
+                                <li>Сотрудник ОС</li>
+                                {% endif %}
+                                {% if user|in_group:"Сотрудник Коммерческого блока" %}
+                                <li>Сотрудник Коммерческого блока</li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        <div class="user-actions">
+                            <button type="button"
+                                    onclick="document.getElementById('ChangeRole{{ user.id }}').style.display='block'">
+                                Редактировать
+                            </button>
+                        </div>
                     </li>
                     {% endfor %}
                 </ul>
             </div>
         </div>
-    </div>
 
-    <div id="Roles" class="tabcontent">
-        <div class="UsersRolesAddButtons">
-            <button onclick="document.getElementById('AddNewRole').style.display='block'">Добавление роли</button>
-        </div>
-
-        <!-- Пригашение новых пользователей -->
-        <div id="AddNewRole" class="modalMember">
-
-            <!-- Модальный контент -->
-            <form class="modal-content" action="/action_page.php">
-                <div class="namecontainer">
-                    Добавление новой роли
-                </div>
-
-                <div class="container">
-                    <label for="RoleName">Наименование новой роли</label>
-                    <input type="text" placeholder="Введите название" name="RoleName" required>
-                </div>
-
-                <div class="EditNewRole">
-                    <div class="Rights">
-                        <div class="RightHat">
-                            Права доступа
-                        </div>
-                        <ul id="CheckedRights">
-                            <li>
-                                Редактировать 1
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="Rights">
-                        <div class="RightHat">
-                            Все права
-                        </div>
-                        <ul>
-                            <li>
-                                Редактировать 1
-                                <input type="checkbox" name="" value="Редактировать 1" onclick="AddRight(this)">
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="PostButtons">
-                    <input type="submit" value="Отправить">
-                    <input type="reset" value="Отменить"
-                           onclick="document.getElementById('AddNewRole').style.display='none'">
-                </div>
-            </form>
-        </div>
-        <!-- Пригашение новых пользователей -->
-
-        <div class="UsersRolesContent">
-            <div class="UsersRolesContentHat">
-                <p>Наименование роли</p>
-                <p>Доступы</p>
-            </div>
-
-            <div class="UsersRolesContentMain">
-                <ul>
-                    {% for role in roles %}
-                    <li>
-                        <p>{{role.name}}</p>
-                        <p>
-                            <button type="button">Редактировать</button>
-                        </p>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
     </div>
 </main>
-
 <script src="\static\js\scripts.js"></script>
 <link rel="shortcut icon" href="static/images/marinette001.png">
 

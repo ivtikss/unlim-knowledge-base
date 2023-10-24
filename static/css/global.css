@@ -32,48 +32,86 @@
 
 }
 
-.left__part__caption{
+.left__part__caption {
     font-size: 24px;
     font-weight: 700;
     background-color: #D9D9D9;
 }
+
 /* Позиционирование ссылок в верхней панели */
-.navigation .topnav {
+.navigation {
+    background: #D9D9D9;
+    height: 30px;
+    position: fixed; /* Закрепляем навигационный бар */
+    top: 0; /* Размещаем его вверху страницы */
+    left: 0;
+    right: 0;
+}
+
+.topnav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    padding: 10px 20px; /* Добавим немного отступа слева и справа */
 }
 
-.navigation {
-    background: #D9D9D9;
+.left__part__caption {
+    font-size: 24px; /* Увеличим размер шрифта для заголовка */
 }
 
 .right__part {
-    display: flex;
-    gap: 30px;
     list-style-type: none;
+    display: flex;
+    background-color: #D9D9D9;
+    align-self: center; /* Выравнивание элемента вверх */
+    align-items: center;
+}
+
+.right__part__item {
+    margin-right: 20px; /* Увеличим расстояние между элементами меню */
     background-color: #D9D9D9;
 }
 
-/* Ссылки в верхней панели */
-.right__part > a {
+.right__part__item a {
     color: #242424;
-    background: #D9D9D9;
-    font-size: 20px;
-    float: right;
-    align-items: flex-start;
+    text-decoration: none; /* Уберем подчеркивание у ссылок */
+    font-size: 18px;
+    padding: 5px 10px; /* Добавим отступы вокруг текста ссылок */
+    border-radius: 5px; /* Закруглим углы границы */
 }
 
+.right__part__item a:hover {
+    background-color: #242424;
+    color: #D9D9D9; /* Изменим цвет фона и текста при наведении */
+}
+.right__part__avatar {
+    background-color: #D9D9D9;
+    margin-right: 10px;
+}
+.right__part__avatar a{
+    background-color: #D9D9D9;
+}
+.right__part__item:last-child {
+    margin-right: 20px; /* Уберите отступ у последнего элемента (в данном случае, кнопки "Выход") */
+}
 
+.right__part__avatar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: filter 0.3s;
+    background-color: #D9D9D9;
+}
 /* Меню боковой панели */
 .sidenav {
-    margin-top: 60px;
+    margin-top: 70px;
     height: 100%;
     width: 250px;
     position: fixed;
     overflow-x: hidden;
     border-radius: 10px;
+    background: #FDF9F6; /* Добавляем фоновый цвет для меню */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Добавляем тень */
 }
 
 /* Ссылки в меню навигации */
@@ -82,20 +120,36 @@
     text-decoration: none;
     font-size: 20px;
     color: #242424;
-    display: block;
+    display: flex;
+    align-items: center;
     border-radius: 10px;
+    position: relative;
+    transition: background-color 0.3s, color 0.3s; /* Плавные анимации при наведении */
 }
 
-/* При наведении курсора мыши на навигационные ссылки измените их цвет */
+/* Изображение */
+.sidenav a img {
+    width: 27px;
+    height: 27px;
+    margin-right: 20px;
+    background: transparent; /* Убрать фон */
+}
+
+/* При наведении курсора мыши на навигационные ссылки измените их цвет и фон */
 .sidenav a:hover {
     background: #242424;
     color: #FDF9F6;
 }
 
+.sidenav a:hover img {
+    filter: brightness(0) invert(1); /* Инвертировать цвет изображения */
+    background: transparent; /* Убрать фон */
+}
+
 /* Стиль содержимого страницы */
 main {
     margin-left: 250px; /* То же, что и ширина боковой панели */
-    padding: 20px 20px;
+    padding: 50px 20px;
     border-radius: 20px;
 }
 
@@ -143,3 +197,65 @@ main {
     border-color: #28a745;
     box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
 }
+
+.price-section {
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+}
+
+.price-title {
+    font-size: 1.5rem;
+    margin: 0;
+
+}
+
+.price-list {
+    list-style: none;
+    padding: 0;
+}
+
+.price-item {
+    margin: 10px 0;
+}
+
+.price-link {
+    text-decoration: none;
+    color: #242424;
+}
+
+.price-link:hover {
+    text-decoration: underline;
+    color: #1d43d5;
+}
+
+.price-link-text {
+    font-size: 1rem;
+}
+
+.edit-button, .add-price-button, .delete-button {
+    background-color: #D9D9D9;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.edit-button:hover, .add-price-button:hover, .delete-button:hover {
+    background-color: #242424;
+    color: white;
+}
+
+/* Стили для заголовка */
+.header {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+

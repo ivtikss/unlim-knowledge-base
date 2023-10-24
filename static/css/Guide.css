@@ -40,7 +40,7 @@
 }
 
 .GuideContentHat {
-    border-bottom: 1px solid #242424;
+    border-bottom: 1px solid #D9D9D9;
     padding: 15px 20px;
     position: sticky;
     background: #FDF9F6;
@@ -60,11 +60,12 @@
     justify-content: space-between;
     align-items: center;
     padding: 5px 20px;
+    border: 1px solid #FDF9F6;
+    border-radius: 15px;
 }
 
 .GuideContentMain ul > li:hover {
-    background: #D9D9D9;
-    border-radius: 30px;
+    border: 1px solid #D9D9D9;
 }
 
 .GuideContentMain li > form > input {

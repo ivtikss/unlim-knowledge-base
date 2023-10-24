@@ -189,24 +189,26 @@
                         </div>
                         <!-- Модальный Добавить вопрос -->
                         <div id="AddNewQuest{{ item.id }}" class="modalMember">
-                            <!-- Модальный контент -->
-                            <form class="modal-content" action="{% url 'index' %}" method="post">
-                                {% csrf_token %}
-                                <div class="namecontainer">
-                                    Добавление вопроса
-                                </div>
-                                <div class="container">
-                                    <label for="uname">Вопрос:</label>
-                                    {{ questionform.name }}
-                                </div>
-                                <div class="PostButtons">
-                                    <input type="submit" value="Отправить" name="add_question">
-                                    <input type="hidden" value="{{ item.id }}" name="group_id">
-                                    <input type="reset" value="Отменить"
-                                           onclick="document.getElementById('AddNewQuest{{ item.id }}').style.display='none'">
-                                </div>
-                            </form>
+                            <!-- Модальное содержимое -->
+                            <div class="modal-content">
+                                <form action="{% url 'index' %}" method="post">
+                                    {% csrf_token %}
+                                    <div class="namecontainer">
+                                        Добавление вопроса
+                                    </div>
+                                    <div class="container">
+                                        <label for="uname">Вопрос:</label>
+                                        {{ questionform.name }}
+                                    </div>
+                                    <div class="PostButtons">
+                                        <input type="submit" value="Отправить" name="add_question">
+                                        <input type="hidden" value="{{ item.id }}" name="group_id">
+                                        <input type="reset" value="Отменить" onclick="document.getElementById('AddNewQuest{{ item.id }}').style.display='none'">
+                                    </div>
+                                </form>
+                            </div>
                         </div>
+
                         <!-- Модальный Удалить раздел -->
                         <div id="delitNewQuest{{ item.id }}" class="modalMember">
                             <!-- Модальный контент -->

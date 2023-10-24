@@ -31,7 +31,7 @@ admin.site.register(VendorSpecialist, VendorSpecialistAdmin)
 
 
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'vendor', 'product', 'phone_number', 'email', 'messanger')
+    list_display = ('id', 'name', 'vendor', 'product', 'phone_number', 'email')
     list_display_links = ('id', 'name')
     search_fields = ('name', 'vendor', 'name')
 

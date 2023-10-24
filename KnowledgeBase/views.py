@@ -1,6 +1,9 @@
+import datetime
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group, User
-from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView
+from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, \
+    PasswordResetConfirmView
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
 from .forms import *
@@ -8,6 +11,17 @@ from .models import *
 from django.contrib.auth import login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import user_passes_test
+from django.core.files.storage import FileSystemStorage
+from django.conf import settings
+
+
+@login_required
+def change_user_role(request):
+    if request.method == "POST":
+        user_id = request.POST.get("user_id")
+        roles = request.POST.getlist("role")
+        # Обновите роли пользователя в базе данных
+    return redirect('/staff')
 
 
 @login_required
@@ -15,18 +29,33 @@ def personal_page(request):
     if request.method == 'POST':
         form = ChangeUserInfoForm(request.POST, instance=request.user)
 
+        uploaded_avatar = request.FILES.get('avatar')
+        print(uploaded_avatar)
         if form.is_valid():
             form.save()
-            return redirect('PersonalPage')  # Перенаправьте пользователя на страницу после изменения данных
+
+            if uploaded_avatar:
+                if not hasattr(request.user, 'userprofile'):
+                    UserProfile.objects.create(user=request.user)
+                    request.user.userprofile.avatar = uploaded_avatar
+                    request.user.userprofile.save()
+                else:
+                    request.user.userprofile.avatar = uploaded_avatar
+                    request.user.userprofile.save()
+
+            return redirect('PersonalPage')
 
     else:
         form = ChangeUserInfoForm(instance=request.user)
-
     return render(request, 'PersonalPage.html', {'form': form})
 
 
 def is_admin(user):
     return user.groups.filter(name='Администратор').exists()
+
+
+def in_group(user, group_name):
+    return user.groups.filter(name=group_name).exists()
 
 
 class UserPasswordResetDoneView(PasswordResetDoneView):
@@ -191,7 +220,8 @@ def index(request):
     filtered_products = product
 
     if vendor_filter:
-        vendor_id = Vendor.objects.filter(name=vendor_filter).values_list('id', flat=True).first()
+        vendor_id = Vendor.objects.filter(name=vendor_filter).values_list('id',
+                                                                          flat=True).first()
         if vendor_id:
             filtered_products = filtered_products.filter(vendor=vendor_id)
 
@@ -230,19 +260,62 @@ def index(request):
 
 @user_passes_test(is_admin, login_url='/')
 def staff(request):
-    users = User.objects.all()
+    users = User.objects.all().order_by('last_name', 'first_name', 'email')
     roles = Group.objects.all()
 
-    if request.method == 'POST':
+    if request.POST.get('addUser'):
         email = request.POST.get('email')
         password = "1234"  # Заданный пароль
+        role = request.POST.get('roles')
+        group = Group.objects.get(name=role)
         try:
-            user = User.objects.create_user(username=email, email=email, password=password)
+            user = User.objects.create_user(username=email, email=email,
+                                            password=password)
+            group.user_set.add(user)
             messages.success(request, "Пользователь успешно создан.")
             return redirect('UsersRoles')
         except Exception as e:
             print(e)
             messages.error(request, str(e))
+
+    if request.POST.get('changeRole'):
+        user_id = request.POST.get("user_id")
+        user = User.objects.filter(pk=user_id).get()
+        roles = request.POST.getlist("role")
+        if in_group(user, 'Администратор') and ('Администратор' not in roles):
+            group = Group.objects.get(name='Администратор')
+            group.user_set.remove(user)
+        if in_group(user, 'Сотрудник') and ('Сотрудник' not in roles):
+            group = Group.objects.get(name='Сотрудник')
+            group.user_set.remove(user)
+        if in_group(user, 'Сотрудник ОПиР') and ('Сотрудник ОПиР' not in roles):
+            group = Group.objects.get(name='Сотрудник ОПиР')
+            group.user_set.remove(user)
+        if in_group(user, 'Сотрудник ОС') and ('Сотрудник ОС' not in roles):
+            group = Group.objects.get(name='Сотрудник ОС')
+            group.user_set.remove(user)
+        if in_group(user, 'Сотрудник Коммерческого блока') and (
+                'Сотрудник Коммерческого блока' not in roles):
+            group = Group.objects.get(name='Сотрудник Коммерческого блока')
+            group.user_set.remove(user)
+        if not (in_group(user, 'Администратор')) and ('Администратор' in roles):
+            group = Group.objects.get(name='Администратор')
+            group.user_set.add(user)
+        if not (in_group(user, 'Сотрудник')) and ('Сотрудник' in roles):
+            group = Group.objects.get(name='Сотрудник')
+            group.user_set.add(user)
+        if not (in_group(user, 'Сотрудник ОПиР')) and (
+                'Сотрудник ОПиР' in roles):
+            group = Group.objects.get(name='Сотрудник ОПиР')
+            group.user_set.add(user)
+        if not (in_group(user, 'Сотрудник ОС')) and ('Сотрудник ОС' in roles):
+            group = Group.objects.get(name='Сотрудник ОС')
+            group.user_set.add(user)
+        if not (in_group(user, 'Сотрудник Коммерческого блока')) and (
+                'Сотрудник Коммерческого блока' in roles):
+            group = Group.objects.get(name='Сотрудник Коммерческого блока')
+            group.user_set.add(user)
+        return redirect('UsersRoles')
 
     context = {
         'users': users,
@@ -253,13 +326,53 @@ def staff(request):
 
 def vendor_detail(request, vendor_id):
     vendor = get_object_or_404(Vendor, pk=vendor_id)
-    specialist = VendorSpecialist.objects.filter(vendor=vendor_id)
-    contact = Contact.objects.filter(vendor=vendor_id)
+    specialist = VendorSpecialist.objects.filter(vendor=vendor_id).get()
+    contact = Contact.objects.filter(vendor=vendor_id).get()
+    prices = VendorPrices.objects.filter(vendor=vendor_id)
+    today = datetime.date.today()
+    nearest_date_diff = None
+    nearest_price = None
+    count = 0
+    act_price = []
+    fut_price = []
+    pas_price = []
+
+    for price in prices:
+        price_date = price.date
+        date_diff = (price_date - today).days
+        if (nearest_date_diff is None or date_diff >= nearest_date_diff) and date_diff <= 0:
+            count +=1
+            nearest_date_diff = date_diff
+            nearest_price = price
+
+    if count != 0:
+        act_price.append(nearest_price)
+        prices = prices.exclude(pk=act_price[0].pk)
+
+    for price in prices:
+        price_date = price.date
+        date_diff = (price_date - today).days
+
+        if date_diff < 0:
+            pas_price.append(price)
+        elif date_diff > 0:
+            fut_price.append(price)
+
+    if request.POST:
+        if 'delete' in request.POST:
+            vendor_id = request.POST.get('vendor_id')
+            vendor = Vendor(pk=vendor_id)
+            vendor.delete()
+            return redirect('/')
 
     context = {
         'vendor': vendor,
         'specialist': specialist,
         'contact': contact,
+        'act_prices': act_price,
+        'fut_prices': fut_price,
+        'pas_prices': pas_price,
+        'today': today,
     }
 
     return render(request, 'vendor_details.html', context)
@@ -267,25 +380,70 @@ def vendor_detail(request, vendor_id):
 
 def new_vendor(request):
     if request.POST:
-        vendor = NewVendorForm(request.POST)
+        name = request.POST.get('vendorName')
+        status = request.POST.get('partnerStatus')
+        date = request.POST.get('partnerStatusExpiration')
+        requirement = request.POST.get('partnerRequirements')
+        discount = request.POST.get('discount')
+        specialists_name = request.POST.get('certifiedSpecialists')
+        specialists_date = request.POST.get(
+            'certifiedSpecialistsExpiration')
+        contact_name = request.POST.get('contactName')
+        contact_phone = request.POST.get('contactPhone')
+        contact_email = request.POST.get('contactEmail')
+        current_price = request.FILES.get('currentPrice')
+        future_price = request.FILES.get('futurePrice')
+        price_future_date = request.POST.get('priceEffectiveDate')
+
+        print(current_price)
+        print(future_price)
+        print(price_future_date)
+
+        vendor = Vendor(
+            name=name,
+            status=status,
+            date=date,
+            requirement=requirement,
+            discount=discount,
+        )
         vendor = vendor.save()
+        vendor = Vendor.objects.filter(name=name, status=status, date=date,
+                                       requirement=requirement,
+                                       discount=discount)[0]
 
-        vendorspecialist = NewVendorSpecialistForm(request.POST)
-        vendorspecialist = vendorspecialist.save(commit=False)
-        vendorspecialist.vendor = vendor
-        vendorspecialist.save()
+        specialist = VendorSpecialist(
+            vendor=vendor,
+            name=specialists_name,
+            date=specialists_date,
+        )
+        specialist = specialist.save()
 
-        return redirect(vendor)
+        contact = Contact(
+            vendor=vendor,
+            name=contact_name,
+            phone_number=contact_phone,
+            email=contact_email,
+        )
 
-    vendor = NewVendorForm()
-    vendorspecialist = NewVendorSpecialistForm()
+        contact = contact.save()
 
-    context = {
-        'vendor': vendor,
-        'vendorspecialist': vendorspecialist
-    }
+        price1 = VendorPrices(
+            file=current_price,
+            vendor=vendor,
+            date=datetime.date.today(),
+        )
 
-    return render(request, 'new_vendor.html', context)
+        price1 = price1.save()
+
+        price2 = VendorPrices(
+            file=future_price,
+            vendor=vendor,
+            date=price_future_date,
+        )
+
+        price2 = price2.save()
+        return redirect("/vendor/" + f'{vendor.id}')
+    return render(request, 'new_vendor.html')
 
 
 def new_product(request):

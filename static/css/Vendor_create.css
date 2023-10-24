@@ -3,17 +3,6 @@
   font-size: 18px;
 }
 
-.CreateVendor button {
-  background: #FDF9F6;
-  border: 1px solid #FDF9F6;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.CreateVendor button:active {
-  background: #FDF9F6;
-}
-
 .PartnersGlobal {
   display: flex;
   justify-content: space-between;

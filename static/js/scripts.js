@@ -105,3 +105,46 @@ function showAnswer(name) {
 
   console.log(name);
 }
+
+
+// Обработчик кнопки "Добавить сертифицированного специалиста"
+document.getElementById("add-specialist").addEventListener("click", function () {
+    const specialistSection = document.createElement("div");
+    specialistSection.classList.add("form-section");
+
+    const specialistNameLabel = document.createElement("label");
+    specialistNameLabel.setAttribute("for", "specialist-name");
+    specialistNameLabel.textContent = "ФИО сертифицированного специалиста:";
+
+    const specialistNameInput = document.createElement("input");
+    specialistNameInput.setAttribute("type", "text");
+    specialistNameInput.setAttribute("name", "specialist-name");
+
+    specialistSection.appendChild(specialistNameLabel);
+    specialistSection.appendChild(specialistNameInput);
+
+    document.querySelector(".right-column").insertBefore(specialistSection, document.querySelector(".button-section"));
+});
+
+// Обработчик кнопки "Добавить контактное лицо"
+document.getElementById("add-contact").addEventListener("click", function () {
+    const contactSection = document.createElement("div");
+    contactSection.classList.add("form-section");
+
+    const contactNameLabel = document.createElement("label");
+    contactNameLabel.setAttribute("for", "contact-name");
+    contactNameLabel.textContent = "ФИО контактного лица:";
+
+    const contactNameInput = document.createElement("input");
+    contactNameInput.setAttribute("type", "text");
+    contactNameInput.setAttribute("name", "contact-name");
+
+    contactSection.appendChild(contactNameLabel);
+    contactSection.appendChild(contactNameInput);
+
+    document.querySelector(".right-column").insertBefore(contactSection, document.querySelector(".button-section"));
+});
+
+$(document).ready(function() {
+    $("#datepicker").datepicker(); // Инициализация Datepicker
+});

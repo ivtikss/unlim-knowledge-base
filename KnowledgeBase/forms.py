@@ -93,7 +93,7 @@ class NewVendorSpecialistForm(forms.ModelForm):
 class NewContactForm(forms.ModelForm):
     class Meta:
         model = Contact
-        fields = ['name', 'phone_number', 'email', 'messanger']
+        fields = ['name', 'phone_number', 'email']
         widgets = {
 
         }

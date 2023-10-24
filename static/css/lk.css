@@ -1,3 +1,38 @@
+/* Стили для элемента загрузки аватара */
+.custom-avatar-upload {
+    display: flex;
+    padding: 10px 20px;
+    background-color: #242424;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 40%;
+}
+
+.file-uploaded-status {
+    color: #4CAF50; /* Зеленый цвет для успешной загрузки */
+}
+
+.custom-avatar-upload i {
+    font-size: 20px;
+}
+
+.custom-avatar-upload:hover {
+    background-color: #0056b3;
+}
+
+.file-input {
+    display: none;
+}
+
+
+
+
 .ChangeName {
   width: 500px; /* Ширина формы */
   padding-top: 30px;

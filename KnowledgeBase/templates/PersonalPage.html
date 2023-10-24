@@ -7,7 +7,14 @@
         Личный кабинет
     </div>
 
-    <form class="ChangeName" action="" method="post">
+    <form class="ChangeName" action="" method="post" enctype="multipart/form-data">
+        <label for="id_avatar" class="custom-avatar-upload">
+            <i class="fas fa-cloud-upload-alt"></i> Загрузить аватар
+        </label>
+        <input type="file" name="avatar" id="id_avatar" class="file-input"
+               accept="image/*">
+        <span id="file-upload-status" class="file-uploaded-status"></span>
+
         <p>Ваша роль:
             {% if user|in_group:"Администратор" %}
             Администратор<br>
@@ -30,4 +37,22 @@
     </form>
     <a href="{% url 'password_reset' %}">Восстановить пароль</a>
 </main>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    // Слушаем событие изменения input[type="file"]
+    $('#id_avatar').on('change', function() {
+        var fileName = $(this).val().split('\\').pop(); // Получаем имя файла
+        var $statusElement = $('#file-upload-status');
+
+        // Проверяем, был ли выбран файл
+        if (fileName) {
+            $statusElement.html('<i class="fas fa-check-circle"></i> Файл загружен: ' + fileName);
+        } else {
+            $statusElement.html(''); // Очищаем статус, если файл не выбран
+        }
+    });
+});
+</script>
+
 {% endblock %}

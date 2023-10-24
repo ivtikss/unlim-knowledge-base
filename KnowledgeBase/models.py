@@ -1,9 +1,20 @@
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 
 # Все модели сделать как модель Вендора, то есть добавить str, meta, verbose-name
+
+def user_avatar_path(instance, filename):
+    return f'avatars/user_{instance.user.id}/avatar'
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    avatar = models.ImageField(upload_to='user_avatar_path', null=True, blank=True)
+
+    def __str__(self):
+        return self.user.username
 
 
 class Vendor(models.Model):  # добавить поле дата
@@ -50,7 +61,7 @@ class Contact(models.Model):  # добавить дату
     name = models.CharField(max_length=50, default='', verbose_name='ФИО')
     phone_number = models.CharField(max_length=50, default='', verbose_name='Номер телефона')
     email = models.CharField(max_length=50, default='', verbose_name='Адрес электронной почты')
-    messanger = models.CharField(max_length=20, default='', verbose_name='Мессенджер')
+
 
     def __str__(self):
         return self.name
@@ -63,8 +74,8 @@ class Contact(models.Model):  # добавить дату
 
 class VendorPrices(models.Model):  # добавить дату
     vendor = models.ForeignKey('Vendor', on_delete=models.CASCADE, default='', null=True,  blank=True)
-    file = models.FileField(default='', verbose_name='Файл прайса', null=True,  blank=True)
-    date = models.DateField(default=timezone.now, verbose_name='Дата начала действия прайса', blank=True, null=True)
+    file = models.FileField(default='', verbose_name='Файл прайса', null=True,  blank=True, upload_to='vendor_price')
+    date = models.DateField(default='', verbose_name='Дата начала действия прайса', blank=True, null=True)
 
     def __str__(self):
         return self.file
