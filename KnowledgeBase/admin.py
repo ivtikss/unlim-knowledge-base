@@ -10,6 +10,7 @@ admin.site.register(TypeCertification)
 admin.site.register(TypeLicense)
 admin.site.register(TypeGet)
 admin.site.register(TypeReliase)
+admin.site.register(Product)
 
 
 class VendorAdmin(admin.ModelAdmin):

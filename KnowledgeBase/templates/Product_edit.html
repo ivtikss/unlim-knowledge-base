@@ -1,0 +1,343 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<link rel="stylesheet" href="/static/css/global.css">
+<link rel="stylesheet" href="/static/css/basemenu.css">
+<link rel="stylesheet" href="/static/css/ProductCreate.css">
+
+<main>
+    <div class="name__directoty">
+        База знаний &#8620; Продукты &#8620; {{product.name}}
+    </div>
+
+    <div class="ProductButtons">
+        <button class="tablink" onclick="openPage('FirstInfo', this)"
+                id="defaultOpen">Первичная информация
+        </button>
+        <button class="tablink" onclick="openPage('DealInfo', this)">Информация
+            для ведения сделок
+        </button>
+        <button class="tablink" onclick="openPage('ExtraInfo', this)">
+            Дополнительная информация
+        </button>
+    </div>
+<form class="CreateProduct" action="{% url 'new_product' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div id="FirstInfo" class="tabcontent">
+        <div class="row">
+            <!-- Левая колонка -->
+            <div class="left-column">
+                <div class="product-field">
+                    <label for="top">Топ:</label>
+                    <input type="checkbox" id="top" name="top" value="on">
+                </div>
+                <div class="product-field">
+                    <label for="productName">Наименование продукта:</label>
+                    <input type="text" id="productName" name="productName"
+                           required value="{{product.name}}">
+                </div>
+                <div class="product-field">
+                    <label for="productVendor">Вендор:</label>
+                    <select id="productVendor" name="productVendor">
+                        <!-- Ваши варианты типов продукта -->
+                        <option value=""></option>
+                        {% for vendor in vendors %}
+                        <option value="{{vendor.id}}">{{vendor}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+
+
+                <div class="product-field">
+                    <label for="productType">Тип продукта:</label>
+                    <select id="productType" name="productType">
+                        <!-- Ваши варианты типов продукта -->
+                        <option value=""></option>
+                        {% for type in guides_type_product %}
+                        <option value="{{type.id}}">{{type}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Добавьте остальные поля левой колонки -->
+                <div class="product-field">
+                    <label for="Analogs">Аналог:</label>
+                    <select id="Analogs" name="Analogs">
+                        <!-- Ваши варианты типов продукта -->
+                        <option value=""></option>
+                        {% for product in products %}
+                        <option value="{{product.id}}">{{product.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+
+                <div class="product-field">
+                    <label for="shortDescription">Краткое описание:</label>
+                    <textarea id="shortDescription" name="shortDescription"
+                              required></textarea>
+                </div>
+
+                <div class="product-field">
+                    <label for="forWhom">Кому и для чего:</label>
+                    <textarea id="forWhom" name="forWhom" required></textarea>
+                </div>
+
+                <div class="product-field">
+                    <label for="shipmentKit">Комплект отгрузки:</label>
+                    <input type="text" id="shipmentKit" name="shipmentKit">
+                </div>
+
+                <div class="product-field">
+                    <label for="techSupport">Техническая поддержка:</label>
+                    <input type="text" id="techSupport" name="techSupport">
+                </div>
+
+                <div class="product-field">
+                    <label for="ownershipPrinciple">Принцип владения:</label>
+                    <input type="text" id="ownershipPrinciple"
+                           name="ownershipPrinciple">
+                </div>
+
+                <div class="product-field">
+                    <label for="Competitions">Компетенции:</label>
+                    <input type="file" id="Competitions" name="Competitions"
+                           accept=".pdf, .docx, .xlsx" size="5000000"/>
+                </div>
+
+                <div class="product-field">
+                    <label for="Anketa">Общая анкета:</label>
+                    <input type="file" id="Anketa" name="Anketa"
+                           accept=".pdf, .docx, .xlsx" size="5000000"/>
+                </div>
+
+                <div class="product-field">
+                    <label for="BattleCard">Баттл-кард:</label>
+                    <input type="file" id="BattleCard" name="BattleCard"
+                           accept=".pdf, .docx, .xlsx" size="5000000"/>
+                </div>
+
+                <div class="product-field">
+                    <label for="additionalComment">Дополнительный
+                        комментарий:</label>
+                    <textarea id="additionalComment"
+                              name="additionalComment"></textarea>
+                </div>
+            </div>
+
+            <!-- Правая колонка -->
+            <div class="right-column">
+                <fieldset>
+                    <legend>Блок «Реализация»</legend>
+                    <div class="product-field">
+                        <label for="relizType">Тип реализации:</label>
+                        <select id="relizType" name="relizType">
+                            <!-- Ваши варианты типов продукта -->
+                            <option value=""></option>
+                            {% for type in guide_type_reliase %}
+                            <option value="{{type.id}}">{{type}}</option>
+                            {% endfor %}
+                        </select>
+
+                        <div class="product-field">
+                            <label for="reliz_rel">Описание:</label>
+                            <input type="text" id="reliz_rel"
+                                   name="reliz_rel">
+                        </div>
+
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Блок «Лицензирование»</legend>
+                    <div class="product-field">
+                        <label for="licenseType">Тип лицензирания:</label>
+                        <select id="licenseType" name="licenseType">
+                            <!-- Ваши варианты типов продукта -->
+                            <option value=""></option>
+                            {% for type in guides_type_license %}
+                            <option value="{{type.id}}">{{type}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="product-field">
+                        <label for="descr_lic">Описание:</label>
+                        <input type="text" id="descr_lic"
+                               name="descr_lic">
+                    </div>
+
+
+                </fieldset>
+
+                <fieldset>
+                    <legend>Блок «Варианты отгрузки»</legend>
+                    <div class="product-field">
+                        <label for="GetType">Вариант отгрузки:</label>
+                        <select id="GetType" name="GetType">
+                            <option value=""></option>
+                            {% for type in guide_type_get %}
+                            <option value="{{type.id}}">{{type}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="product-field">
+                        <label for="descr_get">Описание:</label>
+                        <input type="text" id="descr_get"
+                               name="descr_get">
+                    </div>
+                    </fieldset>
+
+                <fieldset>
+                    <legend>Блок «Сертификация»</legend>
+                    <div class="product-field">
+                        <label for="srtType">Тип сертификации:</label>
+                        <select id="srtType" name="srtType">
+                            <option value=""></option>
+                            {% for type in guide_type_certification %}
+                            <option value="{{type.id}}">{{type}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="product-field">
+                        <label for="ownershipPrinciple">Описание:</label>
+                        <input type="text" id="SertDesc"
+                               name="SertDesc">
+                    </div>
+
+                    <div class="product-field">
+                        <label>Срок действия:</label>
+                        <input type="date" class="custom-datepicker" id="SertDate"
+                               name="SertDate">
+                    </div>
+
+                    </fieldset>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="DealInfo" class="tabcontent">
+        <div class="DealInfo">
+            <div class="row">
+                <div class="colum">
+                    <!-- Техническое задание -->
+                    <fieldset>
+                    <legend>Техническое задание</legend>
+                            <div class="ProdTZ">
+                                <label>Перечень характеристик/функционал:</label>
+                                <input type="file" id="tech" name="tech"
+                           accept=".pdf, .docx, .xlsx" size="5000000"/>
+                            </div>
+                            <div class="ProdTZ44-FZ">
+                                <label>Тех. задание по 44-ФЗ</label>
+                                <input type="file" id="tech44" name="tech44"
+                                       accept=".pdf, .docx, .xlsx"
+                                       size="5000000"/>
+                            </div>
+                    </fieldset>
+                    <!-- Техническое задание -->
+                    <!-- Для проведения пилота -->
+                    <fieldset>
+                        <legend>Для проведения пилота</legend>
+                        <label>Анкета по пилоту</label>
+                        <input type="file" id="anketa_pilot" name="anketa_pilot"
+                               accept=".pdf, .docx, .xlsx" size="5000000"/>
+                        <label>ПМИ</label>
+                        <input type="file" id="pmi" name="pmi"
+                               accept=".pdf, .docx, .xlsx" size="5000000"/>
+                        <div class="sp1"><label>Как проводить пилот</label>
+                        </div>
+                        <textarea class="ProductFrame"
+                                  placeholder="Описание проведения пилота..."
+                                  id="pilot_dis" name="pilot_dis"></textarea>
+                        <label>План Пилота</label>
+                        <input type="file" id="plan" name="plan"
+                               accept=".pdf, .docx, .xlsx" size="5000000"/>
+                        <label for="distr">Дистрибутив:</label>
+                        <input type="text" id="distr"
+                               name="distr">
+
+                    </fieldset>
+
+                    <!-- Для проведения пилота -->
+                    <!-- Доп комментарии -->
+                    <label>Дополнительный комментарий</label>
+                        <textarea class="ProductFrame" id="extra2"
+                               name="extra2"
+                                  placeholder="Дополнительные комментарии..."></textarea>
+                    <!-- Доп комментарии -->
+                </div>
+
+                <div class="colum">
+                    <!-- Регистрация сделок -->
+                    <fieldset>
+                        <legend>Для регистрации сделок</legend>
+                            <label>Продажа через AXOFT</label>
+                            <input type="file" id="axoft" name="axoft"
+                           accept=".pdf, .docx, .xlsx" size="5000000"/>
+                        <label>Контактные лица по прайсу</label>
+                        <textarea class="ProductFrame" name="contacts"
+                                  placeholder="ФИО Номер телефона Эл.Почта" id="contacts"></textarea>
+                            <label>Анкета для регистрации сделок</label>
+                            <input type="file" id="reg" name="reg"
+                           accept=".pdf, .docx, .xlsx" size="5000000"/>
+
+                        <label>Схема вознаграждения</label>
+                        <textarea class="ProductFrame" name="sheme" id="sheme"
+                                  placeholder="Описание схемы вознаграждения..."></textarea>
+
+                        </fieldset>
+                    <!-- Регистрация сделок -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="ExtraInfo" class="tabcontent">
+        <div class="row">
+            <div class="colum">
+                <fieldset>
+                    <legend>Материалы для ознакомления от Вендора</legend>
+                    <br>
+                        <label>Брошюра с официального сайта</label>
+                        <input type="file" id="broch" name="broch"
+                           accept=".pdf, .docx, .xlsx" size="5000000"/>
+                        <label>Презентация продукции</label>
+                        <input type="file" id="present_prod" name="present_prod"
+                           accept=".pdf, .docx, .xlsx" size="5000000"/>
+                        <label>Вебинар по продукту</label>
+                        <input type="text" name="veb" id="veb">
+                    </fieldset>
+                <fieldset>
+                   <legend>Внутрение материалы</legend><br>
+                        <label>Презентация</label>
+                        <input type="text" id="present" name="present">
+                        <label>Закрытый вебинар для партнеров</label>
+                        <input type="text" name="close_veb" id="close_veb">
+                    </fieldset>
+            </div>
+            <div class="colum">
+
+            </div>
+        </div>
+    </div>
+    <div class="ProductSave">
+        <input class="delete-button" type="submit" name="" value="Сохранить">
+    </div>
+</form>
+</main>
+<script>
+  const fileInput = document.getElementById('fileInput');
+  const fileNameSpan = document.getElementById('fileName');
+
+  fileInput.addEventListener('change', function() {
+    const fileName = this.value.split('\\').pop();
+    fileNameSpan.textContent = fileName || 'Выберите файл...';
+  });
+</script>
+<script src="/static/js/scripts.js"></script>
+{% endblock %}

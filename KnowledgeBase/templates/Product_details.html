@@ -8,407 +8,254 @@
 
 <main>
     <div class="name__directoty">
-        База знаний > Продукты > Подробнее > {{product.name}}
+        База знаний &#8620; Продукты &#8620; {{product.name}}
     </div>
 
     <div class="ProductButtons">
-        <button class="tablink" onclick="openPage('FirstInfo', this)" id="defaultOpen">Первичная информация</button>
-        <button class="tablink" onclick="openPage('DealInfo', this)">Информация для ведения сделок</button>
-        <button class="tablink" onclick="openPage('ExtraInfo', this)">Дополнительная информация</button>
+        <button class="tablink" onclick="openPage('FirstInfo', this)"
+                id="defaultOpen">Первичная информация
+        </button>
+        <button class="tablink" onclick="openPage('DealInfo', this)">Информация
+            для ведения сделок
+        </button>
+        <button class="tablink" onclick="openPage('ExtraInfo', this)">
+            Дополнительная информация
+        </button>
     </div>
 
     <div id="FirstInfo" class="tabcontent">
-        <form class="FirstInfo" action="index.html" method="post">
-            <div class="row">
-                <div class="ProductName">
-                    <div class="ProdName">
-                        <span>Наименование продукта</span>
-                        <input type="text" placeholder="Название..." value="{{product.name}}">
+        <form id="productForm" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="left-column">
+                <div class="header">
+                        <a class="edit-button" href="/product/edit/{{product.id}}">Редактировать</a>
+                        <button type="submit" class="delete-button"
+                                name="delete">
+                            Удалить
+                        </button>
+                        <input type="hidden" name="product_id"
+                               value="{{product.pk}}">
                     </div>
-                    <div class="ProdTOP">
-                        <span>ТОП</span>
-                        <input type="checkbox" {% if product.top %} checked {% endif %}>
-                    </div>
+                <div class="product-field">
+                    <label>Топ: {% if product.top_certified %} ✓ {% endif %}</label>
+                </div>
+                <div class="product-field">
+                    <label>Вендор:</label> <a href="/vendor/{{ product.vendor.id }}">{{ product.vendor.name }}</a>
+                </div>
+                <div class="product-field">
+                    <label>Наименование продукта:</label> {{ product.name }}
                 </div>
 
-                <div class="ProductName">
-                    <div class="ProdName">
-                        <span>Тип продукта</span>
-                        <select>
-                            {% for type in view.all_type_product %}
-                            <option>{{type.name}}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
+                <div class="product-field">
+                    <label>Тип продукта: </label> {% if product.product_type %}{{product.product_type}}{% endif %}
                 </div>
-            </div>
-            <div class="row">
-                <div class="colum">
-                    <!-- Реализация -->
-                    Реализация
-                    <div class="ProductFrame ProductRealisation">
-                        <div class="ProductRealisationHat">
-                            <ul>
-                                <li>
-                                    <span>Реализация 1</span>
-                                    <button type="button">Удалить</button>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <ul>
-                            {% for reliz in view.all_type_reliase %}
-                            <li>
-                                <span>{{reliz.name}}</span>
-                                <button type="button">Добавить</button>
-                            </li>
-                            {% endfor %}
-                        </ul>
-
-                    </div>
-                    <!-- Реализация -->
-                    <!-- Компетенции -->
-                    <div class="ProductCompetencies">
-                        <span>Компетенции</span>
-                        <input type="file" accept=".pdf" value="Загрузить">
-                        <ul class="ProductFrame">
-                            <li>
-                                <span>Имя файла 1</span>
-                                <button type="button" name="button">Удалить</button>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- Компетенции -->
-                    <!-- Описание -->
-                    Краткое описание
-                    <div class="ProductDescription">
-                        <textarea class="ProductFrame" name="name" placeholder="Краткое описание продукта...">{{product.brif_description}}</textarea>
-                    </div>
-                    Кому и для чего
-                    <div class="ProductDescription">
-                        <textarea class="ProductFrame" name="name" placeholder="Описание целевой аудитории...">{{product.whom_and_what_for}}</textarea>
-                    </div>
-                    <!-- Описание -->
-                    <!-- Общая анкета -->
-                    <div class="ProductCompetencies">
-                        <span>Общая анкета</span>
-                        <input type="file" accept=".pdf" value="Загрузить">
-                        <ul class="ProductFrame">
-                            <li>
-                                <span>Имя файла 1</span>
-                                <button type="button" name="button">Удалить</button>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- Общая анкета -->
-                    <!-- Лицензирование -->
-                    Лицензирование
-                    <div class="ProductFrame ProductLicence">
-                        <div>
-                            <p>Список лицензий</p>
-                            <input type="button" value="Загрузить">
-                        </div>
-                        <ul class="ProductFrame">
-                            <li>
-                                <select>
-                                    <option disabled selected>Тип лицензии</option>
-                                    {% for license in view.all_type_license %}
-                                    <option>{{license.name}}</option>
-                                    {% endfor %}
-                                </select>
-                                <input type="text" placeholder="Описание...">
-                                <input type="date">
-                                <button type="button">Удалить</button>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- Лицензирование -->
-                    <!-- Описание -->
-                    Комплект отгрузки
-                    <div class="ProductDescription">
-                        <textarea class="ProductFrame" name="name" placeholder="Описание комплектов отгрузки...">{{product.ship_kit}}</textarea>
-                    </div>
-                    Техническая поддержка
-                    <div class="ProductDescription">
-                        <textarea class="ProductFrame" name="name"
-                                  placeholder="Описание взаимодействия с тех. поддержкой...">{{product.tech_support}}</textarea>
-                    </div>
-                    Принцип владения
-                    <div class="ProductDescription">
-                        <textarea class="ProductFrame" name="name" placeholder="Описание принципа владения...">{{product.owner_type}}</textarea>
-                    </div>
-                    <!-- Описание -->
+                <div class="product-field">
+                    <label>Контактное лицо партнера:</label> {% if product.vendor %}<a href="/vendor/{{ product.vendor.id }}">Посмотреть</a>{% endif %}
+                </div>
+                <div class="product-field">
+                    <label>Аналоги:</label> <a href="/product/{{ product.analogs }}">Аналог</a>
                 </div>
 
-                <div class="colum">
-                    <!-- Прайсы -->
-                    Прайсы
-                    <div class="ProductFrame ProductPrices">
-                        <p>Актуальный прайс</p>
-                        <div class="ProductFrame ProductActualPrice">
-                            <a href="#">Название файла 2</a>
-                        </div>
-                        <div class="ProductNewPrice">
-                            <input type="file">
-                            <input type="date">
-                        </div>
-                        <a href="#">Архив прайсов</a>
-                    </div>
-                    <!-- Прайсы -->
-                    <!-- Варианты отгрузки -->
-                    Варианты отгрузки
-                    <div class="ProductFrame ProductShipment">
-                        <div>
-                            <p>Список вариантов отгрузки</p>
-                            <input type="button" value="Загрузить">
-                        </div>
-                        <ul class="ProductFrame">
-                            <li>
-                                <select>
-                                    <option selected>Тип отгрузки</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
-                                <input type="text" placeholder="Описание...">
-                                <button type="button">Удалить</button>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- Варианты отгрузки -->
-                    <!-- Сертификация -->
-                    Сертификация
-                    <div class="ProductFrame ProductLicence">
-                        <div>
-                            <p>Список сертификатов</p>
-                            <input type="button" value="Загрузить">
-                        </div>
-                        <ul class="ProductFrame">
-                            <li>
-                                <select>
-                                    <option selected>Наименование</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
-                                <input type="date">
-                                <input type="file">
-                                <button type="button">Удалить</button>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- Сертификация -->
-                    <!-- Контактные данные -->
-                    <div class="ProductContacts">
-                        <p><a href="#">Контактные лица</a></p>
-                    </div>
-                    <!-- Контактные данные -->
-                    <!-- Аналоги -->
-                    Аналоги
-                    <div class="ProductFrame ProductLicence">
-                        <div>
-                            <p>Список аналогов</p>
-                            <input type="button" value="Загрузить">
-                        </div>
-                        <ul class="ProductFrame">
-                            <select>
-                                <option selected>Другие продукты</option>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                            </select>
-                            <li>
-                                Аналог 1
-                                <button type="button">Удалить</button>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- Аналоги -->
-                    <!-- Батл кард -->
-                    Батл-кард
-                    <div class="ProductFrame ProductLicence">
-                        <div>
-                            <p>Список</p>
-                            <input type="button" value="Загрузить">
-                        </div>
-                        <ul class="ProductFrame">
-                            <li>
-                                <select>
-                                    <option selected>Наименование</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </select>
-                                <input type="text" placeholder="Описание...">
-                                <button type="button">Удалить</button>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- Батл кард -->
+                <div class="product-field">
+                    <label>Краткое описание:</label> {{ product.brif_description }}
+                </div>
+
+                <div class="product-field">
+                    <label>Кому и для чего:</label> {{ product.whom_and_what_for }}
+                </div>
+
+
+                <div class="product-field">
+                    <label>Комплект отгрузки:</label> {{ product.ship_kit }}
+                </div>
+
+                <div class="product-field">
+                    <label>Техническая поддержка:</label> {{ product.tech_support }}
+                </div>
+
+                <div class="product-field">
+                    <label>Принцип владения:</label> {{ product.owner_type }}
+                </div>
+
+
+                <div class="product-field">
+                    <label>Компетенции:</label> {% if product.competitions %}
+                    <a href="{{ product.competitions.url }}" class="price-link"
+                        target="_blank">Компетенции</a>{% endif %}
+                </div>
+                <div class="product-field">
+                    <label>Общая анкета:</label> {% if product.gen_form %}
+                    <a href="{{ product.gen_form.url }}" class="price-link"
+                         target="_blank">Общая форма</a>{% endif %}
+                </div>
+                <div class="product-field"><label>Прайсы:</label> {% if product.vendor %}<a href="/vendor/{{ product.vendor.id }}">Посмотреть</a>{% endif %}</div>
+                <div class="product-field">
+                    <label>Баттл-кард:</label> {% if product.battle_card %}
+                    <a href="{{ product.battle_card.url }}" class="price-link"
+                        target="_blank">Баттл-кард</a>{% endif %}
+                </div>
+
+
+                <div class="product-field">
+                    <label>Дополнительный комментарий:</label>{{ product.extra_comments1 }}
                 </div>
             </div>
-            <div class="row ProductSave">
-                <input type="submit" name="" value="Сохранить">
-                <!-- Путь к файлу с страницей продуктов -->
-                <input type="reset" name="" value="Отмена" onclick="document.location='index.html'">
+
+            <div class="right-column">
+
+
+                <fieldset>
+                    <legend>Блок «Реализация»</legend>
+                    <div class="product-field">
+                        <label>Тип реализации:</label> {% if product.type_reliz %} {{ product.type_reliz }} {% endif %}
+                    </div>
+                    <div class="product-field">
+                        <label>Описание лиц:</label> {{ product.reliz_brif }}
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Блок «Лицензирование»</legend>
+                    <div class="product-field">
+                        <label>Тип лицензирования:</label> {% if product.type_license %} {{ product.type_license }} {% endif %}
+                    </div>
+                    <div class="product-field">
+                        <label>Описание:</label> {{ product.license_brif }}
+                    </div>
+                    <div class="product-field">
+                        <label>Дата актуализации:</label> {{ product.license_date }}
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Блок «Варианты отгрузки»</legend>
+                    <div class="product-field">
+                        <label>Вариант отгрузки:</label> {% if product.type_get %} {{ product.type_get }} {% endif %}
+                    </div>
+                    <div class="product-field">
+                        <label>Описание:</label> {{ product.get_brif }}
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Блок «Сертификация»</legend>
+                    <div class="product-field">
+                        <label>Сертификация:</label> {% if product.type_cert %} {{ product.type_cert }} {% endif %}
+                    </div>
+                    <div class="product-field">
+                        <label>Описание сертиф:</label> {{ product.cert_brif }}
+                    </div>
+                    <div class="product-field">
+                        <label>Срок действия:</label> {{ product.cert_date }}
+                    </div>
+                </fieldset>
+
             </div>
         </form>
     </div>
 
     <div id="DealInfo" class="tabcontent">
-        <div class="DealInfo">
-            <div class="row">
-                <div class="colum">
-                    <!-- Техническое задание -->
-                    Техническое задание
-                    <form class="ProductFrame ProductTZ" action="index.html" method="post">
-                        <div class="ProductLastDateUpdate">
-                            <p>Перечень характеритик / функционала</p>
-                            <p>Последняя дата обновления: 24.10.2023</p>
-                        </div>
-                        <div class="ProdTZS">
-                            <div class="ProdTZ">
-                                <p>Тех. задание</p>
-                                <input type="file" help="Тех. задание">
-                            </div>
-                            <div class="ProdTZ44-FZ">
-                                <p>Тех. задание по 44-ФЗ</p>
-                                <input type="file" help="Тех. задание">
-                            </div>
-                        </div>
-                        <div class="ProductSave">
-                            <input type="submit" name="" value="Сохранить">
-                            <!-- Путь к файлу с страницей продуктов -->
-                            <input type="reset" name="" value="Отмена" onclick="document.location='index.html'">
-                        </div>
-                    </form>
-                    <!-- Техническое задание -->
-                    <!-- Для проведения пилота -->
-                    Для проведения пилота
-                    <form class="ProductFrame ProductPilot" action="index.html" method="post">
-                        <div class="ProductPilotAnketa">
-                            <p>Анкета по пилоту</p>
-                            <input type="file">
-                        </div>
-                        <div class="ProductPilotAnketa">
-                            <p>ПМИ</p>
-                            <input type="file">
-                        </div>
-                        <p>Как проводить пилот</p>
-                        <div class="ProductFrame ProductHowToPilot">
-                            <textarea placeholder="Описание проведения пилота..."></textarea>
-                            <input type="file" name="" value="">
-                            <input type="button" name="" value="Удалить">
-                        </div>
-
-                        <div class="ProductSave">
-                            <a href="#">Сылка на дистрибутив</a>
-                            <input type="submit" name="" value="Сохранить">
-                            <!-- Путь к файлу с страницей продуктов -->
-                            <input type="reset" name="" value="Отмена" onclick="document.location='index.html'">
-                        </div>
-
-                    </form>
-                    <!-- Для проведения пилота -->
-                    <!-- Доп коментарии -->
-                    Дополнительный коментарий
-                    <form class="ProductDescription">
-                        <textarea class="ProductFrame" name="name"
-                                  placeholder="Дополнительные коментарии..."></textarea>
-                        <div class="ProductSave">
-                            <input type="submit" name="" value="Сохранить">
-                            <!-- Путь к файлу с страницей продуктов -->
-                            <input type="reset" name="" value="Отмена" onclick="document.location='index.html'">
-                        </div>
-
-                    </form>
-                    <!-- Доп коментарии -->
+        <form id="productForm">
+        <div class="left-column">
+            <fieldset>
+                <legend>Техническое задание</legend>
+                <div class="product-field">
+                    <label>Перечень характеристик/функционал:</label> {% if product.tz_descriptions %}
+                    <a href="{{ product.tz_descriptions.url }}" class="price-link"
+                        target="_blank">Перечень характеристик</a>{% endif %}
                 </div>
-
-                <div class="colum">
-                    <!-- Регистрация сделок -->
-                    Для регистрации сделок
-                    <form class="ProductFrame ProductRegDeal" action="index.html" method="post">
-                        <div class="ProdAxoft">
-                            <p>Продажа через AXOFT</p>
-                            <input type="file" help="Тех. задание">
-                        </div>
-                        <p>Контактные лица по прайсу</p>
-                        <div class="ProductFrame ProductRegContacts">
-                            <div>
-                                <p>Список контактов</p>
-                                <button type="button" name="button">Загрузить</button>
-                            </div>
-                            <ul class="ProductFrame">
-                                <li>
-                                    <input type="text" placeholder="ФИО">
-                                    <input type="tel" placeholder="Номер телефона">
-                                    <input type="email" placeholder="Адрес эл. почты">
-                                    <button type="button" name="button">Удалить</button>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="ProdAxoft">
-                            <p>Анкета для регистрации сделок</p>
-                            <input type="file" help="Тех. задание">
-                        </div>
-                        <div class="ProdAxoft">
-                            <p>Партнерский статус</p>
-                            <input type="text" placeholder="Вендор...">
-                        </div>
-                        <p>Схема вознаграждения</p>
-                        <textarea class="ProductFrame" name="name"
-                                  placeholder="Описание схемы вознаграждения..."></textarea>
-                        <div class="ProductSave">
-                            <input type="submit" name="" value="Сохранить">
-                            <!-- Путь к файлу с страницей продуктов -->
-                            <input type="reset" name="" value="Отмена" onclick="document.location='index.html'">
-                        </div>
-                    </form>
-                    <!-- Регистрация сделок -->
+                <div class="product-field">
+                    <label>ТЗ по 44-ФЗ:</label>  {% if product.tz_44fzs %}
+                    <a href="{{ product.tz_44fzs.url }}" class="price-link"
+                        target="_blank">44-ФЗ</a>{% endif %}
                 </div>
+                <div class="product-field">
+                    <label>Дата актуализации:</label> {{ product.tz_date }}
+                </div>
+            </fieldset>
+
+            <!-- Блок "Для проведения пилота" -->
+            <fieldset>
+                <legend>Для проведения пилота</legend>
+                <div class="product-field">
+                    <label>Анкета по пилоту:</label> {% if product.pilot_quests %}
+                    <a href="{{ product.pilot_quests.url }}" class="price-link"
+                        target="_blank">Файл</a>{% endif %}
+                </div>
+                <div class="product-field">
+                    <label>ПМИ:</label> {% if product.pilot_pmis %}
+                    <a href="{{ product.pilot_pmis.url }}" class="price-link"
+                        target="_blank">Файл</a>{% endif %}
+                </div>
+                <div class="product-field">
+                    <label>Как проводить пилот:</label> {{ product.pilot_descriptions }}
+                </div>
+                <div class="product-field">
+                    <label>План пилота:</label>  {% if product.pilot_plans %}
+                    <a href="{{ product.pilot_plans.url }}" class="price-link"
+                        target="_blank">Файл</a>{% endif %}
+                </div>
+                <div class="product-field">
+                    <label>Дистрибутив:</label> {{ product.pilot_diss }}
+                </div>
+            </fieldset>
+        </div>
+
+        <!-- Блок "Для регистрации сделок" -->
+        <div class="right-column">
+            <fieldset>
+                <legend>Для регистрации сделок</legend>
+                <div class="product-field">
+                    <label>Продажа через "Axoft" (загрузка файла):</label>  {% if product.reg_axofts %}
+                    <a href="{{ product.reg_axofts.url }}" class="price-link"
+                        target="_blank">Файл</a>{% endif %}
+                </div>
+                <div class="product-field">
+                    <label>Контакты по прайсу: </label> {{ product.contact_price }}
+                </div>
+                <div class="product-field">
+                    <label>Анкета для регистрации сделки (загрузка
+                        файла):</label> {% if product.reg_quest_register_deals %}
+                    <a href="{{ product.reg_quest_register_deals.url }}" class="price-link"
+                        target="_blank">Файл</a>{% endif %}
+                </div>
+                <div class="product-field">
+                    <label>Партнерский статус:</label> {% if product.vendor %}<a href="/vendor/{{ product.vendor.id }}">Посмотреть</a>{% endif %}
+                </div>
+                <div class="product-field">
+                    <label>Схема вознаграждения:</label> {{ product.reg_reward_schemes }}
+                </div>
+            </fieldset>
+
+            <div class="product-field">
+                <label>Дополнительный комментарий:</label> {{ product.extra_comments2 }}
             </div>
         </div>
+        </form>
     </div>
 
     <div id="ExtraInfo" class="tabcontent">
         <div class="row">
             <div class="colum">
-                <form class="ExtraInfo" action="index.html" method="post">
-                    Материалы для ознакомления от Вендора
-                    <div class="ProductFrame ProductExtraVendor">
-                        <p>Брошюра с официального сайта</p>
-                        <input type="file" name="" value="">
-                        <p>Презентация продукции</p>
-                        <input type="file" name="" value="">
-                        <p>Вебинар по продукту</p>
-                        <input type="text" name="" value="ССылка на вебинар...">
-                    </div>
-
-                    Внутрение материалы
-                    <div class="ProductFrame ProductExtraVendor">
-                        <p>Презентация</p>
-                        <input type="file" name="" value="">
-                        <p>Закрытый вебинар для партнеров</p>
-                        <input type="text" name="" value="ССылка на вебинар...">
-                    </div>
-                    <div class="ProductSave">
-                        <input type="submit" name="" value="Сохранить">
-                        <!-- Путь к файлу с страницей продуктов -->
-                        <input type="reset" name="" value="Отмена" onclick="document.location='index.html'">
-                    </div>
-                </form>
+                <fieldset>
+                    <legend>Материалы для ознакомления от Вендора</legend>
+                    <label>Брошюра с официального сайта: {% if product.brochures %}
+                    <a href="{{ product.brochures.url }}" class="price-link"
+                        target="_blank">Файл</a>{% endif %}</label>
+                    <label>Презентация продукции: {% if product.presentation_products %}
+                    <a href="{{ product.presentation_products.url }}" class="price-link"
+                        target="_blank">Файл</a>{% endif %}</label>
+                    <label>Вебинар по продукту: {{ product.webinars }}</label>
+                </fieldset>
+                <fieldset>
+                    <legend>Внутрение материалы</legend>
+                    <label>Презентация: {{ product.presentations }}</label>
+                    <label>Закрытый вебинар для партнеров: {{ product.partner_webinars }}</label>
+                </fieldset>
             </div>
             <div class="colum">
-
             </div>
         </div>
     </div>
-
+    </form>
 
 </main>
 

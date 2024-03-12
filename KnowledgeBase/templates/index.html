@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base1.html' %}
 {% load markdown_extras %}
 {% load group_check %}
 {% block content %}
@@ -18,11 +18,11 @@
         <!-- Кнопки выбора вклвдки -->
         <!-- Содержание страниц -->
         <div id="Base" class="tabcontent">
-            <div class="SubmitBut">
-                {% if user|in_group:"Сотрудник Коммерческого блока" %}
-                <button type="button">Загрузить вендоров</button>
-                {% endif %}
-            </div>
+<!--            <div class="SubmitBut">-->
+<!--                {% if user|in_group:"Сотрудник Коммерческого блока" %}-->
+<!--                <button type="button">Загрузить вендоров</button>-->
+<!--                {% endif %}-->
+<!--            </div>-->
             <div class="VendorProductSearch">
                 <!-- Вендоры -->
                 <div class="Vendors">
@@ -50,34 +50,43 @@
                 <div class="Product">
                     <div class="ProductMenu">
                         <div>
-                            <div class="ProdEmpty"></div>
+                            <div>Наименование</div>
                             <div>Наименование продукта</div>
                             <div>ФСТЭК</div>
                             <div>ФСБ</div>
                             <div>ТОП</div>
                             {% if user|in_group:"Сотрудник Коммерческого блока" %}
-                            <div><a href="{% url 'create_product' %}">
-                                <div class="SubmitButa">
-                                    <button type="button">Добавить Продукт</button>
-                                </div>
-                            </a></div>
+                            <div>
+                                <a href="{% url 'new_product' %}">
+                                    <div class="SubmitButa">
+                                        <button type="button">Добавить Продукт
+                                        </button>
+                                    </div>
+                                </a>
+                            </div>
                             {% endif %}
                         </div>
                     </div>
                     {% for product in products %}
-                    <div class="names">
-                        <div><img src="static/images/phone.png" alt="duck" width="60px;"></div>
-                        <p><a href="">{{product.name}}</a></p>
-                        <p>{% if product.top %}<img src="static/images/59508.png" alt="check" width="20px;">{% endif %}
-                        </p>
-                        <p>{% if product.top %}<img src="static/images/59508.png" alt="check" width="20px;">{% endif %}
-                        </p>
-                        <p>{% if product.top %}<img src="static/images/59508.png" alt="check" width="20px;">{% endif %}
-                        </p>
-                        <p></p>
-                    </div>
+                    <a href="{{ product.get_absolute_url }}">
+                        <div class="names">
+                            <p>{{ product.vendor.name }} </p>
+                            <p>{{ product.name }}</p>
+                            <p>{% if product.type_cert %}<img
+                                    src="static/images/59508.png" alt="check"
+                                    width="20px;">{% endif %}</p>
+                            <p>{% if product.type_cert %}<img
+                                    src="static/images/59508.png" alt="check"
+                                    width="20px;">{% endif %}</p>
+                            <p>{% if product.top_certified %}<img
+                                    src="static/images/59508.png" alt="check"
+                                    width="20px;">{% endif %}</p>
+                            <p></p>
+                        </div>
+                    </a>
                     {% endfor %}
                 </div>
+
 
                 <div class="Filter">
                     <div class="FilterMenu">

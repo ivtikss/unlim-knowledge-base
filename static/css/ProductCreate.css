@@ -5,6 +5,15 @@
   max-height: 90px;
 }
 
+input[type="checkbox"][disabled] + label {
+  display: none;
+}
+
+/* Сделать цвет текста серым в состоянии disabled */
+input[type="checkbox"][disabled] + label::before {
+  color: grey;
+}
+
 .tablink {
   width: 25%;
 }
@@ -15,6 +24,8 @@
 
 .row {
   display: flex;
+  flex: 1;
+  justify-content: space-between;
   flex-wrap: wrap;
 }
 
@@ -23,17 +34,7 @@
   flex: 50%;
 }
 
-.ProductFrame {
-  width: 90%;
-  border: 1px solid #242424;
-  border-radius: 5px;
-  font-size: 1em;
-  margin-top: 5px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  margin-bottom: 20px;
-  height: 100px;
-}
+
 
 .ProductName {
   display: inline-flex;
@@ -168,7 +169,7 @@
 
 .ProductDescription{
   margin-top: 5px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .ProductDescription>textarea {
   resize: none;
@@ -339,9 +340,99 @@
 .DealInfo {
   margin: 1em;
 }
+
+/* Основные стили формы */
+#productForm {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Стили для левой колонки */
+.left-column {
+    width: 45%; /* Ширина левой колонки, настройте по своему усмотрению */
+}
+
+/* Стили для правой колонки */
+.right-column {
+    width: 45%; /* Ширина правой колонки, настройте по своему усмотрению */
+}
+
+/* Общие стили для полей ввода */
+.product-field {
+    margin-bottom: 10px;
+}
+
+/* Дополнительные стили для полей ввода или других элементов можно добавить по мере необходимости */
+
 /* Техническое задание */
 .ProductTZ{
   height: 160px;
+}
+
+.custom-datepicker {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #333;
+    font-size: 16px;
+    padding: 5px;
+    border-bottom: 1px solid #FDF9F6;
+}
+/* Стилизация обертки для элемента загрузки файла */
+.custom-fileload {
+  position: relative;
+  display: inline-block;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Стилизация кнопки загрузки файла */
+.custom-fileload input[type="file"] {
+  position: absolute;
+  font-size: 13px;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+/* Стилизация контейнера для отображения выбранного файла */
+.custom-fileload .file-info {
+  display: inline-block;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+/* Стилизация текста внутри контейнера для выбранного файла */
+.custom-fileload .file-info span {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+}
+
+/* Стилизация кнопки загрузки файла */
+.custom-fileload .file-upload-btn {
+  display: inline-block;
+  padding: 8px 15px;
+  background-color: #3498db;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 13px;
+  transition: background-color 0.3s;
+}
+
+/* Изменение цвета кнопки при наведении */
+.custom-fileload .file-upload-btn:hover {
+  background-color: #2980b9;
 }
 .ProductLastDateUpdate {
   display: flex;
@@ -577,4 +668,134 @@
   .ProdTZS {
     display: block;
   }
+}
+
+#productForm {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+.product-field {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input[type="checkbox"] {
+    margin-top: 5px;
+}
+
+.ProductFrame {
+    width: 100%;
+    height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1em;
+    resize: none;
+    overflow-y: auto;
+}
+
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden; /* Чтобы скрыть стандартную кнопку */
+}
+
+input[type="file"]::file-selector-button {
+    display: none; /* Скрыть стандартную кнопку в некоторых браузерах */
+}
+
+input[type="file"]::before {
+    content: 'Выбрать файл'; /* Замените текст на свой выбор */
+    display: inline-block;
+    background: #D9D9D9;
+    color: black;
+    padding: 4px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+input[type="file"]:hover::before {
+    background: #45a049; /* Измените цвет при наведении на кнопку */
+}
+
+button[type="button"] {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button[type="button"]:hover {
+    background-color: #0056b3;
+}
+
+/* Стилизация блока "Блок «Лицензирование» */
+/* Стилизация блока "Блок «Лицензирование»" */
+fieldset {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 95%;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    overflow: auto; /* Добавьте это свойство для прокрутки, если контент слишком широкий */
+}
+
+legend {
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color: #f0f0f0;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 0;
+}
+
+/* Стилизация полей внутри блока */
+.product-field {
+    margin: 10px 0;
+}
+
+.product-field label {
+    display: inline-block;
+    font-weight: bold;
+}
+
+/* Стилизация полей внутри блока */
+.product-field input[type="text"],
+.product-field textarea,
+.product-field select {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Отступы для кнопок */
+.product-field button {
+    margin-top: 10px;
+}
+
+.product-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
 }

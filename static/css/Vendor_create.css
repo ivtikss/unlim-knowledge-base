@@ -8,6 +8,8 @@
   justify-content: space-between;
 }
 
+
+
 .PartnersLeft {
   width: 49%;
 }
@@ -200,6 +202,11 @@
 /* Общий стиль для контейнера формы */
 .vendor-form {
     display: flex;
+}
+
+.sp1{
+  border-radius: 5px;
+  border: #242424;
 }
 
 /* Стиль для левой колонки */

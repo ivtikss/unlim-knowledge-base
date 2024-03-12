@@ -1,0 +1,145 @@
+{% extends 'base1.html' %} {% load markdown_extras %} {% load group_check %} 
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <form>
+          <div class="form-group m-0">
+            <label for="search" class="sr-only">Поиск:</label>
+            <input
+              type="text"
+              class="form-control"
+              id="search"
+              placeholder="Поиск..."
+            />
+          </div>
+        </form>
+      </div>
+      <div
+        class="vendor-list"
+        style="height: calc(100vh - 140px); overflow-y: auto"
+      >
+        <!-- Элементы списка вендоров -->
+        {% for vendor in vendors %}
+        <li>
+          <img src="static/images/marinette001.png" alt="" width="40px" />
+          <a href="{{ vendor.get_absolute_url }}">{{vendor.name}}</a>
+        </li>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="table-container">
+        <table class="table table-dark table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Наименование продукта</th>
+            <th>ФСТЭК</th>
+            <th>ФСБ</th>
+            <th>Топ</th>
+            <th><button type="button">Добавить Продукт
+                                                    </button></th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in products %}
+          <thead>
+            <tr>
+              <th>{{ product.name }}</th>
+              <th>{% if product.type_cert %}<img
+                                                  src="static/images/59508.png" alt="check"
+                                                  width="20px;">{% endif %}</th>
+              <th>{% if product.top_certified %}<img
+                                                  src="static/images/59508.png" alt="check"
+                                                  width="20px;">{% endif %}</th>
+              <th>{% if product.top_certified %}<img
+                                                  src="static/images/59508.png" alt="check"
+                                                  width="20px;">{% endif %}</th>
+            </tr>
+          </thead>
+          {% endfor %}
+          {% for product in products %}
+                    <thead>
+                      <tr>
+                        <th>{{ product.name }}</th>
+                        <th>{% if product.type_cert %}<img
+                                                            src="static/images/59508.png" alt="check"
+                                                            width="20px;">{% endif %}</th>
+                        <th>{% if product.top_certified %}<img
+                                                            src="static/images/59508.png" alt="check"
+                                                            width="20px;">{% endif %}</th>
+                        <th>{% if product.top_certified %}<img
+                                                            src="static/images/59508.png" alt="check"
+                                                            width="20px;">{% endif %}</th>
+                      </tr>
+                    </thead>
+                    {% endfor %}
+                    {% for product in products %}
+                              <thead>
+                                <tr>
+                                  <th>{{ product.name }}</th>
+                                  <th>{% if product.type_cert %}<img
+                                                                      src="static/images/59508.png" alt="check"
+                                                                      width="20px;">{% endif %}</th>
+                                  <th>{% if product.top_certified %}<img
+                                                                      src="static/images/59508.png" alt="check"
+                                                                      width="20px;">{% endif %}</th>
+                                  <th>{% if product.top_certified %}<img
+                                                                      src="static/images/59508.png" alt="check"
+                                                                      width="20px;">{% endif %}</th>
+                                </tr>
+                              </thead>
+                              {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    </div>
+    <div class="col-md-2">
+      <form id="filterForm" method="get">
+                                  <div class="filter__search">
+                                      Вендор
+                                      <select class="filter__vendor" name="vendor">
+                                          <option value="">Все</option>
+                                          {% for vendor in vendors %}
+                                          <option value="{{ vendor.name }}" {% if vendor.name == request.GET.vendor %} selected {% endif %}>{{ vendor.name }}
+                                          </option>
+                                          {% endfor %}
+                                      </select>
+      
+                                      Продукт
+                                      <select class="filter__product" name="product">
+                                          <option value="">Все</option>
+                                          {% for product in products %}
+                                          <option value="{{ product.name }}" {% if product.name == request.GET.product %} selected {% endif %}>{{ product.name }}
+                                          </option>
+                                          {% endfor %}
+                                      </select>
+      
+                                      Тип продукта
+                                      <select class="filter__type__product" name="type">
+                                          <option value="">Все</option>
+                                          {% for type in all_type_product %}
+                                          <option value="{{ type.name }}" {% if type.name == request.GET.type %}selected{% endif %}>{{ type.name }}
+                                          </option>
+                                          {% endfor %}
+                                      </select>
+                                  </div>
+      
+                                  <div class="filter__certificate">
+                                      <label><input type="checkbox" name="FSTEK" {% if request.GET.FSTEK %}checked{% endif %}>
+                                          ФСТЭК</label><br>
+                                      <label><input type="checkbox" name="FSB" {% if request.GET.FSB %}checked{% endif %}> ФСБ</label><br>
+                                      <label><input type="checkbox" name="TOP" {% if request.GET.TOP %}checked{% endif %}> ТОП</label><br>
+                                  </div>
+      
+                                  <div class="FilterButtons">
+                                      <button type="submit">Применить</button>
+                                      <button type="button" id="clearFilter">Очистить</button>
+                                  </div>
+                              </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

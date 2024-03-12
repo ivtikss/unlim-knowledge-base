@@ -13,10 +13,15 @@ class ChangeUserInfoForm(forms.ModelForm):
 class UserLoginForm(AuthenticationForm):
     username = forms.CharField(
         label='E-mail',
-        widget=forms.TextInput(attrs={'class': 'login-input'}))
+        widget=forms.TextInput(attrs={'class': 'form-control form'}))
     password = forms.CharField(
         label='Пароль',
-        widget=forms.PasswordInput(attrs={'class': 'password-input'}))
+        widget=forms.PasswordInput(attrs={'class': 'form-control form'}))
+    
+    def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            for field in self.fields:
+                self.fields[field].widget.attrs['class'] += ' error'
 
 
 class UserRegisterForm(UserCreationForm):
@@ -84,7 +89,9 @@ class NewVendorSpecialistForm(forms.ModelForm):
         model = VendorSpecialist
         fields = ['name', 'date']
         widgets = {
-            'date': forms.DateInput(attrs={'type': 'date', 'placeholder': 'dd.mm.YYYY (DOB)', 'class': 'PartnerSertificatedMenuinput'})
+            'date': forms.DateInput(
+                attrs={'type': 'date', 'placeholder': 'dd.mm.YYYY (DOB)',
+                       'class': 'PartnerSertificatedMenuinput'})
         }
 
     prefix = 'vendorspecialist'

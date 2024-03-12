@@ -1,0 +1,138 @@
+:root {
+    --cblack: #242424;
+    --cwhite: #FDF9F6;
+    --cgray: #D9D9D9;
+}
+
+
+.logos {
+    max-width: 200px;
+}
+
+.logos_nav {
+    max-width: 50px;
+}
+body {
+  background-color: var(--cblack); /* Цвет фона в шестнадцатеричном формате */
+}
+
+h2, h3, h4, h5, h6 {
+    color: var(--cwhite);
+}
+
+.form {
+    background-color: var(--cwhite);
+}
+
+p {
+    color: var(--cwhite);
+}
+
+.btn-gray {
+    margin-top: 10px;
+    background-color: var(--cgray);
+    min-width: 50px;
+    min-height: 50px;
+}
+
+.btn-gray:hover {
+    background-color: var(--cblack);
+    color : var(--cwhite);
+    transition: 250ms;
+    border-color: var(--cgray);
+}
+
+li{
+    color: var(--cwhite);
+}
+
+.login-container {
+    margin-top: 10%;
+    min-width: 400px;
+    max-width: 400px;
+    max-height: 500px;
+}
+
+.errorlist {
+    list-style-type: none;
+    padding: 5px;
+    margin-top: 5px;
+}
+
+.errorlist li {
+    color: rgb(255, 99, 99);
+}
+
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.navbar {
+    padding: 15px 0;
+    background-color: var(--cblack);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar:hover {
+    box-shadow: 0px 0px 10px var(--cgray);
+}
+
+
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: box-shadow 0.3s ease;
+    position: relative;
+}
+
+.navbar a:hover {
+    box-shadow: 0px 0px 10px var(--cgray);
+    color: #fff;
+}
+
+
+.navbar .logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: auto;
+}
+
+.table-dark {
+  background-color: transparent;
+  color: #fff;
+}
+
+.table.table-dark {
+  background-color: transparent !important;
+  color: #fff !important;
+}
+
+.table.table-dark th,
+.table.table-dark td {
+  padding: 0.5rem 0.5rem !important;
+}
+
+.table-container {
+  height: calc(100vh); /* Вы можете изменить высоту в соответствии с вашими потребностями */
+  overflow-y: auto;
+}
+
+.table-container table {
+  width: 100%;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Вы можете изменить цвет в соответствии с вашими потребностями */
+}
+
