@@ -136,3 +136,56 @@ li{
   background-color: rgba(255, 255, 255, 0.1); /* Вы можете изменить цвет в соответствии с вашими потребностями */
 }
 
+.prod {
+    border-radius: 10px;
+    border-right: 1px solid rgba(220, 220, 220, 0.2);
+    border-left: 1px solid rgba(220, 220, 220, 0.2);
+    height: 50px;
+    background-color: var(--cblack)
+  }
+
+
+.prod:hover {
+    background-color: rgba(220, 220, 220, 0.2);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+.table-responsive {
+    overflow-x: hidden;
+}
+
+.table {
+    max-width: 98%;
+    padding-left: 15px;
+    background-color: var(--cblack);
+}
+
+.col {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .table-header {
+    font-weight: bold;
+    border-bottom: 1px solid rgba(220, 220, 220, 0.2); /* Увеличиваем толщину нижней границы заголовков */
+    color: var(--cwhite);
+    background-color: var(--cblack);
+    padding: 20px; /* Увеличиваем отступы вокруг текста заголовков */
+    font-size: 20px; /* Увеличиваем размер шрифта заголовков */
+    letter-spacing: 3px; /* Увеличиваем расстояние между буквами заголовков */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Увеличиваем тень заголовкам */
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1); /* Добавляем тень тексту заголовков */
+    border-radius: 5px; /* Добавляем закругленные углы заголовкам */
+    margin-bottom: 10px;
+  }
+  
+
+  .row a {
+    color: none;
+    text-decoration: none;
+  }
+
+  .row a:hover {
+    color: #007bff;
+  }
